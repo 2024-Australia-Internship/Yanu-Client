@@ -7,21 +7,23 @@
     <link rel="stylesheet" href="/css/index.css">
     <title></title>
 </head>
-<body>
-    <div class="title-div">
-        <p class="title">Welcome to</p>
-        <img src="/images/yanu.png">
-    </div>
-    
-    <div class="user-div">
-        <div class="input-box">
-            <input class="user-input" placeholder="ID">
-            <input class="user-input" placeholder="Password">
+    <body>
+        <div class="title-div">
+            <p class="title">Welcome to</p>
+            <img src="/images/yanu.png">
         </div>
-        <div class="setting-pw">Forgot your password?</div>
-    </div>
+        
+        <div class="user-div">
+            <div class="input-box">
+                <input class="user-input" placeholder="ID">
+                <input class="user-input" placeholder="Password">
+            </div>
+            <div class="setting-pw" onclick="window.location.href='/html/edit-password.html'">Forgot your password?</div>
+        </div>
 
-    <div class="login-btn">Log in</div>
-    <div class="signup-btn">Sign up</div>
-</body>
+        <div class="login-btn" onclick="checkInfo()">Log in</div>
+        <div class="signup-btn" onclick="window.location.href='/html/signup.html'">Sign up</div>
+
+        <script src="/js/index.js"></script>
+    </body>
 </html>
