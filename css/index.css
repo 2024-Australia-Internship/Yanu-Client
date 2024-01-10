@@ -23,7 +23,7 @@
     background-color: #F4F4F4;
     border-radius: 12px;
     padding-left: 20px;
-    color: #9E9E9E;
+    color: rgba(0, 0, 0, 0.87);
 }
 .user-input:focus{
     outline: 2px solid #FF7A00;
