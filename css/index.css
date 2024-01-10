@@ -1,0 +1,57 @@
+.title-div{
+    text-align: center;
+    margin-top: 112px;
+}
+.title{
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+.user-div{
+    width: 288px;
+    margin: 0 auto;
+    margin-top: 57px;
+}
+.input-box{
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+.user-input{
+    height: 51px;
+    width: calc(100% - 20px);
+    border: none;
+    background-color: #F4F4F4;
+    border-radius: 12px;
+    padding-left: 20px;
+    color: #9E9E9E;
+}
+.user-input:focus{
+    outline: 2px solid #FF7A00;
+}
+.setting-pw{
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--first-color);
+    text-align: right;
+    text-decoration: underline;
+}
+.login-btn{
+    width: 304px;
+    height: 56px;
+    background-color: var(--first-color);
+    margin: 0 auto;
+    margin-top: 175px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 17px;
+    color: white;
+}
+.signup-btn{
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: #9E9E9E;
+    text-decoration: underline;
+}
