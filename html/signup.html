@@ -3,9 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/basic.css">
+    <link rel="stylesheet" href="/css/signup.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>sign up</h1>
+    <label class="email-input-div">
+        <input type="text" placeholder="E-mail" class="user-input email-input">
+        <button>Check availability</button>
+    </label>
+    <div class="email-comment">You can use this E-mail.</div>
+    <div class="pw-div">
+        <div class="confirm-pw-div">
+            <input type="password" placeholder="Password" class="user-input my-pw-input" oninput="checkPwCondition()">
+            <iconify-icon icon="ph:eye-light" class="my-pw-icon pw-icon" onclick="showMyPw()"></iconify-icon>
+        </div>
+        <div class="confirm-pw-div">
+            <input type="password" placeholder="Confirm password" class="user-input confirm-pw-input" oninput="checkPwEquivalence()">
+            <iconify-icon icon="ph:eye-light" class="confirm-pw-icon pw-icon" onclick="showConfirmPw()"></iconify-icon>
+        </div>
+    </div>
+    <div class="confirm-div">
+        <div class="confirm-btn">
+            <iconify-icon icon="basil:check-outline" class="check-icon"></iconify-icon>
+            <div class="confirm-detail">8~16 letters</div>
+        </div>
+        <div class="confirm-btn">
+            <iconify-icon icon="basil:check-outline" class="check-icon"></iconify-icon>
+            <div class="confirm-detail">Capital letter</div>
+        </div>
+        <div class="confirm-btn">
+            <iconify-icon icon="basil:check-outline" class="check-icon"></iconify-icon>
+            <div class="confirm-detail">Small letter</div>
+        </div>
+        <div class="confirm-btn">
+            <iconify-icon icon="basil:check-outline" class="check-icon"></iconify-icon>
+            <div class="confirm-detail">Number</div>
+        </div>
+        <div class="confirm-btn">
+            <iconify-icon icon="basil:check-outline" class="check-icon"></iconify-icon>
+            <div class="confirm-detail">Special character</div>
+        </div>
+    </div>
+
+    <div class="phone-num-div">
+        <select name="country" class="select-country-div user-input">
+            <option value="+61" class="country-options">
+                <div class="country-name user-input">AUS</div>
+                <div class="country-num">+ 61</div>
+            </option>
+            <option value="+82">
+                <div class="country-name">KOR</div>
+                <div class="country-num">+ 82</div>
+            </option>
+        </select>
+        <input class="user-input phone-num-input" placeholder="Phone Number"></div>
+    </div>
+
+    <button class="signup-btn" onclick="signup()">Sign up</button>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="/config.js"></script>
+    <script src="/js/signup.js"></script>
 </body>
 </html>
