@@ -16,18 +16,6 @@
     flex-direction: column;
     row-gap: 16px;
 }
-.user-input{
-    height: 51px;
-    width: calc(100% - 20px);
-    border: none;
-    background-color: #F4F4F4;
-    border-radius: 12px;
-    padding-left: 20px;
-    color: rgba(0, 0, 0, 0.87);
-}
-.user-input:focus{
-    outline: 2px solid #FF7A00;
-}
 .setting-pw{
     margin-top: 8px;
     font-size: 10px;

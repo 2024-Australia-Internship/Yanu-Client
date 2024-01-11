@@ -6,4 +6,17 @@
 }
 :root{
     --first-color : #FF7A00;
+    --font-color : rgba(0, 0, 0, 0.87);
+}
+.user-input{
+    height: 51px;
+    width: calc(100% - 20px);
+    border: none;
+    background-color: #F4F4F4;
+    border-radius: 12px;
+    padding-left: 20px;
+    color: var(--font-color);
+}
+.user-input:focus{
+    outline: 1.2px solid #C5C5C5;
 }
