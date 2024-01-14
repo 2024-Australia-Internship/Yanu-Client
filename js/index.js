@@ -8,11 +8,14 @@ function checkInfo(){
         user_email: idValue,
         user_pw: pwValue
     }
+    
     axios.post(`${BASE_URL}/users/login`, req)
     .then(response => {
-        console.log(response)
+        console.log(response);
+        alert('로그인 성공');
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
+        alert('로그인 실패');
     });
 }
