@@ -1,22 +1,26 @@
 function showMyPw(){
     let myPw = document.getElementsByClassName('my-pw-input')[0];
-    let toggleBtn = document.getElementsByClassName('my-pw-icon')[0];
-    togglePw(myPw, toggleBtn);
+    let toggleBtn = document.getElementsByClassName('eye-div')[0];
+
+    if(myPw.type === "password"){
+        myPw.type = "text";
+        toggleBtn.innerHTML = `<iconify-icon icon="ph:eye-closed-light" class="my-pw-icon pw-icon" onclick="showMyPw()"></iconify-icon>`
+    }else{
+        myPw.type = "password";
+        toggleBtn.innerHTML = `<img src="/images/eye-open.svg" class="my-pw-icon pw-icon" onclick="showMyPw()">`;
+    }
 }
 
 function showConfirmPw(){
     let myPw = document.getElementsByClassName('confirm-pw-input')[0];
-    let toggleBtn = document.getElementsByClassName('confirm-pw-icon')[0];
-    togglePw(myPw, toggleBtn);
-}
+    let toggleBtn = document.getElementsByClassName('eye-div')[1];
 
-function togglePw(myPw, toggleBtn){
     if(myPw.type === "password"){
         myPw.type = "text";
-        toggleBtn.icon = "ph:eye-closed-light";
+        toggleBtn.innerHTML = `<iconify-icon icon="ph:eye-closed-light" class="my-pw-icon confirm-pw-icon" onclick="showConfirmPw()"></iconify-icon>`
     }else{
         myPw.type = "password";
-        toggleBtn.icon = "ph:eye-light";
+        toggleBtn.innerHTML = `<img src="/images/eye-open.svg" class="my-pw-icon confirm-pw-icon" onclick="showConfirmPw()">`;
     }
 }
 
@@ -123,6 +127,11 @@ function signup(){
     axios.post(`${BASE_URL}/users/register`, req)
     .then(response => {
         console.log(response)
+        if(response.data.message === ''){
+            alert('아이디 중복');
+        }
+        console.log()
+        // window.location.href = "/index.html";
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);

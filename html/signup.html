@@ -18,11 +18,16 @@
     <div class="pw-div">
         <div class="confirm-pw-div">
             <input type="password" placeholder="Password" class="user-input my-pw-input" oninput="checkPwCondition()">
-            <iconify-icon icon="ph:eye-light" class="my-pw-icon pw-icon" onclick="showMyPw()"></iconify-icon>
+            <div class="eye-div">
+                <img src="/images/eye-open.svg" class="my-pw-icon pw-icon" onclick="showMyPw()">
+            </div>
         </div>
+        
         <div class="confirm-pw-div">
             <input type="password" placeholder="Confirm password" class="user-input confirm-pw-input" oninput="checkPwEquivalence()">
-            <iconify-icon icon="ph:eye-light" class="confirm-pw-icon pw-icon" onclick="showConfirmPw()"></iconify-icon>
+            <div class="eye-div">
+                <img src="/images/eye-open.svg" class="my-pw-icon confirm-pw-icon" onclick="showConfirmPw()">
+            </div>
         </div>
     </div>
     <div class="confirm-div">
