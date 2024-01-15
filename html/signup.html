@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    <img src="/images/yanu.svg" class="logo-img">
+    <div class="title">Create your Account</div>
     <label class="email-input-div">
         <input type="text" placeholder="E-mail" class="user-input email-input">
         <button>Check availability</button>
@@ -47,9 +49,9 @@
     </div>
 
     <div class="phone-num-div">
-        <select name="country" class="select-country-div user-input">
+        <select name="country" class="select-country-div user-input" onchange="selectedValue()">
             <option value="+61" class="country-options">
-                <div class="country-name user-input">AUS</div>
+                <div class="country-name">AUS</div>
                 <div class="country-num">+ 61</div>
             </option>
             <option value="+82">

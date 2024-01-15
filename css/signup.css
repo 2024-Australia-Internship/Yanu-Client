@@ -2,8 +2,20 @@ body{
     width: 288px;
     margin: 0 auto;
 }
+.logo-img{
+    width: 58px;
+    margin-left: calc((288px - 58px) / 2);
+    margin-top: 42px;
+}
+.title{
+    position: relative;
+    font-size: 17px;
+    margin-top: 41px;
+    font-weight: 500;
+    left: -10px;
+}
 .email-input-div{
-    margin-top: 128px;
+    margin-top: 16px;
     display: flex;
     height: 51px;
     align-items: center;
