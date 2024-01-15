@@ -26,17 +26,10 @@
 .login-btn{
     width: 304px;
     height: 56px;
-    background-color: var(--first-color);
     margin: 0 auto;
     margin-top: 175px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    font-size: 17px;
-    color: white;
 }
-.signup-btn{
+.sm-signup-btn{
     text-align: center;
     margin-top: 16px;
     font-size: 12px;

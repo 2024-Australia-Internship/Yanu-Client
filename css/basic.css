@@ -20,3 +20,51 @@
 .user-input:focus{
     outline: 1.2px solid #C5C5C5;
 }
+.signup-btn,
+.login-btn,
+.ok-btn{
+    margin-top: 122px;
+    width: 100%;
+    height: 56px;
+    background-color: var(--first-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 17px;
+    color: white;
+    border: none;
+}
+.wrong-info{
+    outline: 1.2px solid var(--first-color);
+}
+.wrong-info:focus{
+    outline: 1.2px solid var(--first-color);
+}
+.confirm-div{
+    margin-top: 8px;
+    display: flex;
+    row-gap: 8px;
+    flex-wrap: wrap;
+    column-gap: 8px;
+}
+.confirm-btn{
+    display: flex;
+    height: 21px;
+    border-radius: 8px;
+    align-items: center;
+    background-color: #F4F4F4;
+    font-size: 11px;
+    padding: 4px 6px 4px 6px;
+    column-gap: 3px;
+    color: #9E9E9E;
+}
+.confirm-btn > iconify-icon{
+    font-size: 15px;
+}
+.currect-box{
+    background-color: #F4FFE9;
+}
+.currect{
+    color: #66CC00;
+}

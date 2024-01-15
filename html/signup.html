@@ -12,17 +12,22 @@
     <div class="title">Create your Account</div>
     <label class="email-input-div">
         <input type="text" placeholder="E-mail" class="user-input email-input">
-        <button>Check availability</button>
+        <button onclick="checkEmail()">Check availability</button>
     </label>
-    <div class="email-comment">You can use this E-mail.</div>
+    <div class="email-comment"></div>
     <div class="pw-div">
         <div class="confirm-pw-div">
             <input type="password" placeholder="Password" class="user-input my-pw-input" oninput="checkPwCondition()">
-            <iconify-icon icon="ph:eye-light" class="my-pw-icon pw-icon" onclick="showMyPw()"></iconify-icon>
+            <div class="eye-div">
+                <img src="/images/eye-open.svg" class="my-pw-icon pw-icon" onclick="showMyPw()">
+            </div>
         </div>
+        
         <div class="confirm-pw-div">
             <input type="password" placeholder="Confirm password" class="user-input confirm-pw-input" oninput="checkPwEquivalence()">
-            <iconify-icon icon="ph:eye-light" class="confirm-pw-icon pw-icon" onclick="showConfirmPw()"></iconify-icon>
+            <div class="eye-div">
+                <img src="/images/eye-open.svg" class="my-pw-icon confirm-pw-icon" onclick="showConfirmPw()">
+            </div>
         </div>
     </div>
     <div class="confirm-div">
@@ -49,16 +54,16 @@
     </div>
 
     <div class="phone-num-div">
-        <select name="country" class="select-country-div user-input" onchange="selectedValue()">
-            <option value="+61" class="country-options">
-                <div class="country-name">AUS</div>
-                <div class="country-num">+ 61</div>
-            </option>
-            <option value="+82">
-                <div class="country-name">KOR</div>
-                <div class="country-num">+ 82</div>
-            </option>
-        </select>
+        <div class="select-country-div user-input">
+            <button class="label">
+                + 62
+                <iconify-icon icon="iconamoon:arrow-up-2-thin" class="arrow-icon"></iconify-icon>
+            </button>
+            <ul class="optionList">
+                <li class="optionItem">+ 62</li>
+                <li class="optionItem">+ 81</li>
+            </ul>
+        </div>
         <input class="user-input phone-num-input" placeholder="Phone Number"></div>
     </div>
 
