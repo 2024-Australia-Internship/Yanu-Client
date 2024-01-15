@@ -60,18 +60,76 @@ body{
     margin-left: 251px;
     font-size: 24px;
 }
+.phone-num-div{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    column-gap: 12px;
+}
 .select-country-div{
-    /* padding: 0 0 0 10px; */
-    /* position: absolute; */
-    padding: 0;
+    position: relative;
     width: 83px;
     height: 48px;
-    /* box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12); */
+    padding: 0;
+    border-radius: 12px;
 }
-.country-options{
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 13px;
-    background-color: #9E9E9E;
+/* .select-country-div:after {
+  content: '';
+  display: block; 
+  width: 2px;
+  height: 100%; 
+  position: absolute; 
+  top: 0; 
+  right: 35px;
+  background: lightcoral;
+} */
+.select-country-div .label {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+    border: 0 none;
+    outline: 0 none;
+    background: transparent;
+    cursor: pointer;
+  }
+.select-country-div .optionList {
+    position: absolute; 
+    /* top: 28px; */
+    left: 0;
+    width: 100%;
+    background: #F4F4F4;
+    color: rgba(0, 0, 0, 0.87);
+    list-style-type: none;
+    padding: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    max-height: 0;
+    transition: .3s ease-in;
+}
+.select-country-div .optionList::-webkit-scrollbar {width: 6px;}
+.select-country-div .optionList::-webkit-scrollbar-track {background: transparent; }
+.select-country-div .optionList::-webkit-scrollbar-thumb {background: #303030; border-radius: 45px;}
+.select-country-div .optionList::-webkit-scrollbar-thumb:hover {background: #303030;}
+
+.select-country-div.active .optionList {
+  max-height: 500px;
+}
+
+.select-country-div .optionItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #BEBEBE;
+    padding: 5px 15px 5px;
+    height: 38px;
+    transition: .1s;
+}
+.select-country-div .optionItem:last-child {
+  border-bottom: 0 none;
 }
 .select-country-div, .country-name, .country-num{
     text-align-last: center;
@@ -79,12 +137,11 @@ body{
     -moz-text-align-last: center;
     text-align: center;
 }
-.phone-num-div{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 16px;
-    column-gap: 12px;
-}
 .phone-num-input{
+    position: relative;
     height: 48px;
+    width: calc(288px - 83px - 69px);
+}
+.arrow-icon{
+    transform: rotate( 180deg );
 }

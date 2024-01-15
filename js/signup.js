@@ -1,3 +1,21 @@
+const label = document.querySelector('.label');
+const options = document.querySelectorAll('.optionItem');
+const handleSelect = function(item) {
+  label.innerHTML = item.textContent;
+  label.parentNode.classList.remove('active');
+}
+options.forEach(function(option){
+  option.addEventListener('click', function(){handleSelect(option)})
+})
+
+label.addEventListener('click', function(){
+  if(label.parentNode.classList.contains('active')) {
+    label.parentNode.classList.remove('active');
+  } else {
+    label.parentNode.classList.add('active');
+  }
+});
+
 function checkEmail(){
     let myEmail = document.getElementsByClassName('email-input')[0].value;
 
@@ -10,12 +28,14 @@ function checkEmail(){
         console.log(response)
         checkEmail.innerText = "You can use this E-mail."
         checkEmail.style.color = "#66CC00";
+        return true;
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
         if(error.message == 'Request failed with status code 409'){
             checkEmail.innerText = "Someone is already using this E-mail."
             checkEmail.style.color = "#FF6F6F";
+            return false;
         }
     });
 }
@@ -113,18 +133,18 @@ function checkPwEquivalence(){
 function signup(){
     let user_email = document.getElementsByClassName('email-input')[0].value;
     let user_pw = document.getElementsByClassName('my-pw-input')[0].value;
-    let user_country_num = document.getElementsByClassName('select-country-div')[0].value;
+    let user_country_num = document.getElementsByClassName('label')[0].innerText;
     let user_phonenumber = document.getElementsByClassName('phone-num-input')[0].value;
     let user_confirm_pw = document.getElementsByClassName('confirm-pw-input')[0].value;
-    let user_email_confirm = document.getElementsByClassName('email-comment')[0];
 
     console.log(user_email);
     console.log(user_pw);
     console.log(user_phonenumber);
 
     // email 확인
-    console.log(user_email_confirm.innerText);
-    if(user_email_confirm.innerText == "Someone is already using this E-mail.") return alert('이메일을 확인해주세요.');
+    if(!checkEmail()){
+        return alert('이메일을 확인해주세요.');
+    }
 
     // pw 확인 - myPw와 confirmPw가 같은지
     if(user_pw !== user_confirm_pw) return alert('비번 틀림');
@@ -136,8 +156,8 @@ function signup(){
 
     // phone number 확인
     console.log(user_country_num);
-    if(!((user_country_num == '+61' && (/^04\d{8}$/).test(user_phonenumber)) ||
-       (user_country_num == '+82' && (/^010\d{8}$/).test(user_phonenumber)))){
+    if(!((user_country_num == '+ 61' && (/^04\d{8}$/).test(user_phonenumber)) ||
+       (user_country_num == '+ 82' && (/^010\d{8}$/).test(user_phonenumber)))){
         return alert('전화번호 틀림');
     }
 
@@ -159,13 +179,4 @@ function signup(){
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
     });
-}
-
-function selectedValue(){
-    let selectBox = document.getElementsByClassName('select-country-div')[0];
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-
-    console.log(selectBox.value + "before");
-    selectBox.value = selectedValue;
-    console.log(selectBox.value + "after");
 }
