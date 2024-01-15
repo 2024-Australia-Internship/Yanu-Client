@@ -1,3 +1,25 @@
+function checkEmail(){
+    let myEmail = document.getElementsByClassName('email-input')[0].value;
+
+    let checkEmail = document.getElementsByClassName('email-comment')[0];
+    const req = {
+        user_email: myEmail
+    }
+    axios.post(`${BASE_URL}/users/check/email`, req)
+    .then(response => {
+        console.log(response)
+        checkEmail.innerText = "You can use this E-mail."
+        checkEmail.style.color = "#66CC00";
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+        if(error.message == 'Request failed with status code 409'){
+            checkEmail.innerText = "Someone is already using this E-mail."
+            checkEmail.style.color = "#FF6F6F";
+        }
+    });
+}
+
 function showMyPw(){
     let myPw = document.getElementsByClassName('my-pw-input')[0];
     let toggleBtn = document.getElementsByClassName('eye-div')[0];
@@ -94,13 +116,15 @@ function signup(){
     let user_country_num = document.getElementsByClassName('select-country-div')[0].value;
     let user_phonenumber = document.getElementsByClassName('phone-num-input')[0].value;
     let user_confirm_pw = document.getElementsByClassName('confirm-pw-input')[0].value;
+    let user_email_confirm = document.getElementsByClassName('email-comment')[0];
 
     console.log(user_email);
     console.log(user_pw);
     console.log(user_phonenumber);
 
     // email 확인
-    // if()
+    console.log(user_email_confirm.innerText);
+    if(user_email_confirm.innerText == "Someone is already using this E-mail.") return alert('이메일을 확인해주세요.');
 
     // pw 확인 - myPw와 confirmPw가 같은지
     if(user_pw !== user_confirm_pw) return alert('비번 틀림');
@@ -130,7 +154,6 @@ function signup(){
         if(response.data.message === ''){
             alert('아이디 중복');
         }
-        console.log()
         // window.location.href = "/index.html";
     })
     .catch(error => {
