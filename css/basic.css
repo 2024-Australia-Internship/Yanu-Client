@@ -8,6 +8,14 @@
     font-family: 'gilroy-semiBold';
     src: url('/font/Gilroy-SemiBold.ttf');
 }
+@font-face {
+    font-family: 'gilroy-bold';
+    src: url('/font/Gilroy-Bold.ttf');
+}
+@font-face {
+    font-family: 'gilroy-medium';
+    src: url('/font/Gilroy-Medium.ttf');
+}
 *{
     margin: 0;
     padding: 0;
