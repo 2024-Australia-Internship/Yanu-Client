@@ -88,23 +88,7 @@ function checkPwEquivalence(){
     }
 }
 
-function checkEmail(){
-    let myEmail = document.getElementsByClassName('email-input')[0].value;
-
-    const req = {
-        user_email: myEmail
-    }
-    axios.post(`${BASE_URL}/users/check/email`, req)
-    .then(response => {
-        alert('존재하지 않는 이메일 입니다.')
-    })
-    .catch(error => {
-        console.error('There has been a problem with your axios request:', error);
-        checkPw();
-    });
-}
-
-function checkPw(){
+function changePw(){
     let user_email = document.getElementsByClassName('email-input')[0].value;
     let user_pw = document.getElementsByClassName('my-pw-input')[0].value;
     let user_confirm_pw = document.getElementsByClassName('check-new-pw-input')[0].value;
@@ -117,19 +101,25 @@ function checkPw(){
         return alert('비번 조건에 안 맞음');
     }
 
+    console.log(user_email)
+    console.log(user_pw);
+
     var req = {
         user_email: user_email,
-        user_pw: user_pw
+        new_password: user_pw
     }
     
     axios.patch(`${BASE_URL}/forget/password`, req)
     .then(response => {
         console.log(response);
         alert('로그인 성공');
-        window.location.href = "/index.html";
+        console.log(response.status);
+        // window.location.href = "/index.html";
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
+        console.log(error.response.status);
+        if(error.response.status == 404) return alert('존재하지 않는 이메일입니다.');
         alert('로그인 실패');
     });
 }
