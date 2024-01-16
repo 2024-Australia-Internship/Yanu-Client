@@ -56,18 +56,20 @@
     <div class="phone-num-div">
         <div class="select-country-div user-input">
             <button class="label">
-                + 62
-                <iconify-icon icon="iconamoon:arrow-up-2-thin" class="arrow-icon"></iconify-icon>
+                <p class="select-country-num">+ 61</p>
+                <img src="/images/arrow-down.svg" class="arrow-icon">
             </button>
             <ul class="optionList">
-                <li class="optionItem">+ 62</li>
-                <li class="optionItem">+ 81</li>
+                <li class="blank-option"></li>
+                <li class="optionItem"><p class="country-name">AUS</p><p class="country-num">+ 61</p></li>
+                <div class="line"></div>
+                <li class="optionItem"><p class="country-name">KOR</p><p class="country-num">+ 82</p></li>
             </ul>
         </div>
         <input class="user-input phone-num-input" placeholder="Phone Number"></div>
     </div>
 
-    <button class="signup-btn" onclick="signup()">Sign up</button>
+    <button class="signup-btn" onclick="checkEmail(true)">Sign up</button>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
