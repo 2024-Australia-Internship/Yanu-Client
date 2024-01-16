@@ -1,0 +1,31 @@
+nav{
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 54px;
+    background-color: white;
+    left: 0;
+    bottom: 0;
+}
+.nav-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+.nav-icon{
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: #9E9E9E;
+}
+.nav-title{
+    font-family: 'gilroy-regular';
+    font-size: 10px;
+    color: #9E9E9E;
+}
+#choose-page .nav-icon,
+#choose-page .nav-title{
+    color: #FF7A00;
+}

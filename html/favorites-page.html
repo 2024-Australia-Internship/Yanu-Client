@@ -3,27 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="/css/basic.css">
     <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/main-page.css">
+    <link rel="stylesheet" href="/css/favorites-page.css">
+    <title>Document</title>
 </head>
 <body>
-    <div class="top-bar">
-        <img src="/images/yanu.svg" class="logo-img">
-        <iconify-icon icon="bi:cart2" class="cart-icon"></iconify-icon>
-    </div>
-
-    <div class="welcome-ment">
-        <p>Nice to meet you,</p>&nbsp;<p class="welcome-username">Hannah</p>
-    </div>
-
-    <div class="products-div">
-        
-    </div>
+    <h1>favorites page</h1>
 
     <nav>
-        <div class="nav-page" id="choose-page" onclick="window.location.href='/html/main-page.html'">
+        <div class="nav-page" onclick="window.location.href='/html/main-page.html'">
             <div class="icon-div home">
                 <iconify-icon icon="octicon:home-24" class="nav-icon"></iconify-icon>
             </div>
@@ -35,7 +24,7 @@
             </div>
             <div class="nav-title">Search</div>
         </div>
-        <div class="nav-page" onclick="window.location.href='/html/favorites-page.html'">
+        <div class="nav-page" id="choose-page" onclick="window.location.href='/html/favorites-page.html'">
             <div class="icon-div favorites">
                 <iconify-icon icon="ph:heart" class="nav-icon"></iconify-icon>
             </div>
@@ -54,24 +43,10 @@
             <div class="nav-title">My page</div>
         </div>
     </nav>
-
-    <div class="popup-background">
-        <div class="farmer-registration-popup">
-            <iconify-icon icon="mynaui:x" class="close-popup-icon" onclick="hidePopup()"></iconify-icon>
-            <div class="popup-ment">
-                <p class="ment1">You want to sell<br>your crops?</p>
-                <p class="ment2">Let’s be a farmer!</p>
-            </div>
-            <button class="ok-btn">Go</button>
-        </div>
-    </div>
-    
-    
-
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script src="/config.js"></script>
     <script src="/js/nav.js"></script>
-    <script src="/js/main-page.js"></script>
+    <script src="/js/favorites-page.js"></script>
 </body>
 </html>
