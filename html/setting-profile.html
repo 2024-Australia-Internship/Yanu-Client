@@ -15,14 +15,13 @@
         <div class="edit-image-btn" onclick="editProfile()">
             <iconify-icon icon="la:pen" class="check-icon"></iconify-icon>
         </div>
+        <input type="file" accept="image/*" style="display: none;" class="upload-file">
     </div>
 
     <input type="text" class="user-input nickname-input" placeholder="Nickname">
     <textarea type="text" class="introduction-input user-input" placeholder="About you..."></textarea>
 
-    <button class="ok-btn">Ok</button>
-
-    <input type="file" accept="image/*" style="display: none;" class="upload-file">
+    <button class="ok-btn" onclick="settingProfile()">Ok</button>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
