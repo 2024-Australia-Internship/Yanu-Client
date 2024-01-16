@@ -47,18 +47,9 @@ body{
     display: grid;
     row-gap: 12px;
 }
-.confirm-pw-div{
-    display: flex;
-    align-items: center;
-}
 .user-input{
     width: 231px;
     padding-right: 37px;
-}
-.eye-div{
-    position: absolute;
-    margin-left: 251px;
-    font-size: 24px;
 }
 .phone-num-div{
     display: flex;
@@ -135,6 +126,7 @@ body{
     -ms-text-align-last: center;
     -moz-text-align-last: center;
     text-align: center;
+    font-family: var(--input-font);
 }
 .country-name{
     font-size: 13px;
