@@ -1,22 +1,27 @@
 const label = document.querySelector('.label');
+const countryNum = document.getElementsByClassName('select-country-num')[0];
 const options = document.querySelectorAll('.optionItem');
 const handleSelect = function(item) {
-  label.innerHTML = item.textContent;
-  label.parentNode.classList.remove('active');
+    console.log(item.textContent)
+    countryNum.innerHTML = item.textContent.substr(3, 4);
+    label.parentNode.classList.remove('active');
+    label.style.boxShadow = 'none';
 }
 options.forEach(function(option){
-  option.addEventListener('click', function(){handleSelect(option)})
+    option.addEventListener('click', function(){handleSelect(option)})
 })
 
 label.addEventListener('click', function(){
-  if(label.parentNode.classList.contains('active')) {
-    label.parentNode.classList.remove('active');
-  } else {
-    label.parentNode.classList.add('active');
-  }
+    if(label.parentNode.classList.contains('active')) {
+        label.parentNode.classList.remove('active');
+        label.style.boxShadow = 'none';
+    } else {
+        label.parentNode.classList.add('active');
+        label.style.boxShadow = '0 1px 4px 0 rgba(0, 0, 0, 0.12)';
+    }
 });
 
-function checkEmail(){
+function checkEmail(flag){
     let myEmail = document.getElementsByClassName('email-input')[0].value;
 
     let checkEmail = document.getElementsByClassName('email-comment')[0];
@@ -28,15 +33,16 @@ function checkEmail(){
         console.log(response)
         checkEmail.innerText = "You can use this E-mail."
         checkEmail.style.color = "#66CC00";
-        return true;
+        if(flag) signup();
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
-        if(error.message == 'Request failed with status code 409'){
+        console.log(error.response.status);
+        if(error.response.status == 409){
             checkEmail.innerText = "Someone is already using this E-mail."
-            checkEmail.style.color = "#FF6F6F";
-            return false;
+            checkEmail.style.color = "#FF6F6F"; 
         }
+        if(flag) alert('이메일을 확인해주세요');
     });
 }
 
@@ -141,11 +147,6 @@ function signup(){
     console.log(user_pw);
     console.log(user_phonenumber);
 
-    // email 확인
-    if(!checkEmail()){
-        return alert('이메일을 확인해주세요.');
-    }
-
     // pw 확인 - myPw와 confirmPw가 같은지
     if(user_pw !== user_confirm_pw) return alert('비번 틀림');
 
@@ -171,10 +172,7 @@ function signup(){
     axios.post(`${BASE_URL}/users/register`, req)
     .then(response => {
         console.log(response)
-        if(response.data.message === ''){
-            alert('아이디 중복');
-        }
-        // window.location.href = "/index.html";
+        window.location.href = "/index.html";
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);

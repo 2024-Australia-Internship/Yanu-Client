@@ -73,59 +73,58 @@ body{
     padding: 0;
     border-radius: 12px;
 }
-/* .select-country-div:after {
-  content: '';
-  display: block; 
-  width: 2px;
-  height: 100%; 
-  position: absolute; 
-  top: 0; 
-  right: 35px;
-  background: lightcoral;
-} */
 .select-country-div .label {
     position: relative;
     z-index: 1;
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
     width: inherit;
     height: inherit;
-    border: 0 none;
-    outline: 0 none;
-    background: transparent;
-    cursor: pointer;
-  }
+    border: 0 none;    
+    border-radius: 12px;
+    background-color: #F4F4F4;
+}
+.select-country-div .blank-option{
+    height: 8px;
+}
 .select-country-div .optionList {
     position: absolute; 
-    /* top: 28px; */
+    top: 37px;
     left: 0;
     width: 100%;
     background: #F4F4F4;
     color: rgba(0, 0, 0, 0.87);
     list-style-type: none;
     padding: 0;
-    border-radius: 6px;
+    border-radius: 0 0 12px 12px;
     overflow: hidden;
     max-height: 0;
     transition: .3s ease-in;
 }
-.select-country-div .optionList::-webkit-scrollbar {width: 6px;}
-.select-country-div .optionList::-webkit-scrollbar-track {background: transparent; }
-.select-country-div .optionList::-webkit-scrollbar-thumb {background: #303030; border-radius: 45px;}
-.select-country-div .optionList::-webkit-scrollbar-thumb:hover {background: #303030;}
 
 .select-country-div.active .optionList {
-  max-height: 500px;
+  max-height: 124px;
 }
-
+.line{
+    width: 71px;
+    background-color: #BEBEBE;
+    margin-left: 6.5px;
+    height: 1px;
+    transform: scaleY(0.5);
+}
+.select-country-num{
+    padding-left: 7px;
+    width: calc(63px - 7px);
+    text-align: center;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.87);
+}
 .select-country-div .optionItem {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #BEBEBE;
-    padding: 5px 15px 5px;
-    height: 38px;
+    padding: 0 11px 0 11px;
+    height: 41px;
     transition: .1s;
 }
 .select-country-div .optionItem:last-child {
@@ -137,11 +136,16 @@ body{
     -moz-text-align-last: center;
     text-align: center;
 }
+.country-name{
+    font-size: 13px;
+    color: #8B8B8B;
+}
+.country-num{
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.87);
+}
 .phone-num-input{
     position: relative;
     height: 48px;
     width: calc(288px - 83px - 69px);
-}
-.arrow-icon{
-    transform: rotate( 180deg );
 }
