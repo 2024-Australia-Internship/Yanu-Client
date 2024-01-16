@@ -1,0 +1,89 @@
+body{
+    width: calc(100% - 20px * 2);
+    margin-left: 20px;
+}
+.top-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 24px;
+    margin-top: 12px;
+}
+.logo-img{
+    width: 69px;
+}
+.cart-icon{
+    font-size: 24px;
+}
+.welcome-ment{
+    display: flex;
+    margin-top: 43px;
+}
+.welcome-ment p{
+    font-family: 'gilroy-semiBold';
+    font-size: 20px;
+}
+.welcome-username{
+    color: #FF7A00;
+}
+.products-div{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    display: grid;
+    row-gap: 16px;
+    grid-template-rows: auto;
+    justify-content: space-between;
+    grid-template-columns: 153px 153px;
+    padding-bottom: 150px;
+}
+.product{
+    width: 153px;
+    height: 185px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+}
+.product-img{
+    width: 100%;
+    height: 107px;
+    object-fit: cover;
+}
+.product-detail-div{
+    padding: 7px 12px 11px 12px;
+}
+.product-name{
+    font-family: 'gilroy-semiBold';
+    font-size: 15px;
+}
+.product-farm-name{
+    font-family: 'gilroy-regular';
+    color: #818181;
+    font-size: 11px;
+}
+.product-detail{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.product-price-div{
+    display: flex;
+    column-gap: 4px;
+    align-items: center;
+}
+.product-price{
+    font-family: 'gilroy-semiBold';
+    font-size: 17px;
+}
+.product-unit{
+    padding-top: 2px;
+    font-family: 'gilroy-regular';
+    font-size: 11px;
+    color: #ABABAB;
+}
+.heart-btn{
+    font-size: 20px;
+    color: #FF7A00;
+}
