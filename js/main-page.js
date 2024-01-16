@@ -58,3 +58,8 @@ function heartToggle(e){
         e.target.icon = 'ph:heart-fill';
     }
 }
+
+function hidePopup(){
+    let popup = document.getElementsByClassName('popup-background')[0];
+    popup.style.visibility = "hidden";
+}

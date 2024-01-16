@@ -87,3 +87,46 @@ body{
     font-size: 20px;
     color: #FF7A00;
 }
+.popup-background{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.4);
+    /* visibility: hidden; */
+}
+.farmer-registration-popup{
+    position: fixed;
+    width: calc(264px - 18px * 2);
+    padding: 0 18px 0 18px;
+    height: 344px;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 28px;
+}
+.close-popup-icon{
+    margin-left: 208px;
+    margin-top: 16px;
+    font-size: 24px;
+    color: black;
+}
+.popup-ment{
+    margin-top: 16px;
+    margin-left: 2px;
+}
+.ment1,
+.ment2{
+    font-family: 'gilroy-bold';
+    font-size: 24px;
+}
+.ment2{
+    margin-top: 8px;
+}
+.ok-btn{
+    margin-top: 114px;
+    border-radius: 62px;
+    font-family: 'gilroy-medium';
+}
