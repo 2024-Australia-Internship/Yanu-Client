@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css');
+
 *{
     margin: 0;
     padding: 0;
@@ -7,6 +9,7 @@
 :root{
     --first-color : #FF7A00;
     --font-color : rgba(0, 0, 0, 0.87);
+    --input-font: 'SUIT', sans-serif;
 }
 .user-input{
     height: 51px;
@@ -16,6 +19,7 @@
     border-radius: 12px;
     padding-left: 20px;
     color: var(--font-color);
+    font-family: var(--input-font);
 }
 .user-input:focus{
     outline: 1.2px solid #C5C5C5;
@@ -41,12 +45,23 @@
 .wrong-info:focus{
     outline: 1.2px solid var(--first-color);
 }
+.confirm-pw-div{
+    display: flex;
+    align-items: center;
+}
 .confirm-div{
     margin-top: 8px;
     display: flex;
     row-gap: 8px;
     flex-wrap: wrap;
     column-gap: 8px;
+}
+.eye-div{
+    position: absolute;
+    margin-left: 251px;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
 }
 .confirm-btn{
     display: flex;
@@ -62,9 +77,15 @@
 .confirm-btn > iconify-icon{
     font-size: 15px;
 }
+.confirm-detail{
+    font-family: var(--input-font);
+}
 .currect-box{
     background-color: #F4FFE9;
 }
 .currect{
     color: #66CC00;
+}
+.input-font{
+    font-family: var(--input-font);
 }

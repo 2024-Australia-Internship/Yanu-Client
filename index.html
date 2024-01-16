@@ -15,16 +15,22 @@
         
         <div class="user-div">
             <div class="input-box">
-                <input class="user-input id-input" placeholder="ID">
-                <input class="user-input pw-input" type="password" placeholder="Password">
+                <input class="user-input id-input" placeholder="E-mail">
+                <div class="confirm-pw-div">
+                    <input type="password" placeholder="Password" class="user-input my-pw-input">
+                    <div class="eye-div">
+                        <img src="/images/eye-open.svg" class="my-pw-icon pw-icon" onclick="showMyPw()">
+                    </div>
+                </div>
             </div>
-            <div class="setting-pw" onclick="window.location.href='/html/edit-password.html'">Forgot password?</div>
+            <div class="setting-pw input-font" onclick="window.location.href='/html/edit-password.html'">Forgot password?</div>
         </div>
 
         <div class="login-btn" onclick="checkInfo()">Log in</div>
-        <div class="sm-signup-btn" onclick="window.location.href='/html/signup.html'">Sign up</div>
+        <div class="sm-signup-btn input-font" onclick="window.location.href='/html/signup.html'">Sign up</div>
 
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
         <script src="/config.js"></script>
         <script src="/js/index.js"></script>
     </body>

@@ -109,12 +109,12 @@ function changePw(){
         new_password: user_pw
     }
     
-    axios.patch(`${BASE_URL}/forget/password`, req)
+    axios.patch(`${BASE_URL}/users/forget/password`, req)
     .then(response => {
         console.log(response);
         alert('로그인 성공');
         console.log(response.status);
-        // window.location.href = "/index.html";
+        window.location.href = "/index.html";
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
