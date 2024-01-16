@@ -172,7 +172,7 @@ function signup(){
     axios.post(`${BASE_URL}/users/register`, req)
     .then(response => {
         console.log(response)
-        window.location.href = "/index.html";
+        window.location.href = "/html/setting-profile.html";
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
