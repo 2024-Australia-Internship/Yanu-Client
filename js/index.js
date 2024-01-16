@@ -28,6 +28,7 @@ function checkInfo(){
     .then(response => {
         console.log(response);
         alert('로그인 성공');
+        window.location.href = "/html/main-page.html";
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
