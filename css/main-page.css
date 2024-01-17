@@ -39,10 +39,6 @@ body{
     left: 50%;
     transform: translate(-50%, 0);
 }
-.heart-btn{
-    font-size: 20px;
-    color: #FF7A00;
-}
 .popup-background{
     position: fixed;
     top: 0;
