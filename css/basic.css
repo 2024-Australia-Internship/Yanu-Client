@@ -105,22 +105,30 @@
 .input-font{
     font-family: var(--input-font);
 }
-.product{
+.product,
+.favorites-product,
+.farm{
     width: 153px;
     height: 185px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
 }
-.product-img{
+.product-img,
+.favorites-product-img,
+.farm-img{
     width: 100%;
     height: 107px;
     object-fit: cover;
 }
-.product-detail-div{
+.product-detail-div,
+.favorites-product-detail-div,
+.farm-detail-div{
     padding: 7px 12px 11px 12px;
 }
-.product-name{
+.product-name,
+.favorites-product-name,
+.farm-name{
     font-family: 'gilroy-semiBold';
     font-size: 15px;
     overflow: hidden; 
@@ -128,7 +136,9 @@
     white-space: nowrap; 		
     word-break:break-all;
 }
-.product-farm-name{
+.product-farm-name,
+.favorites-product-farm-name,
+.farm-username{
     font-family: 'gilroy-regular';
     color: #818181;
     font-size: 11px;
@@ -137,25 +147,34 @@
     white-space: nowrap; 		
     word-break:break-all;
 }
-.product-detail{
+.product-detail,
+.favorites-product-detail{
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 }
-.product-price-div{
+.product-price-div,
+.favorites-product-price-div{
     display: flex;
     column-gap: 4px;
     align-items: center;
 }
-.product-price{
+.product-price,
+.favorites-product-price{
     font-family: 'gilroy-semiBold';
     font-size: 17px;
 }
-.product-unit{
+.product-unit,
+.favorites-product-unit{
     padding-top: 2px;
     font-family: 'gilroy-regular';
     font-size: 11px;
     color: #ABABAB;
+}
+.heart-btn,
+.favorites-heart-btn{
+    font-size: 20px;
+    color: #FF7A00;
 }
