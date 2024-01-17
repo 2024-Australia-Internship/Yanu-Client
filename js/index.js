@@ -12,7 +12,6 @@ function showMyPw(){
 }
 
 function checkInfo(){
-    alert('정보 확인');
 
     let idValue = document.getElementsByClassName('id-input')[0].value;
     let pwValue = document.getElementsByClassName('my-pw-input')[0].value;
@@ -26,9 +25,10 @@ function checkInfo(){
     
     axios.post(`${BASE_URL}/users/login`, req)
     .then(response => {
-        console.log(response);
+        let user_code = response.data.result.user_code;
+        window.localStorage.setItem('user_code', user_code);
         alert('로그인 성공');
-        window.location.href = "/html/main-page.html";
+        window.location.href = `/html/main-page.html?id=${user_code}`;
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);

@@ -1,4 +1,5 @@
 let prductsDiv = document.getElementsByClassName('products-div')[0];
+console.log(window.localStorage.getItem('user_code'));
 
 for(let i = 0; i<20; i++){
     let product = document.createElement('div');
