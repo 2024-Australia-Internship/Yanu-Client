@@ -27,15 +27,17 @@ body{
     color: #FF7A00;
 }
 .products-div{
-    width: 100%;
+    position: relative;
+    width: calc(153px * 2 + 14px);
     height: auto;
     margin-top: 10px;
     display: grid;
-    row-gap: 16px;
+    gap: 16px 14px;
     grid-template-rows: auto;
-    justify-content: space-between;
     grid-template-columns: 153px 153px;
     padding-bottom: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 .product{
     width: 153px;
@@ -55,11 +57,19 @@ body{
 .product-name{
     font-family: 'gilroy-semiBold';
     font-size: 15px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 		
+    word-break:break-all;
 }
 .product-farm-name{
     font-family: 'gilroy-regular';
     color: #818181;
     font-size: 11px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 		
+    word-break:break-all;
 }
 .product-detail{
     margin-top: 5px;
