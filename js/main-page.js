@@ -1,3 +1,23 @@
+if(window.localStorage.getItem('first-login') === 'false'){
+    let popup = document.getElementsByClassName('popup-background')[0];
+    popup.style.visibility = "hidden";
+}
+
+let user_code = getCookie('user_code');
+console.log(user_code);
+
+axios.get(`${BASE_URL}/users/${user_code}`)
+.then(response => {
+    console.log(response);
+    let username = document.getElementsByClassName('welcome-username')[0];
+    username.innerText = response.data.userAllInfo[0].nickname
+    alert('로그인 성공');
+})
+.catch(error => {
+    console.error('There has been a problem with your axios request:', error);
+    alert('로그인 실패');
+});
+
 let prductsDiv = document.getElementsByClassName('products-div')[0];
 console.log(window.localStorage.getItem('user_code'));
 
@@ -60,7 +80,15 @@ function heartToggle(e){
     }
 }
 
+function getCookie(key){
+    key = new RegExp(key + '=([^;]*)'); 
+    return key.test(document.cookie) ? unescape(RegExp.$1) : '';
+}
+
 function hidePopup(){
+    console.log(window.localStorage.getItem('first-login'));
+    window.localStorage.setItem('first-login', false);
     let popup = document.getElementsByClassName('popup-background')[0];
     popup.style.visibility = "hidden";
 }
+

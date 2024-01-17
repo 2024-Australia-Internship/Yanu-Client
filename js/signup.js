@@ -172,6 +172,15 @@ function signup(){
     axios.post(`${BASE_URL}/users/register`, req)
     .then(response => {
         console.log(response)
+        let user_code = response.data.result.user_code;
+        console.log(user_code);
+
+        let expireDate = new Date();
+        expireDate.setMonth(expireDate.getMonth() + 1);
+        document.cookie = `user_code=${user_code}; path=/; expires=` + expireDate.toGMTString();
+        console.log(document.cookie);
+
+        window.localStorage.setItem('first-login', true);
         window.location.href = "/html/setting-profile.html";
     })
     .catch(error => {

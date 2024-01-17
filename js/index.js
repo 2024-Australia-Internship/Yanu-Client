@@ -25,14 +25,23 @@ function checkInfo(){
     
     axios.post(`${BASE_URL}/users/login`, req)
     .then(response => {
-        let user_code = response.data.result.user_code;
-        window.localStorage.setItem('user_code', user_code);
+        console.log(response);
+        
         alert('로그인 성공');
-        window.location.href = `/html/main-page.html?id=${user_code}`;
+        saveUserInfo(response.data.result);
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
         alert('로그인 실패');
         if(error.response.status == 404) alert('비밀번호가 일치하지 않음');
     });
+}
+
+function saveUserInfo(result){
+    let user_code = result.user_code;
+
+    document.cookie = `user_code=${user_code};`;
+    console.log(document.cookie);
+
+    window.location.href = `/html/main-page.html?id=${user_code}`;
 }
