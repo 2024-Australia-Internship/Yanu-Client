@@ -12,7 +12,6 @@ function showMyPw(){
 }
 
 function checkInfo(){
-    alert('정보 확인');
 
     let idValue = document.getElementsByClassName('id-input')[0].value;
     let pwValue = document.getElementsByClassName('my-pw-input')[0].value;
@@ -27,12 +26,22 @@ function checkInfo(){
     axios.post(`${BASE_URL}/users/login`, req)
     .then(response => {
         console.log(response);
+        
         alert('로그인 성공');
-        window.location.href = "/html/main-page.html";
+        saveUserInfo(response.data.result);
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
         alert('로그인 실패');
         if(error.response.status == 404) alert('비밀번호가 일치하지 않음');
     });
+}
+
+function saveUserInfo(result){
+    let user_code = result.user_code;
+
+    document.cookie = `user_code=${user_code};`;
+    console.log(document.cookie);
+
+    window.location.href = `/html/main-page.html?id=${user_code}`;
 }

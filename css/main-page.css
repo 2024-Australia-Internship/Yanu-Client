@@ -27,61 +27,17 @@ body{
     color: #FF7A00;
 }
 .products-div{
-    width: 100%;
+    position: relative;
+    width: calc(153px * 2 + 14px);
     height: auto;
     margin-top: 10px;
     display: grid;
-    row-gap: 16px;
+    gap: 16px 14px;
     grid-template-rows: auto;
-    justify-content: space-between;
     grid-template-columns: 153px 153px;
     padding-bottom: 150px;
-}
-.product{
-    width: 153px;
-    height: 185px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
-}
-.product-img{
-    width: 100%;
-    height: 107px;
-    object-fit: cover;
-}
-.product-detail-div{
-    padding: 7px 12px 11px 12px;
-}
-.product-name{
-    font-family: 'gilroy-semiBold';
-    font-size: 15px;
-}
-.product-farm-name{
-    font-family: 'gilroy-regular';
-    color: #818181;
-    font-size: 11px;
-}
-.product-detail{
-    margin-top: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.product-price-div{
-    display: flex;
-    column-gap: 4px;
-    align-items: center;
-}
-.product-price{
-    font-family: 'gilroy-semiBold';
-    font-size: 17px;
-}
-.product-unit{
-    padding-top: 2px;
-    font-family: 'gilroy-regular';
-    font-size: 11px;
-    color: #ABABAB;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 .heart-btn{
     font-size: 20px;
