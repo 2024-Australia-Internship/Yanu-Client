@@ -58,6 +58,7 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 28px;
+    overflow: hidden;
 }
 .close-popup-icon{
     margin-left: 208px;
@@ -66,7 +67,7 @@ body{
     color: black;
 }
 .popup-ment{
-    margin-top: 16px;
+    margin-top: 8px;
     margin-left: 2px;
 }
 .ment1,
@@ -77,8 +78,14 @@ body{
 .ment2{
     margin-top: 8px;
 }
+.farmer-popup-img{
+    position: absolute;
+    left: -62px;
+    margin-top: 16px;
+}
 .ok-btn{
-    margin-top: 114px;
+    position: relative;
+    z-index: 1;
     border-radius: 62px;
     font-family: 'gilroy-medium';
 }
