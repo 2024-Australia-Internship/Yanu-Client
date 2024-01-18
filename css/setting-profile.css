@@ -20,7 +20,7 @@ body{
     position: relative;
     width: 30px;
     height: 30px;
-    background-color: #FF7A00;
+    background-color: var(--first-color);
     border-radius: 50%;
     top: -30px;
     left: 166px;

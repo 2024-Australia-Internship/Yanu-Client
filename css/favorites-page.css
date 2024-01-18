@@ -2,7 +2,7 @@
     background-color: white;
 }
 body{
-    background-color: #FFD7B3;
+    background-color: var(--sub-color);
 }
 header{
     position: relative;
