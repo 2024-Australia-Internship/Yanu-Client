@@ -54,6 +54,17 @@ let translate = 0; // 슬라이드 위치 값
 let sliderPageLength = document.getElementsByClassName('product-img-slider')[0].children.length;
 let totalsliderWidth = document.getElementsByClassName('product-img-slider')[0];
 
+if(sliderPageLength >= 2){
+    for(var i = 1; i<=sliderPageLength; i++){
+        const pages = document.createElement('input');
+        pages.type = "radio";
+        pages.name = "pageIndex";
+        pages.style.border = 0;
+        pages.className = `page-radio radio${i-1}`;
+        if(i === 1) pages.checked = true;
+        document.getElementsByClassName("product-img-cnt")[0].appendChild(pages);
+    }
+}
 
 function nextSlide(){
     console.log('전으로 이동')
@@ -62,6 +73,8 @@ function nextSlide(){
         totalsliderWidth.style.transform = `translateX(${translate}px)`;
         currentIdx -= 1;
     }
+    var currectPage = document.getElementsByClassName(`radio${currentIdx}`)[0];
+    currectPage.checked = true;
 }
 
 function prevSilde(){
@@ -71,6 +84,8 @@ function prevSilde(){
         totalsliderWidth.style.transform = `translateX(${translate}px)`;
         currentIdx += 1;
     }
+    var currectPage = document.getElementsByClassName(`radio${currentIdx}`)[0];
+    currectPage.checked = true;
 }
 function chooseProductDetail(detail){
     let info = document.getElementsByClassName('product-info-div')[0];
