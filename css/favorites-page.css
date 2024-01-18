@@ -2,7 +2,7 @@
     background-color: white;
 }
 body{
-    background-color: #FFD7B3;
+    background-color: var(--sub-color);
 }
 header{
     position: relative;
@@ -111,14 +111,13 @@ header{
     gap: 12px 14px;
     justify-content: center;
     padding-bottom: 150px;
-    display: none;
 }
 .favorites-farms-div{
     margin-top: 28px;
     display: grid;
     row-gap: 16px;
     padding-bottom: 150px;
-    /* display: none; */
+    display: none;
 }
 .favorites-farm{
     width: 100%;

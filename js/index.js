@@ -40,8 +40,11 @@ function checkInfo(){
 function saveUserInfo(result){
     let user_code = result.user_code;
 
-    document.cookie = `user_code=${user_code};`;
+    let expireDate = new Date();
+    expireDate.setMonth(expireDate.getMonth() + 1);
+    document.cookie = `user_code=${user_code}; path=/; expires=` + expireDate.toGMTString();
+    
     console.log(document.cookie);
 
-    window.location.href = `/html/main-page.html?id=${user_code}`;
+    window.location.href = `/html/main-page.html`;
 }

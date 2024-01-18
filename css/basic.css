@@ -24,6 +24,7 @@
 }
 :root{
     --first-color: #FF7A00;
+    --sub-color: #FFD7B3;
     --font-color: rgba(0, 0, 0, 0.87);
     --input-font: 'SUIT', sans-serif;
 }
@@ -176,5 +177,29 @@
 .heart-btn,
 .favorites-heart-btn{
     font-size: 20px;
-    color: #FF7A00;
+    color: var(--first-color);
+}
+.back-btn{
+    width: 24px;
+    height: 24px;
+}
+.fill-basic-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--first-color);
+    border-radius: 12px;
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+    color: white;
+}
+.basic-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--first-color);
+    border-radius: 12px;
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+    color: var(--first-color);
 }

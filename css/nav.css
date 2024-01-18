@@ -27,5 +27,5 @@ nav{
 }
 #choose-page .nav-icon,
 #choose-page .nav-title{
-    color: #FF7A00;
+    color: var(--first-color);
 }
