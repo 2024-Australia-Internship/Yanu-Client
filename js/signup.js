@@ -31,8 +31,10 @@ function checkEmail(flag){
     axios.post(`${BASE_URL}/users/check/email`, req)
     .then(response => {
         console.log(response)
-        checkEmail.innerText = "You can use this E-mail."
-        checkEmail.style.color = "#66CC00";
+        if((/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/).test(myEmail)){
+            checkEmail.innerText = "You can use this E-mail."
+            checkEmail.style.color = "#66CC00";
+        }
         if(flag) signup();
     })
     .catch(error => {
@@ -174,14 +176,8 @@ function signup(){
         console.log(response)
         let user_code = response.data.result.user_code;
         console.log(user_code);
-
-        let expireDate = new Date();
-        expireDate.setMonth(expireDate.getMonth() + 1);
-        document.cookie = `user_code=${user_code}; path=/; expires=` + expireDate.toGMTString();
-        console.log(document.cookie);
-
         window.localStorage.setItem('first-login', true);
-        window.location.href = "/html/setting-profile.html";
+        window.location.href = `/html/setting-profile.html?user_code=${user_code}`;
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
