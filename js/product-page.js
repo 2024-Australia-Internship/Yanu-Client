@@ -45,8 +45,9 @@ function handleScroll(event) {
   }
 }
 
+let slider = document.getElementsByClassName('product-img-div')[0];
 // 스크롤 이벤트 리스너 등록
-document.addEventListener('wheel', handleScroll);
+slider.addEventListener('wheel', handleScroll);
 
 let currentIdx = 0; // 슬라이드 현재 번호
 let translate = 0; // 슬라이드 위치 값
