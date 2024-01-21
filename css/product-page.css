@@ -105,7 +105,8 @@ input[type='radio']:checked {
     font-size: 15px;
 }
 .choose-detail{
-    background-color: var(--sub-color);
+    background-color: #FFBD80;
+    border-bottom: 3px solid var(--first-color);
 }
 .product-detail-div{
     width: calc(100% - 20px);

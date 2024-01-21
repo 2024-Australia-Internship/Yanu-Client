@@ -1,20 +1,3 @@
-// let first = 0;
-
-// window.addEventListener('mousewheel',(event) => {
-// 	let wheel = event.wheelDeltaX;
-  
-// 	// if(wheel > 0) {
-//     //   console.log('Up!');
-//     // }
-// 	// else { // (wheel < 0)
-//     //   console.log('Down!');
-//     // }
-// });
-
-// window.addEventListener('wheel', (e) => { 
-//     console.log(e.deltaY, e.deltaX);
-//     window.scrollBy(0, 50);
-// });
 // 스크롤 중 여부를 확인하기 위한 변수
 let isScrolling = false;
 
@@ -107,4 +90,97 @@ function chooseProductDetail(detail){
         infoBtn.classList.remove('choose-detail');
         reivewBtn.classList.add('choose-detail');
     }
+}
+
+let bestReviewsDiv = document.getElementsByClassName('best-reviews')[0];
+for(let i = 0; i<20; i++){
+  let bestReview = document.createElement('div');
+  bestReview.className = "best-review";
+
+  let reviewerInfoDiv = document.createElement('div');
+  reviewerInfoDiv.className = 'reviewer-info-div';
+
+  let bestReviewerProfileImg = document.createElement('div');
+  bestReviewerProfileImg.className = "best-reviewer-profile-img";
+  bestReviewerProfileImg.innerHTML = `<img src="/images/product-img.png" class="reviewer-img">`
+
+  let reviewer = document.createElement('div');
+  reviewer.className = 'reviewer';
+
+  let reviewerName = document.createElement('div');
+  reviewerName.className = 'reviewer-name';
+  reviewerName.innerText = 'Bella';
+
+  let reviewerStarDiv = document.createElement('div');
+  reviewerStarDiv.className = 'reviewer-star-div';
+
+  for(let j = 0; j<5; j++){
+    reviewerStarDiv.innerHTML += `<iconify-icon icon="ph:star-fill" class="review-star"></iconify-icon>`
+  }
+  
+  reviewer.appendChild(reviewerName);
+  reviewer.appendChild(reviewerStarDiv);
+
+  reviewerInfoDiv.appendChild(bestReviewerProfileImg);
+  reviewerInfoDiv.appendChild(reviewer);
+  
+  let reviewDetail = document.createElement('div');
+  reviewDetail.className = 'review-detail';
+  reviewDetail.innerText = `shdfshdfkjsdfhfjfjkshdkfhskhfkjhsdjfshdfsjkdfhuefhkjwhefksjhdfjkshfkjsdfjkdhfjksdhfkjsdfhjsfkjhfjkswhfkjsfwhkjwefkjwehfjkshkjfhskjfwhekfhwuefhkwhk`
+
+  bestReview.appendChild(reviewerInfoDiv);
+  bestReview.appendChild(reviewDetail);
+
+  bestReviewsDiv.appendChild(bestReview);
+}
+
+let allReviews = document.getElementsByClassName('all-reviews')[0];
+for(let i = 0; i<20; i++){
+  let allReview = document.createElement('div');
+  allReview.className = 'all-review'
+
+  let reviewerTitleDiv = document.createElement('div');
+  reviewerTitleDiv.className = 'reviewer-title-div';
+
+  let reviewerInfoDiv = document.createElement('div');
+  reviewerInfoDiv.className = 'reviewer-info-div';
+
+  let allReviewerProfileImg = document.createElement('div');
+  allReviewerProfileImg.className = 'all-reviewer-profile-img';
+  allReviewerProfileImg.innerHTML = `<img src="/images/home-hover.svg" class="all-reviewer-img reviewer-img">`;
+
+  let reviewerInfo = document.createElement('div');
+  reviewerInfo.className = 'reviewer-info';
+
+  let allReviewerName = document.createElement('div');
+  allReviewerName.className = 'all-reviewer-name';
+  allReviewerName.innerText = 'Amanda Scott'
+
+  let reviewDate = document.createElement('div');
+  reviewDate.className = 'review-date';
+  reviewDate.innerText = '2024.01.12'
+
+  reviewerInfo.appendChild(allReviewerName);
+  reviewerInfo.appendChild(reviewDate);
+
+  reviewerInfoDiv.appendChild(allReviewerProfileImg);
+  reviewerInfoDiv.appendChild(reviewerInfo);
+
+  let allReviewStars = document.createElement('div');
+  allReviewStars.className = 'all-review-starts'
+  for(let j = 0 ; j<5; j++){
+    allReviewStars.innerHTML += `<iconify-icon icon="ph:star-fill" class="review-star all-review-star"></iconify-icon>`;
+  }
+
+  reviewerTitleDiv.appendChild(reviewerInfoDiv);
+  reviewerTitleDiv.appendChild(allReviewStars);
+
+  let allReviewDetail = document.createElement('div');
+  allReviewDetail.className = 'all-review-detail';
+  allReviewDetail.innerText = 'jsdfhlsdfhkdhfkhsdfdhsdhsdfhfkhsidwyhivbwifuwbklihfuwabyihfviawhribevhvfiuaebhlioanvihertaeurtnhaeilmvawiohaemloiwdjfvkd,uheuklfsndfjbklawvnhwuifbhlwaunvwi';
+
+  allReview.appendChild(reviewerTitleDiv);
+  allReview.appendChild(allReviewDetail);
+
+  allReviews.appendChild(allReview);
 }
