@@ -31,13 +31,17 @@
     align-items: baseline;
 }
 .user-name{
+    position: relative;
     font-family: 'gilroy-semiBold';
+    left: 50%;
+    transform: translate(-50%, 0);
     font-size: 17px;
     color: white;
 }
 .edit-user-name{
     font-size: 12px;
     color: white;
+    margin-left: 16px;
 }
 .user-history-div{
     width: 262px;
