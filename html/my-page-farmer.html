@@ -9,6 +9,57 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="farm-back-img-div">
+        <img src="/images/farmer-registration-back-img.svg" class="farm-back-img">
+        <iconify-icon icon="fluent:camera-20-regular" class="edit-back-img" onclick="editbackImg()"></iconify-icon>
+        <input type="file" accept="image/*" style="display: none;" class="upload-file">
+    </div>
+    <div class="user-profile-img-div">
+        <img src="/images/product-img.png" class="profile-img">
+    </div>
+    <div class="user-profile-info-div">
+        <div class="user-name-div">
+            <div class="user-name">Hannah</div>
+            <iconify-icon icon="la:pen" class="edit-user-name"></iconify-icon>
+        </div>
+        <div class="user-farm-name">Annie’s farm</div>
+        <div class="user-history-div">
+            <div class="user-order-history-div history-div">
+                <div class="history-title">My Product</div>
+                <iconify-icon icon="iconamoon:arrow-up-2-thin" class="history-btn"></iconify-icon>
+            </div>
+            <div class="user-info-history-div">
+                <div class="user-address-div history-div">
+                    <div class="history-title sales-history-title">Sales History</div>
+                    <iconify-icon icon="iconamoon:arrow-up-2-thin" class="history-btn"></iconify-icon>
+                </div>
+                <div class="user-review-div history-div">
+                    <div class="history-title">Sale List</div>
+                    <iconify-icon icon="iconamoon:arrow-up-2-thin" class="history-btn"></iconify-icon>
+                </div>
+            </div>
+        </div>
+        <div class="user-ugly-percent-div">
+            <div class="ugly-percent-title">My Ugly Percent</div>
+            <div class="user-ugly-percent">
+                <div class="ugly-percent">
+                    <div class="ugly-cnt">87</div>
+                    <div class="ugly-unit">%</div>
+                </div>
+                <img src="/images/ugly-potato.svg" class="ugly-potato">
+            </div>
+        </div>
+        <div class="etc-div">
+            <div class="payment-div etc">
+                <iconify-icon icon="ion:card-outline" class="etc-btn"></iconify-icon>
+                <div class="etc-title">Payment Methods</div>
+            </div>
+            <div class="logout-div etc">
+                <iconify-icon icon="mynaui:logout" class="etc-btn logout"></iconify-icon>
+                <div class="etc-title logout" onclick="window.location.href='/index.html'">Log out</div>
+            </div>
+        </div>
+    </div>
     
     <nav>
         <div class="nav-page" onclick="window.location.href='/html/main-page.html'">
