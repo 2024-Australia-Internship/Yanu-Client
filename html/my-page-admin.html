@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/basic.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/my-page-admin.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="user-profile-img-div">
+        <img src="/images/product-img.png" class="profile-img">
+    </div>
+    <div class="user-profile-info-div">
+        <div class="user-name-div">
+            <div class="user-name">Hannah</div>
+            <iconify-icon icon="la:pen" class="edit-user-name"></iconify-icon>
+        </div>
+        <div class="user-history-div">
+            <div class="user-order-history-div history-div">
+                <div class="history-title">Order History</div>
+                <iconify-icon icon="iconamoon:arrow-up-2-thin" class="history-btn"></iconify-icon>
+            </div>
+            <div class="user-info-history-div">
+                <div class="user-address-div history-div">
+                    <div class="history-title">My Address</div>
+                    <iconify-icon icon="iconamoon:arrow-up-2-thin" class="history-btn"></iconify-icon>
+                </div>
+                <div class="user-review-div history-div">
+                    <div class="history-title">My Review</div>
+                    <iconify-icon icon="iconamoon:arrow-up-2-thin" class="history-btn"></iconify-icon>
+                </div>
+            </div>
+        </div>
+        <div class="user-ugly-percent-div">
+            <div class="ugly-percent-title">My Ugly Percent</div>
+            <div class="user-ugly-percent">
+                <div class="ugly-percent">
+                    <div class="ugly-cnt">87</div>
+                    <div class="ugly-unit">%</div>
+                </div>
+                <img src="/images/ugly-potato.svg" class="ugly-potato">
+            </div>
+        </div>
+        <div class="etc-div">
+            <div class="payment-div etc">
+                <iconify-icon icon="ion:card-outline" class="etc-btn"></iconify-icon>
+                <div class="etc-title">Payment Methods</div>
+            </div>
+            <div class="farmer-div etc">
+                <iconify-icon icon="circum:apple" class="etc-btn"></iconify-icon>
+                <div class="etc-title">Become a Farmer</div>
+            </div>
+            <div class="logout-div etc">
+                <iconify-icon icon="mynaui:logout" class="etc-btn logout"></iconify-icon>
+                <div class="etc-title logout">Log out</div>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-page" onclick="window.location.href='/html/main-page.html'">
+            <div class="icon-div home">
+                <iconify-icon icon="octicon:home-24" class="nav-icon"></iconify-icon>
+            </div>
+            <div class="nav-title">home</div>
+        </div>
+        <div class="nav-page" onclick="window.location.href='/html/search-page.html'">
+            <div class="icon-div search">
+                <iconify-icon icon="basil:search-outline" class="nav-icon"></iconify-icon>
+            </div>
+            <div class="nav-title">Search</div>
+        </div>
+        <div class="nav-page" onclick="window.location.href='/html/favorites-page.html'">
+            <div class="icon-div favorites">
+                <iconify-icon icon="ph:heart" class="nav-icon"></iconify-icon>
+            </div>
+            <div class="nav-title">Favorites</div>
+        </div>
+        <div class="nav-page" onclick="window.location.href='/html/map-page.html'">
+            <div class="icon-div map">
+                <iconify-icon icon="cil:map" class="nav-icon"></iconify-icon>
+            </div>
+            <div class="nav-title">Map</div>
+        </div>
+        <div class="nav-page" id="choose-page" onclick="window.location.href='/html/my-page.html'">
+            <div class="icon-div my-page">
+                <iconify-icon icon="iconoir:profile-circle" class="nav-icon"></iconify-icon>
+            </div>
+            <div class="nav-title">My page</div>
+        </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="/config.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/my-page-admin.js"></script>
+</body>
+</html>
