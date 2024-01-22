@@ -19,7 +19,6 @@ axios.get(`${BASE_URL}/users/${user_code}`)
 });
 
 let prductsDiv = document.getElementsByClassName('products-div')[0];
-console.log(window.localStorage.getItem('user_code'));
 
 for(let i = 0; i<20; i++){
     let product = document.createElement('div');
@@ -78,11 +77,6 @@ function heartToggle(e){
         e.target.classList.add('choose-heart-btn');
         e.target.icon = 'ph:heart-fill';
     }
-}
-
-function getCookie(key){
-    key = new RegExp(key + '=([^;]*)'); 
-    return key.test(document.cookie) ? unescape(RegExp.$1) : '';
 }
 
 function hidePopup(flag){
