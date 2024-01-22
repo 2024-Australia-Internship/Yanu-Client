@@ -8,7 +8,7 @@ function termSelectAll(){
 function submit(){
     let businessName = document.getElementsByClassName('business-name-input')[0].value;
     let name = document.getElementsByClassName('name-input')[0].value;
-    let familyName = document.getElementsByClassName('family-name-input')[0].value;
+    let familyName = document.getElementsByClassName('family-name-input')[1].value;
     let phoneNumber = document.getElementsByClassName('phone-number-input')[0].value;
     let email = document.getElementsByClassName('e-mail-input')[0].value;
     let adress1 = document.getElementsByClassName('address-input1')[0].value;
@@ -30,10 +30,48 @@ function submit(){
         return alert('이메일 다시 입력하셈');
     }
 
-    let checkBtns = [...document.getElementsByClassName('terms-checkbox')];
-    for(let checkBtn of checkBtns){
-        if(!checkBtn.checked) return alert('terms 동의 please')
+    const reqE = {
+        user_email: email
     }
+    axios.post(`${BASE_URL}/users/check/email`, reqE)
+    .then(response => {
+        console.log(response)
+        return alert('존재하지 않는 이메일입니다.');
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+        let checkBtns = [...document.getElementsByClassName('terms-checkbox')];
+        for(let checkBtn of checkBtns){
+            if(!checkBtn.checked) return alert('terms 동의 please')
+        }
 
-    window.location.href = '/html/main-page.html';
+        let user_code = getCookie('user_code');
+
+        console.log(user_code);
+        console.log(businessName);
+        console.log(`${familyName} ${name}`);
+        console.log(phoneNumber);
+        console.log(email);
+        console.log(`${adress1} ${adress2}`);
+
+        const req = {
+            user_code: user_code, 
+            business_name: businessName, 
+            farmer_name: `${familyName} ${name}`, 
+            farm_phonenumber: phoneNumber, 
+            farm_email: email, 
+            farm_address: `${adress1} ${adress2}`
+        }
+        axios.post(`${BASE_URL}/farms/register`, req)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.error('There has been a problem with your axios request:', error);
+        });
+
+        window.location.href = '/html/main-page.html';
+    });
+
+    
 }
