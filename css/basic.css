@@ -43,7 +43,8 @@
 }
 .signup-btn,
 .login-btn,
-.ok-btn{
+.ok-btn,
+.submit-btn{
     margin-top: 122px;
     width: 100%;
     height: 56px;
