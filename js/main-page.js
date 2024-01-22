@@ -19,7 +19,6 @@ axios.get(`${BASE_URL}/users/${user_code}`)
 });
 
 let prductsDiv = document.getElementsByClassName('products-div')[0];
-console.log(window.localStorage.getItem('user_code'));
 
 for(let i = 0; i<20; i++){
     let product = document.createElement('div');
@@ -80,15 +79,12 @@ function heartToggle(e){
     }
 }
 
-function getCookie(key){
-    key = new RegExp(key + '=([^;]*)'); 
-    return key.test(document.cookie) ? unescape(RegExp.$1) : '';
-}
-
-function hidePopup(){
+function hidePopup(flag){
     console.log(window.localStorage.getItem('first-login'));
     window.localStorage.setItem('first-login', false);
     let popup = document.getElementsByClassName('popup-background')[0];
     popup.style.visibility = "hidden";
+
+    if(flag) window.location.href = '/html/farmer-registration.html';
 }
 

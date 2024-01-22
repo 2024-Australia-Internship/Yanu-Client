@@ -24,7 +24,7 @@ function getImageFiles(e){
 }
 function settingProfile(){
     let urlParams = new URL(location.href).searchParams;
-    let user_code = urlParams.get('user_name');
+    let user_code = urlParams.get('user_code');
     console.log(user_code);
 
     const formData = new FormData();

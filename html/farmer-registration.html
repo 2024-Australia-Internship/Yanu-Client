@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/basic.css">
+    <link rel="stylesheet" href="/css/farmer-registration.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="title-div">
+        <div class="title-comment-div">
+            <div class="title-comment">Welcome to YANU</div>
+            <div class="title-comment">Let’s be a farmer!</div>
+        </div>
+    </div>
+
+    <div class="input-form">
+        <div class="input-div">
+            <div class="input-title">Business name</div>
+            <input class="user-input business-name-input">
+        </div>
+
+        <div class="name-input-div">
+            <div class="input-div last-name-input">
+                <div class="input-title">Name</div>
+                <input class="user-input name-input">
+            </div>
+            <div class="input-div family-name-input">
+                <div class="input-title">Family Name</div>
+                <input class="user-input family-name-input">
+            </div>
+        </div>
+        
+        <div class="input-div">
+            <div class="input-title">Phone Number</div>
+            <input class="user-input phone-number-input">
+        </div>
+
+        <div class="input-div">
+            <div class="input-title">E-mail</div>
+            <input class="user-input e-mail-input">
+        </div>
+
+        <div class="input-div">
+            <div class="input-title">Address</div>
+            <div class="address-input">
+                <input class="user-input address-input1">
+                <input class="user-input address-input2">
+            </div>
+        </div>
+    </div>
+    
+    <div class="terms-for-farm-div">
+        <div class="terms-title-div">
+            <div class="terms-title">Terms for farmers</div>
+            <div class="select-all-btn" onclick="termSelectAll()">Select All</div>
+        </div>
+
+        <div class="terms-detail-div">
+            <div class="terms-detail">
+                <input type="checkbox" class="terms-checkbox" id="check1">
+                <label for="check1" class="check1"></label>
+                <div class="terms">Agree to become a farmer</div>
+            </div>
+
+            <div class="terms-detail">
+                <input type="checkbox" class="terms-checkbox" id="check2">
+                <label for="check2" class="check2"></label>
+                <div class="terms">Agree to become a farmer</div>
+            </div>
+
+            <div class="terms-detail">
+                <input type="checkbox" class="terms-checkbox" id="check3">
+                <label for="check3" class="check3"></label>
+                <div class="terms">Agree to become a farmer</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="submit()">submit</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="/config.js"></script>
+    <script src="/js/basic.js"></script>
+    <script src="/js/farmer-registration.js"></script>
+</body>
+</html>

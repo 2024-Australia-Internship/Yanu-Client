@@ -1,0 +1,142 @@
+.user-profile-img-div{
+    position: relative;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    top: 52px;
+    z-index: 1;
+}
+.profile-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.user-profile-info-div{
+    position: absolute;
+    width: 100%;
+    top: 92px;
+    height: calc(100% - 92px);
+    background-color: var(--first-color);
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-name-div{
+    display: flex;
+    margin-top: 50px;
+    column-gap: 8px;
+    align-items: baseline;
+}
+.user-name{
+    position: relative;
+    font-family: 'gilroy-semiBold';
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 17px;
+    color: white;
+}
+.edit-user-name{
+    font-size: 12px;
+    color: white;
+    margin-left: 16px;
+}
+.user-history-div{
+    width: 262px;
+    height: 96px;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 33px;
+}
+.history-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.history-title,
+.etc-title{
+    font-family: 'gilroy-medium';
+    font-size: 15px;
+}
+.history-btn{
+    transform: rotate(90deg);
+    font-size: 24px;
+}
+.user-order-history-div{
+    width: calc(100% - 12px - 8px);
+    padding: 0 8px 0 12px;
+    height: 50%;
+    border-bottom: 1px solid #D4D4D4;
+}
+.user-info-history-div{
+    display: flex;
+    height: 50%;
+}
+.user-address-div,
+.user-review-div{
+    width: calc(50% - 12px - 8px);
+    padding: 0 8px 0 12px;
+}
+.user-address-div{
+    border-right: 1px solid #D4D4D4;
+}
+.user-ugly-percent-div{
+    margin-top: 28px;
+    width: 262px;
+    height: 112px;
+    background-color: #FFD7B3;
+    border-radius: 12px;
+}
+.ugly-percent-title{
+    margin: 16px 0 0 20px;
+    font-family: 'gilroy-semiBold';
+    font-size: 17px;
+}
+.user-ugly-percent{
+    float: right;
+    position: relative;
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    right: 16px;
+    top: 16px;
+}
+.ugly-percent{
+    display: flex;
+    column-gap: 2px;
+}
+.ugly-cnt{
+    font-family: 'gilroy-semiBold';
+    font-size: 24px;
+}
+.ugly-unit{
+    font-weight: 700;
+    font-size: 24px;
+}
+.etc-div{
+    margin-top: 28px;
+    width: 262px;
+    height: 168px;
+    border-radius: 12px;
+    background-color: white;
+}
+.etc{
+    width: calc(100% - 16px);
+    height: calc(168px / 3);
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+.etc-btn{
+    font-size: 24px;
+}
+.payment-div,
+.farmer-div{
+    border-bottom: 1px solid #E3E3E3;
+}
+.logout{
+    color: #CA5500;
+}
