@@ -70,6 +70,7 @@ header{
     display: flex;
     align-items: baseline;
     column-gap: 2px;
+    flex-shrink: 0;
 }
 .product-input{
     border: none;
@@ -90,6 +91,8 @@ header{
 }
 .hashtag-input{
     height: 25px;
+    max-width: calc(100% - 100px);
+    overflow-x: auto;
 }
 .hashtag-btn-div{
     position: absolute;
