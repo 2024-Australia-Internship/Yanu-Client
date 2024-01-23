@@ -6,79 +6,111 @@ if(window.localStorage.getItem('first-login') === 'false'){
 let user_code = getCookie('user_code');
 console.log(user_code);
 
-axios.get(`${BASE_URL}/users/${user_code}`)
-.then(response => {
-    console.log(response);
-    let username = document.getElementsByClassName('welcome-username')[0];
-    username.innerText = response.data.userAllInfo[0].nickname
-    if(response.data.userAllInfo[0].is_farmer){
-        document.getElementsByClassName('registration-product-btn')[0].style.display = 'flex';
-    }
-})
-.catch(error => {
-    console.error('There has been a problem with your axios request:', error);
-});
+window.onload = () => {
+    axios.get(`${BASE_URL}/users/${user_code}`)
+    .then(response => {
+        console.log(response);
+        let username = document.getElementsByClassName('welcome-username')[0];
+        username.innerText = response.data.userAllInfo[0].nickname
+        if(response.data.userAllInfo[0].is_farmer){
+            document.getElementsByClassName('registration-product-btn')[0].style.display = 'flex';
+        }
+        getProducts();
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+    });
+}
+
+
+function getProducts(){
+    axios.get(`${BASE_URL}/products/list`)
+    .then(response => {
+        console.log(response);
+        showProducts(response.data.products, response.data.firstProductImageURL);
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+    });
+}
 
 let prductsDiv = document.getElementsByClassName('products-div')[0];
 
-for(let i = 0; i<20; i++){
-    let product = document.createElement('div');
-    product.className = 'product';
-
-    let productDetailDiv = document.createElement('div');
-    productDetailDiv.className = 'product-detail-div';
-
-    let productName = document.createElement('div');
-    productName.className = 'product-name';
-    productName.innerText = "Fresh carrots!"
-
-    let productFarmName = document.createElement('div');
-    productFarmName.className = 'product-farm-name';
-    productFarmName.innerText = "Annie's Farm";
-
-    let productDetail = document.createElement('div');
-    productDetail.className = "product-detail";
-
-    let productPriceDiv = document.createElement('div');
-    productPriceDiv.className = "product-price-div";
-
-    let productPrice = document.createElement('div');
-    productPrice.className = "product-price";
-    productPrice.innerText = '$ 19';
-
-    let productUnit = document.createElement('div');
-    productUnit.className = "product-unit";
-    productUnit.innerText = ' / kg';
-
-    productPriceDiv.appendChild(productPrice);
-    productPriceDiv.appendChild(productUnit);
-
-    productDetail.appendChild(productPriceDiv);
-    productDetail.innerHTML += '<iconify-icon icon="ph:heart" class="heart-btn"></iconify-icon>';
-
-    productDetailDiv.appendChild(productName);
-    productDetailDiv.appendChild(productFarmName);
-    productDetailDiv.appendChild(productDetail);
-
-    product.innerHTML = '<img src="/images/product-img.png" class="product-img">';
-    product.appendChild(productDetailDiv);
-
-    prductsDiv.appendChild(product);
+function showProducts(products, images){
+    console.log(products);
+    for(let i = 0; i<products.length; i++){
+        // console.log(i.product_image.split(',')[0]);
+        let product = document.createElement('div');
+        product.className = 'product';
+        product.id = products[i].product_code;
+    
+        let productDetailDiv = document.createElement('div');
+        productDetailDiv.className = 'product-detail-div';
+    
+        let productName = document.createElement('div');
+        productName.className = 'product-name';
+        productName.innerText = products[i].product_title;
+    
+        let productFarmName = document.createElement('div');
+        productFarmName.className = 'product-farm-name';
+        productFarmName.innerText = "Annie's Farm";
+    
+        let productDetail = document.createElement('div');
+        productDetail.className = "product-detail";
+    
+        let productPriceDiv = document.createElement('div');
+        productPriceDiv.className = "product-price-div";
+    
+        let productPrice = document.createElement('div');
+        productPrice.className = "product-price";
+        productPrice.innerText = `$ ${products[i].product_price}`;
+    
+        let productUnit = document.createElement('div');
+        productUnit.className = "product-unit";
+        productUnit.innerText = ` / ${products[i].product_unit}`;
+    
+        productPriceDiv.appendChild(productPrice);
+        productPriceDiv.appendChild(productUnit);
+    
+        productDetail.appendChild(productPriceDiv);
+        productDetail.innerHTML += '<iconify-icon icon="ph:heart" class="heart-btn"></iconify-icon>';
+    
+        productDetailDiv.appendChild(productName);
+        productDetailDiv.appendChild(productFarmName);
+        productDetailDiv.appendChild(productDetail);
+    
+        let productImg = document.createElement('img');
+        productImg.src = images[i];
+        productImg.className = 'product-img';
+        product.appendChild(productImg);
+        product.appendChild(productDetailDiv);
+        
+        productName.onclick = () => moveProductPage(product.id, products[i].user_code);
+        productImg.onclick = () => moveProductPage(product.id, products[i].user_code);
+    
+        prductsDiv.appendChild(product);
+    }
 }
+
+
+
+let productss = [...document.getElementsByClassName('product')];
+productss.forEach((e) => {
+    e.onclick = (e) => {
+        console.log(e);
+    }
+})
+
+function moveProductPage(id, user_code){
+    console.log(id);
+    window.location.href = `/html/product-page.html?product_code=${id}&user_code=${user_code}`
+}
+
+
 let heartBtns = [...document.getElementsByClassName("heart-btn")];
 heartBtns.forEach((e) => {
     e.onclick = (e) => heartToggle(e);
 });
-
-function heartToggle(e){
-    if(e.target.classList.contains('choose-heart-btn')){
-        e.target.classList.remove('choose-heart-btn');
-        e.target.icon = 'ph:heart';
-    }else{
-        e.target.classList.add('choose-heart-btn');
-        e.target.icon = 'ph:heart-fill';
-    }
-}
 
 function hidePopup(flag){
     console.log(window.localStorage.getItem('first-login'));
