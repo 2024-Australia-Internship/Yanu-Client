@@ -10,9 +10,53 @@
 </head>
 <body>
     <div class="farmer-title-div">
-
+        <div class="favorite-div">
+            <iconify-icon icon="ph:heart" class="favorite-icon"></iconify-icon>
+            <div class="favorite-cnt">1,232</div>
+        </div>
+        <div class="farmer-info-div">
+            <div class="farmer-profile-div">
+                <div class="farmer-profile-img-div">
+                    <img src="/images/product-title.png" class="farmer-profile-img">
+                </div>
+                <div class="farmer-detail-div">
+                    <div class="farm-name">Annie’s farm</div>
+                    <div class="farmer-products-detail">
+                        <div class="farmer-products-cnt">120 products</div>
+                        <div class="farmer-review-cnt">23 reviews</div>
+                    </div>
+                </div>
+            </div>
+            <div class="farmer-kind-percent">32%</div>
+        </div>
     </div>
 
+    <div class="farmer-info-btn-div">
+        <div class="product-btn farmer-btn choose-btn" onclick="chooseDetail(true)">Product</div>
+        <div class="review-btn farmer-btn" onclick="chooseDetail(false)">Review</div>
+    </div>
+
+    <div class="products-div">
+        <div class="best-seller-div">
+            <div class="best-seller-title">Best Seller</div>
+            <div class="best-sellers"></div>
+        </div>
+        <div class="all-products-div">
+            <div class="all-product-title">All Products</div>
+            <div class="all-products"></div>
+        </div>
+    </div>
+
+    <div class="reviews-div">
+        <div class="review-title-div">
+            <div class="review-title">All Reviews</div>
+            <div class="star-avg-div">
+                <iconify-icon icon="ph:star-fill" class="star-avg-icon"></iconify-icon>
+                <div class="star-avg">3.5</div>
+            </div>
+        </div>
+        <div class="all-reviews"></div>
+    </div>
 
     <nav>
         <div class="nav-page" id="choose-page" onclick="window.location.href='/html/main-page.html'">
