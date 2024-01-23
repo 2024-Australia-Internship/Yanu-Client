@@ -11,11 +11,12 @@ axios.get(`${BASE_URL}/users/${user_code}`)
     console.log(response);
     let username = document.getElementsByClassName('welcome-username')[0];
     username.innerText = response.data.userAllInfo[0].nickname
-    alert('로그인 성공');
+    if(response.data.userAllInfo[0].is_farmer){
+        document.getElementsByClassName('registration-product-btn')[0].style.display = 'flex';
+    }
 })
 .catch(error => {
     console.error('There has been a problem with your axios request:', error);
-    alert('로그인 실패');
 });
 
 let prductsDiv = document.getElementsByClassName('products-div')[0];
