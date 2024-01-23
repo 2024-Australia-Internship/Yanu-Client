@@ -1,0 +1,314 @@
+.farmer-title-div{
+    width: 100%;
+    height: 200px;
+    background-image: url(/images/farmer-registration-back-img.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.favorite-div{
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3px;
+}
+.favorite-icon{
+    font-size: 24px;
+    color:white;
+}
+.favorite-cnt{
+    font-family: 'gilroy-medium';
+    font-size: 9px;
+    color: white;
+}
+.farmer-info-div{
+    position: absolute;
+    width: calc(100% - 24px * 2);
+    margin-left: 24px;
+    margin-top: 140px;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.farmer-profile-div{
+    display: flex;
+    column-gap: 8px;
+}
+.farmer-profile-img-div{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.farmer-profile-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.farm-name{
+    font-family: 'gilroy-semiBold';
+    font-size: 17px;
+    color: white;
+}
+.farmer-detail-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.farmer-products-detail{
+    display: flex;
+    column-gap: 8px;
+}
+.farmer-products-detail div{
+    font-family: 'gilroy-regular';
+    font-size: 13px;
+    color: white;
+}
+.farmer-kind-percent{
+    background-color: white;
+    border-radius: 24px;
+    padding: 6px 12px 6px 12px;
+    font-family: 'gilroy-medium';
+    font-size: 15px;
+}
+.farmer-info-btn-div{
+    display: flex;
+    width: calc(105px * 2);
+    height: 45px;
+}
+.farmer-btn{
+    width: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'gilroy-medium';
+    font-size: 15px;
+}
+.choose-btn{
+    font-family: 'gilroy-semiBold';
+    color: var(--first-color);
+    border-bottom: 2px solid var(--first-color);
+}
+.products-div{
+    width: 100%;
+    margin-top: 24px;
+    background-color: var(--sub-color);
+}
+.best-seller-div{
+    width: calc(100% - 20px);
+    padding-left: 20px;
+    height: 166px;
+    border-radius: 0 0 12px 12px;
+    background-color: white;
+}
+.best-seller-title,
+.all-product-title{
+    font-family: 'gilroy-medium';
+    font-size: 17px;
+}
+.all-products-div{
+    margin-top: 12px;
+    padding-top: 24px;
+    width: 100%;
+    background-color: white;
+    border-radius: 12px 12px 0 0;
+}
+.all-product-title{
+    margin-left: 20px;
+}
+.best-sellers{
+    display: flex;
+    column-gap: 8px;
+    overflow-x: auto;
+    height: 125px;
+    margin-top: 4px;
+    
+}
+.best-sellers::-webkit-scrollbar {
+    display: none;
+}
+.best-seller{
+    width: 110px;
+    height: 121px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.best-seller-img-div{
+    width: 100%;
+    height: 82px;
+    overflow: hidden;
+}
+.best-seller-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product-info-div{
+    width: calc(100% - 4px * 2);
+    height: calc(39px - 5px * 2);
+    padding: 4px 5px 4px 5px;
+}
+.product-title{
+    font-family: 'gilroy-semiBold';
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.best-product-detail-div{
+    padding: 0;
+    display: flex;
+    column-gap: 4px;
+    align-items: baseline;
+}
+.product-price{
+    font-family: 'gilroy-semiBold';
+    font-size: 12px;
+}
+.product-unit{
+    font-size: 9px;
+}
+.all-products{
+    position: relative;
+    width: calc(153px * 2 + 14px);
+    height: auto;
+    margin-top: 10px;
+    display: grid;
+    gap: 16px 14px;
+    grid-template-rows: auto;
+    grid-template-columns: 153px 153px;
+    padding-bottom: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.product-detail-div{
+    display: grid;
+    padding: 6px 12px 12px 12px;
+}
+.reviews-div{
+    margin-top: 24px;
+    width: calc(100% - 20px);
+    padding-left: 20px;
+}
+.review-title-div{
+    display: flex;
+    column-gap: 12px;
+    align-items: center;
+}
+.review-title{
+    font-family: 'gilroy-medium';
+    font-size: 17px;
+}
+.star-avg-div{
+    display: flex;
+    column-gap: 4px;
+    align-items: center;
+}
+.star-avg-icon,
+.review-star-icon{
+    font-size: 12px;
+    color: var(--first-color);
+}
+.star-avg{
+    font-family: 'gilroy-medium';
+    font-size: 15px;
+    color: var(--first-color);
+}
+.all-reviews{
+    margin-top: 24px;
+    display: grid;
+    row-gap: 12px;
+    padding-bottom: 150px;
+}
+.all-review{
+    width: calc(100% - 20px - 17px * 2);
+    height: calc(111px - 12px - 8px);
+    padding: 12px 17px 8px 17px;
+}
+.all-review-title-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.all-review-user-info{
+    display: flex;
+    column-gap: 8px;
+    align-items: baseline;
+}
+.user-name{
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+}
+.review-date{
+    font-family: 'gilroy-regular';
+    font-size: 10px;
+    color: var(--first-color);
+}
+.all-review-stars{
+    display: flex;
+}
+.review-detail-div{
+    margin-top: 7px;
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+}
+.user-profile-img-div{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.all-review-profile-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.review-detail{
+    width: calc(100% - 28px - 8px);
+    font-family: 'gilroy-regular';
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2 ;
+    -webkit-box-orient: vertical;
+}
+.all-review-product-btn{
+    position: relative;
+    width: 100%;
+    height: 28px;
+    margin-top: 16px;
+    border-radius: 4px;
+    border: 1px solid #FFBD80;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+}
+.all-review-product-title{
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'gilroy-medium';
+    font-size: 10px;
+    padding-left: 10px;
+    width: 172px;
+    height: 12px;
+    flex-shrink: 0;
+}
+.move-product-btn{
+    transform: rotate(90deg);
+    font-size: 24px;
+    color: #FFBD80;
+    flex-shrink: 0;
+}

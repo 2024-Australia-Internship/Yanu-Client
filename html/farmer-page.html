@@ -3,25 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="/css/basic.css">
     <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/main-page.css">
+    <link rel="stylesheet" href="/css/farmer-page.css">
+    <title>Document</title>
 </head>
 <body>
-    <div class="top-bar">
-        <img src="/images/yanu.svg" class="logo-img">
-        <iconify-icon icon="bi:cart2" class="cart-icon"></iconify-icon>
+    <div class="farmer-title-div">
+        <div class="favorite-div">
+            <iconify-icon icon="ph:heart" class="favorite-icon"></iconify-icon>
+            <div class="favorite-cnt">1,232</div>
+        </div>
+        <div class="farmer-info-div">
+            <div class="farmer-profile-div">
+                <div class="farmer-profile-img-div">
+                    <img src="/images/product-title.png" class="farmer-profile-img">
+                </div>
+                <div class="farmer-detail-div">
+                    <div class="farm-name">Annie’s farm</div>
+                    <div class="farmer-products-detail">
+                        <div class="farmer-products-cnt">120 products</div>
+                        <div class="farmer-review-cnt">23 reviews</div>
+                    </div>
+                </div>
+            </div>
+            <div class="farmer-kind-percent">32%</div>
+        </div>
     </div>
 
-    <div class="welcome-ment">
-        <p>Nice to meet you,</p>&nbsp;<p class="welcome-username">Hannah</p>
+    <div class="farmer-info-btn-div">
+        <div class="product-btn farmer-btn choose-btn" onclick="chooseDetail(true)">Product</div>
+        <div class="review-btn farmer-btn" onclick="chooseDetail(false)">Review</div>
     </div>
 
-    <div class="products-div"></div>
+    <div class="products-div">
+        <div class="best-seller-div">
+            <div class="best-seller-title">Best Seller</div>
+            <div class="best-sellers"></div>
+        </div>
+        <div class="all-products-div">
+            <div class="all-product-title">All Products</div>
+            <div class="all-products"></div>
+        </div>
+    </div>
 
-    <div class="registration-product-btn" onclick="window.location.href='/html/upload-product.html'">
-        <iconify-icon icon="radix-icons:plus" class="registration-product-icon"></iconify-icon>
+    <div class="reviews-div">
+        <div class="review-title-div">
+            <div class="review-title">All Reviews</div>
+            <div class="star-avg-div">
+                <iconify-icon icon="ph:star-fill" class="star-avg-icon"></iconify-icon>
+                <div class="star-avg">3.5</div>
+            </div>
+        </div>
+        <div class="all-reviews"></div>
     </div>
 
     <nav>
@@ -56,24 +90,11 @@
             <div class="nav-title">My page</div>
         </div>
     </nav>
-
-    <div class="popup-background">
-        <div class="farmer-registration-popup">
-            <iconify-icon icon="mynaui:x" class="close-popup-icon" onclick="hidePopup(false)"></iconify-icon>
-            <div class="popup-ment">
-                <p class="ment1">You want to sell<br>your crops?</p>
-                <p class="ment2">Let’s be a farmer!</p>
-            </div>
-            <img src="/images/farmer-popup-img.svg" class="farmer-popup-img">
-            <button class="ok-btn" onclick="hidePopup(true)">Go</button>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script src="/config.js"></script>
     <script src="/js/nav.js"></script>
     <script src="/js/basic.js"></script>
-    <script src="/js/main-page.js"></script>
+    <script src="/js/farmer-page.js"></script>
 </body>
 </html>

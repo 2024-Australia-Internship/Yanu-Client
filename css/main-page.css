@@ -101,6 +101,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    display: none;
 }
 .registration-product-icon{
     font-size: 24px;
