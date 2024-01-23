@@ -91,6 +91,10 @@ input[type='radio']:checked {
     font-family: 'gilroy-regular';
     font-size: 12px;
 }
+.product-info-div{
+    font-family: 'gilroy-regular';
+    font-size: 15px;
+}
 .product-info-btn-div{
     display: flex;
     width: 100%;

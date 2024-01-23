@@ -1,3 +1,42 @@
+window.onload = () => {
+  const urlParams = new URL(location.href).searchParams;
+  const product_code = urlParams.get('product_code');
+  const user_code = urlParams.get('user_code');
+
+  axios.get(`${BASE_URL}/products/${product_code}`)
+  .then(response => {
+      console.log(response);
+      makeImages(response.data.images);
+      showProductInfo(response.data.infoProduct)
+  })
+  .catch(error => {
+      console.error('There has been a problem with your axios request:', error);
+  });
+}
+let productImgSlider = document.getElementsByClassName('product-img-slider')[0];
+
+function makeImages(images){
+  console.log(images);
+  console.log(productImgSlider);
+  for(let image of images){
+    let imgDiv = document.createElement('img');
+    imgDiv.src = image;
+    imgDiv.className = "product-title-img"
+
+    productImgSlider.appendChild(imgDiv);
+  }
+  imgRadio();
+}
+
+function showProductInfo(product_info){
+  let productTitleDiv = document.getElementsByClassName('product-name')[0];
+  let productInfoDiv = document.getElementsByClassName('product-info-div')[0];
+  let productPriceDiv = document.getElementsByClassName('product-price')[0];
+
+  productTitleDiv.innerText = product_info.product_title;
+  productInfoDiv.innerText = product_info.product_description;
+  productPriceDiv.innerText = `$ ${product_info.product_price}`;
+}
 // 스크롤 중 여부를 확인하기 위한 변수
 let isScrolling = false;
 
@@ -27,30 +66,30 @@ function handleScroll(event) {
     scrollToPage('left');
   }
 }
-
+let currentIdx = 0; // 슬라이드 현재 번호
+let translate = 0; // 슬라이드 위치 값
 let slider = document.getElementsByClassName('product-img-div')[0];
+function imgRadio(){
+  let sliderPageLength = document.getElementsByClassName('product-img-slider')[0].children.length;
+  if(sliderPageLength >= 2){
+      for(var i = 1; i<=sliderPageLength; i++){
+          const pages = document.createElement('input');
+          pages.type = "radio";
+          pages.name = "pageIndex";
+          pages.style.border = 0;
+          pages.className = `page-radio radio${i-1}`;
+          if(i === 1) pages.checked = true;
+          document.getElementsByClassName("product-img-cnt")[0].appendChild(pages);
+      }
+  }
+}
 // 스크롤 이벤트 리스너 등록
 slider.addEventListener('wheel', handleScroll);
 
-let currentIdx = 0; // 슬라이드 현재 번호
-let translate = 0; // 슬라이드 위치 값
 
-let sliderPageLength = document.getElementsByClassName('product-img-slider')[0].children.length;
-let totalsliderWidth = document.getElementsByClassName('product-img-slider')[0];
-
-if(sliderPageLength >= 2){
-    for(var i = 1; i<=sliderPageLength; i++){
-        const pages = document.createElement('input');
-        pages.type = "radio";
-        pages.name = "pageIndex";
-        pages.style.border = 0;
-        pages.className = `page-radio radio${i-1}`;
-        if(i === 1) pages.checked = true;
-        document.getElementsByClassName("product-img-cnt")[0].appendChild(pages);
-    }
-}
 
 function nextSlide(){
+    let totalsliderWidth = document.getElementsByClassName('product-img-slider')[0];
     console.log('전으로 이동')
     if (currentIdx !== 0) {
         translate += totalsliderWidth.clientWidth;
@@ -62,6 +101,8 @@ function nextSlide(){
 }
 
 function prevSilde(){
+    let totalsliderWidth = document.getElementsByClassName('product-img-slider')[0];
+    let sliderPageLength = document.getElementsByClassName('product-img-slider')[0].children.length;
     console.log('다음으로 이동')
     if (currentIdx !== sliderPageLength -1) {
         translate -= totalsliderWidth.clientWidth;
