@@ -1,0 +1,116 @@
+.search-title-div{
+    margin-top: 38px;
+    width: calc(100% - 24px * 2);
+    margin-left: 24px;
+    height: 36px;
+    display: flex;
+    column-gap: 6px;
+    align-items: center;
+}
+.search-input-div{
+    width: calc(100% - 6px - 24px);
+    display: flex;
+    align-items: center;
+}
+.search-icon{
+    position: absolute;
+    font-size: 24px;
+    color: var(--first-color);
+    z-index: 1;
+    margin-left: 10px;
+}
+.search-input{
+    height: 36px;
+    width: calc(100% - 24px - 6px);
+    padding-left: 51px;
+    border: 1px solid var(--first-color);
+    border-radius: 100px;
+    outline: none;
+    font-family: 'gilroy-regular';
+    font-size: 13px;
+}
+.search-filter-icon{
+    font-size: 24px;
+}
+.category-btns{
+    margin: 7px 0 0 27px;
+    display: flex;
+    column-gap: 8px;
+}
+.vegetable-btn,
+.fruit-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(30px - 7px * 2);
+    background-color: var(--sub-color);
+    border-radius: 100px;
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+    color: var(--first-color);
+}
+.vegetable-btn{
+    padding: 7px 11px 7px 11px;
+}
+.fruit-btn{
+    padding: 7px 20px 7px 20px;
+}
+.choose-category{
+    background-color: var(--first-color);
+    color: white;
+}
+.recently-search-div{
+    margin-top: 45px;
+    
+}
+.recently-search-title-div{
+    width: calc(100% - 28px - 24px);
+    margin-left: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.recently-search-title{
+    font-family: 'gilroy-medium';
+    font-size: 14px;
+}
+.delete-all-btn{
+    font-family: 'gilroy-regular';
+    font-size: 11px;
+    color: var(--first-color);
+    text-decoration: underline;
+}
+.recently-search-list{
+    margin: 22px 0 0 40px;
+    width: calc(100% - 40px - 32px);
+    display: grid;
+    row-gap: 20px;
+}
+.recently-search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.recently-search-name{
+    font-family: 'gilroy-regular';
+    font-size: 12px;
+    color: var(--first-color);
+}
+.recently-search-delete-icon{
+    font-size: 12px;
+    color: var(--first-color);
+}
+.products-div{
+    position: relative;
+    width: calc(153px * 2 + 14px);
+    height: auto;
+    margin-top: 45px;
+    display: grid;
+    gap: 16px 14px;
+    grid-template-rows: auto;
+    grid-template-columns: 153px 153px;
+    padding-bottom: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: none;
+}

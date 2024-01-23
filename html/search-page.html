@@ -9,7 +9,41 @@
     <link rel="stylesheet" href="/css/search-page.css">
 </head>
 <body>
-    <h1>search page</h1>
+    <div class="search-title-div">
+        <div class="search-input-div">
+            <iconify-icon icon="basil:search-outline" class="search-icon" onclick="search()"></iconify-icon>
+            <input class="search-input" placeholder="What are you looking for?" onkeyup="if(window.event.keyCode==13){search()}">
+        </div>
+        <iconify-icon icon="lets-icons:filter" class="search-filter-icon"></iconify-icon>
+    </div>
+
+    <div class="category-btns">
+        <div class="vegetable-btn choose-category">vegetable</div>
+        <div class="fruit-btn">Fruit</div>
+    </div>
+
+    <div class="recently-search-div">
+        <div class="recently-search-title-div">
+            <div class="recently-search-title">Recently searched</div>
+            <div class="delete-all-btn">Delete all</div>
+        </div>
+        <div class="recently-search-list">
+            <div class="recently-search">
+                <div class="recently-search-name">Apples</div>
+                <iconify-icon icon="mynaui:x" class="recently-search-delete-icon"></iconify-icon>
+            </div>
+            <div class="recently-search">
+                <div class="recently-search-name">Oranges</div>
+                <iconify-icon icon="mynaui:x" class="recently-search-delete-icon"></iconify-icon>
+            </div>
+            <div class="recently-search">
+                <div class="recently-search-name">Bunch of banana</div>
+                <iconify-icon icon="mynaui:x" class="recently-search-delete-icon"></iconify-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="products-div"></div>
     
     <nav>
         <div class="nav-page" onclick="window.location.href='/html/main-page.html'">
