@@ -8,6 +8,8 @@ window.onload = () => {
             response.data.farmInfo.business_name;
         document.getElementsByClassName('farmer-title-div')[0].style.backgroundImage = 
             `${response.data.farm_image}`;
+        document.getElementsByClassName('farmer-profile-img')[0].src = 
+            `${response.data.profile_image}`;
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
