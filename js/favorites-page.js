@@ -1,3 +1,66 @@
+const user_code = getCookie('user_code');
+console.log(user_code);
+
+window.onload = () => {
+    axios.get(`${BASE_URL}/hearts/${user_code}/product`)
+    .then(response => {
+        console.log(response.productList);
+        showProducts(response.productList);
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+    });
+}
+
+function showProducts(productList){
+    let favoritesProductsDiv = document.getElementsByClassName('favorites-products-div')[0];
+
+    for(let i = 0; i<productList.length; i++){
+        let product = document.createElement('div');
+        product.className = `favorites-product ${productList[i].user_code}`;
+        product.id = productList[i].product_code;
+
+        let productDetailDiv = document.createElement('div');
+        productDetailDiv.className = 'favorites-product-detail-div';
+
+        let productName = document.createElement('div');
+        productName.className = 'favorites-product-name';
+        productName.innerText = productList[i].product_title;
+
+        let productFarmName = document.createElement('div');
+        productFarmName.className = 'favorites-product-farm-name';
+        productFarmName.innerText = "Annie's Farm";
+
+        let productDetail = document.createElement('div');
+        productDetail.className = "favorites-product-detail";
+
+        let productPriceDiv = document.createElement('div');
+        productPriceDiv.className = "favorites-product-price-div";
+
+        let productPrice = document.createElement('div');
+        productPrice.className = "favorites-product-price";
+        productPrice.innerText = `$ ${productList[i].product_price}`;
+
+        let productUnit = document.createElement('div');
+        productUnit.className = "favorites-product-unit";
+        productUnit.innerText = ` / ${productList[i].product_unit}`;
+
+        productPriceDiv.appendChild(productPrice);
+        productPriceDiv.appendChild(productUnit);
+
+        productDetail.appendChild(productPriceDiv);
+        productDetail.innerHTML += '<iconify-icon icon="ph:heart-fill" class="favorites-heart-btn"></iconify-icon>';
+
+        productDetailDiv.appendChild(productName);
+        productDetailDiv.appendChild(productFarmName);
+        productDetailDiv.appendChild(productDetail);
+
+        product.innerHTML = '<img src="/images/product-img.png" class="favorites-product-img">';
+        product.appendChild(productDetailDiv);
+
+        favoritesProductsDiv.appendChild(product);
+    }
+}
 let productDiv = document.getElementsByClassName('products-div')[0];
 for(let i = 0; i<20; i++){
     let product = document.createElement('div');
@@ -34,52 +97,7 @@ for(let i = 0; i<20; i++){
     productDiv.appendChild(product);
 }
 
-let favoritesProductsDiv = document.getElementsByClassName('favorites-products-div')[0];
 
-for(let i = 0; i<20; i++){
-    let product = document.createElement('div');
-    product.className = 'favorites-product';
-
-    let productDetailDiv = document.createElement('div');
-    productDetailDiv.className = 'favorites-product-detail-div';
-
-    let productName = document.createElement('div');
-    productName.className = 'favorites-product-name';
-    productName.innerText = "Fresh carrots!"
-
-    let productFarmName = document.createElement('div');
-    productFarmName.className = 'favorites-product-farm-name';
-    productFarmName.innerText = "Annie's Farm";
-
-    let productDetail = document.createElement('div');
-    productDetail.className = "favorites-product-detail";
-
-    let productPriceDiv = document.createElement('div');
-    productPriceDiv.className = "favorites-product-price-div";
-
-    let productPrice = document.createElement('div');
-    productPrice.className = "favorites-product-price";
-    productPrice.innerText = '$ 19';
-
-    let productUnit = document.createElement('div');
-    productUnit.className = "favorites-product-unit";
-    productUnit.innerText = ' / kg';
-
-    productPriceDiv.appendChild(productPrice);
-    productPriceDiv.appendChild(productUnit);
-
-    productDetail.appendChild(productPriceDiv);
-    productDetail.innerHTML += '<iconify-icon icon="ph:heart-fill" class="favorites-heart-btn"></iconify-icon>';
-
-    productDetailDiv.appendChild(productName);
-    productDetailDiv.appendChild(productFarmName);
-    productDetailDiv.appendChild(productDetail);
-
-    product.innerHTML = '<img src="/images/product-img.png" class="favorites-product-img">';
-    product.appendChild(productDetailDiv);
-
-    favoritesProductsDiv.appendChild(product);
-}
 
 let favoritesFarmsDiv = document.getElementsByClassName('favorites-farms-div')[0];
 
