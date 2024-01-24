@@ -41,7 +41,8 @@ function showProducts(products, images){
     for(let i = 0; i<products.length; i++){
         // console.log(i.product_image.split(',')[0]);
         let product = document.createElement('div');
-        product.className = 'product';
+        product.classList.add('product');
+        product.classList.add(`${products[i].user_code}`);
         product.id = products[i].product_code;
     
         let productDetailDiv = document.createElement('div');
@@ -73,7 +74,7 @@ function showProducts(products, images){
         productPriceDiv.appendChild(productUnit);
     
         productDetail.appendChild(productPriceDiv);
-        productDetail.innerHTML += '<iconify-icon icon="ph:heart" class="heart-btn"></iconify-icon>';
+        productDetail.innerHTML += `<iconify-icon icon="ph:heart" class="heart-btn product-btn"></iconify-icon>`;
     
         productDetailDiv.appendChild(productName);
         productDetailDiv.appendChild(productFarmName);
@@ -90,6 +91,11 @@ function showProducts(products, images){
     
         prductsDiv.appendChild(product);
     }
+
+    let heartBtns = [...document.getElementsByClassName("heart-btn")];
+    heartBtns.forEach((e) => {
+        e.onclick = (e) => heartToggle(e);
+    });
 }
 
 
@@ -107,10 +113,6 @@ function moveProductPage(id, user_code){
 }
 
 
-let heartBtns = [...document.getElementsByClassName("heart-btn")];
-heartBtns.forEach((e) => {
-    e.onclick = (e) => heartToggle(e);
-});
 
 function hidePopup(flag){
     console.log(window.localStorage.getItem('first-login'));
