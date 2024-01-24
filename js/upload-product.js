@@ -206,7 +206,7 @@ function sendProductImgs(product_code){
     .then(response => {
         console.log(response);
         alert('이미지 업로드 성공');
-        // window.location.href = '/html/main-page.html';
+        window.location.href = '/html/main-page.html';
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
