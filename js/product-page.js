@@ -1,13 +1,13 @@
+const urlParams = new URL(location.href).searchParams;
+const product_code = urlParams.get('product_code');
+const user_code = urlParams.get('user_code');
 window.onload = () => {
-  const urlParams = new URL(location.href).searchParams;
-  const product_code = urlParams.get('product_code');
-  const user_code = urlParams.get('user_code');
-
-  axios.get(`${BASE_URL}/products/${product_code}`)
+  axios.get(`${BASE_URL}/products/${user_code}/${product_code}`)
   .then(response => {
       console.log(response);
+      document.getElementsByClassName('farmer-name')[0]
       makeImages(response.data.images);
-      showProductInfo(response.data.infoProduct)
+      showProductInfo(response.data.infoProduct);
   })
   .catch(error => {
       console.error('There has been a problem with your axios request:', error);
@@ -224,4 +224,8 @@ for(let i = 0; i<20; i++){
   allReview.appendChild(allReviewDetail);
 
   allReviews.appendChild(allReview);
+}
+
+function moveFarmerPage(){
+  window.location.href = `/html/farmer-page.html?user_code=${user_code}`;
 }
