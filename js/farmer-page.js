@@ -7,7 +7,8 @@ window.onload = () => {
         document.getElementsByClassName('farm-name')[0].innerText = 
             response.data.farmInfo.business_name;
         document.getElementsByClassName('farmer-title-div')[0].style.backgroundImage = 
-            `${response.data.farm_image}`;
+            `url(${response.data.farm_image})`;
+        console.log(document.getElementsByClassName('farmer-title-div')[0].style)
         document.getElementsByClassName('farmer-profile-img')[0].src = 
             `${response.data.profile_image}`;
     })
