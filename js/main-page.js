@@ -27,7 +27,8 @@ function getProducts(){
     axios.get(`${BASE_URL}/products/list`)
     .then(response => {
         console.log(response);
-        showProducts(response.data.products, response.data.firstProductImageURL);
+        let farmName = response.data.farm_name;
+        showProducts(response.data.products, response.data.firstProductImageURL, farmName);
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
@@ -36,7 +37,7 @@ function getProducts(){
 
 let prductsDiv = document.getElementsByClassName('products-div')[0];
 
-function showProducts(products, images){
+function showProducts(products, images, farmNames){
     console.log(products);
     for(let i = 0; i<products.length; i++){
         // console.log(i.product_image.split(',')[0]);
@@ -54,7 +55,7 @@ function showProducts(products, images){
     
         let productFarmName = document.createElement('div');
         productFarmName.className = 'product-farm-name';
-        productFarmName.innerText = "Annie's Farm";
+        productFarmName.innerText = farmNames[i].business_name;
     
         let productDetail = document.createElement('div');
         productDetail.className = "product-detail";

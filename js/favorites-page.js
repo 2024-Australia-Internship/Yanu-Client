@@ -1,11 +1,12 @@
 const user_code = getCookie('user_code');
-console.log(user_code);
+
 
 window.onload = () => {
+    console.log(user_code);
     axios.get(`${BASE_URL}/hearts/${user_code}/product`)
     .then(response => {
-        console.log(response.productList);
-        showProducts(response.productList);
+        console.log(response.data.productList);
+        showProducts(response.data.productList);
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
@@ -60,6 +61,7 @@ function showProducts(productList){
 
         favoritesProductsDiv.appendChild(product);
     }
+    
 }
 let productDiv = document.getElementsByClassName('products-div')[0];
 for(let i = 0; i<20; i++){
