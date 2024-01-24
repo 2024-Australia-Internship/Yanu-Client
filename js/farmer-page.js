@@ -1,3 +1,19 @@
+const urlParams = new URL(location.href).searchParams;
+const user_code = urlParams.get('user_code');
+window.onload = () => {
+    axios.get(`${BASE_URL}/users/${user_code}`)
+    .then(response => {
+        console.log(response);
+        document.getElementsByClassName('farm-name')[0].innerText = 
+            response.data.farmInfo.business_name;
+        document.getElementsByClassName('farmer-title-div')[0].style.backgroundImage = 
+            `${response.data.farm_image}`;
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+    });
+}
+
 let bestSellerDiv = document.getElementsByClassName('best-sellers')[0];
 for(let i = 0; i<20; i++){
     let bestSeller = document.createElement('div');
