@@ -19,7 +19,7 @@
 .setting-pw{
     margin-top: 8px;
     font-size: 10px;
-    color: var(--first-color);
+    color: var(--orange);
     text-align: right;
     text-decoration: underline;
 }

@@ -33,7 +33,7 @@ body{
     font-size: 10px;
     background-color: white;
     border-radius: 4px;
-    border: 0.5px solid var(--first-color);
+    border: 0.5px solid var(--orange);
     color: var(--font-color);
 }
 .email-comment{

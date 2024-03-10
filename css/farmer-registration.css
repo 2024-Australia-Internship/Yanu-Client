@@ -61,7 +61,7 @@
 .select-all-btn{
     font-family: 'gilroy-medium';
     font-size: 12px;
-    color: var(--first-color);
+    color: var(--orange);
     text-decoration: underline;
 }
 .terms-detail-div{

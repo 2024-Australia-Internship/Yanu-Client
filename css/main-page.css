@@ -24,7 +24,7 @@ body{
     font-size: 20px;
 }
 .welcome-username{
-    color: var(--first-color);
+    color: var(--orange);
 }
 .products-div{
     position: relative;
@@ -97,7 +97,7 @@ body{
     bottom: calc(54px + 12px);
     right: 24px;
     z-index: 1;
-    background-color: var(--first-color);
+    background-color: var(--orange);
     display: flex;
     justify-content: center;
     align-items: center;
