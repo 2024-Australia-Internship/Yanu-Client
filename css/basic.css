@@ -23,8 +23,13 @@
     color: rgba(0, 0, 0, 0.87);
 }
 :root{
-    --first-color: #FF7A00;
-    --sub-color: #FFD7B3;
+    --orange-30: #FFD7B3;
+    --orange-50: #FFBD80;
+    --orange: #FF7A00;
+    --orange-dp: #EC6300;
+    --orange-DP: #CA5500;
+    --brown: #674023;
+
     --font-color: rgba(0, 0, 0, 0.87);
     --input-font: 'SUIT', sans-serif;
 }
@@ -48,7 +53,7 @@
     margin-top: 122px;
     width: 100%;
     height: 56px;
-    background-color: var(--first-color);
+    background-color: var(--orange);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,10 +63,10 @@
     border: none;
 }
 .wrong-info{
-    outline: 1.2px solid var(--first-color);
+    outline: 1.2px solid var(--orange);
 }
 .wrong-info:focus{
-    outline: 1.2px solid var(--first-color);
+    outline: 1.2px solid var(--orange);
 }
 .confirm-pw-div{
     display: flex;
@@ -178,7 +183,7 @@
 .heart-btn,
 .favorites-heart-btn{
     font-size: 20px;
-    color: var(--first-color);
+    color: var(--orange);
 }
 .back-btn{
     width: 24px;
@@ -188,7 +193,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--first-color);
+    background-color: var(--orange);
     border-radius: 12px;
     font-family: 'gilroy-medium';
     font-size: 13px;
@@ -198,9 +203,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--first-color);
+    border: 1px solid var(--orange);
     border-radius: 12px;
     font-family: 'gilroy-medium';
     font-size: 13px;
-    color: var(--first-color);
+    color: var(--orange);
 }

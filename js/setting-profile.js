@@ -66,8 +66,7 @@ function settingProfile(){
 
     axios.post(`${BASE_URL}/users/${user_code}/profile/info`, req)
     .then(response => {
-        console.log(response);
-        alert('완료');
+        localStorage.setItem('recentSearch', []);
         window.location.href = '/index.html';
     })
     .catch(error => {
