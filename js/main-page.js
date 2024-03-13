@@ -27,7 +27,7 @@ function getProducts(){
     axios.get(`${BASE_URL}/products/list`)
     .then(response => {
         console.log(response);
-        let farmName = response.data.farm_name;
+        let farmName = response.data.farmName;
         showProducts(response.data.products, response.data.firstProductImageURL, farmName);
     })
     .catch(error => {
@@ -55,7 +55,7 @@ function showProducts(products, images, farmNames){
     
         let productFarmName = document.createElement('div');
         productFarmName.className = 'product-farm-name';
-        //productFarmName.innerText = farmNames[i].business_name;
+        productFarmName.innerText = farmNames[i];
     
         let productDetail = document.createElement('div');
         productDetail.className = "product-detail";
