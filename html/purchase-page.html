@@ -8,7 +8,131 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="checkout-title">Checkout Details</div>
+    <div class="checkout-products-div">
+        <div class="show-all-btn" onclick="showAllList()">
+            <div class="show-all-title">view all</div>
+            <iconify-icon icon="iconamoon:arrow-up-2-thin" class="show-all-icon"/>
+        </div>
+        <div class="checkout-product-list">
+            <div class="product-div">
+                <img src="/images/product-img.png" class="product-img">
+                <div class="product-info-div">
+                    <div>
+                        <div class="product-name">Fresh carrot!</div>
+                        <div class="farm-name">Annie’s Farm</div>
+                    </div>
+                    <div class="product-price">$ 50</div>
+                </div>
+            </div>
+
+            <div class="product-div">
+                <img src="/images/product-img.png" class="product-img">
+                <div class="product-info-div">
+                    <div>
+                        <div class="product-name">Fresh carrot!</div>
+                        <div class="farm-name">Annie’s Farm</div>
+                    </div>
+                    <div class="product-price">$ 50</div>
+                </div>
+            </div>
+
+            <div class="product-div">
+                <img src="/images/product-img.png" class="product-img">
+                <div class="product-info-div">
+                    <div>
+                        <div class="product-name">Fresh carrot!</div>
+                        <div class="farm-name">Annie’s Farm</div>
+                    </div>
+                    <div class="product-price">$ 50</div>
+                </div>
+            </div>
+
+            <div class="product-div">
+                <img src="/images/product-img.png" class="product-img">
+                <div class="product-info-div">
+                    <div>
+                        <div class="product-name">Fresh carrot!</div>
+                        <div class="farm-name">Annie’s Farm</div>
+                    </div>
+                    <div class="product-price">$ 50</div>
+                </div>
+            </div>
+
+            <div class="product-div">
+                <img src="/images/product-img.png" class="product-img">
+                <div class="product-info-div">
+                    <div>
+                        <div class="product-name">Fresh carrot!</div>
+                        <div class="farm-name">Annie’s Farm</div>
+                    </div>
+                    <div class="product-price">$ 50</div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="list-more">
+            <iconify-icon icon="quill:meatballs-h" class="list-more-btn"/>
+        </div>
+        <div class="total-price-div">
+            <div class="total-title">Total</div>
+            <div class="total-price">$ 123</div>
+        </div>
+    </div>
+
+    <div class="delivery-address-div">
+        <div class="delivery-address-title">Delivery address</div>
+        <div class="user-info">
+            <div class="user-name">Hannah Park</div>
+            <div class="user-phone-num">010-1234-1234</div>
+        </div>
+        <div class="user-address">
+            77 St Georges Rd, Preston VIC 3072
+        </div>
+    </div>
+
+    <div class="payment-method-div">
+        <div class="payment-method-title">Payment Methods</div>
+        <div class="card-type-div">
+            <div class="my-card">
+                <img src="/images/mastercard.svg" class="card-img">
+                <div class="card-num">***134</div>
+            </div>
+            <div class="card-change-btn" onclick="showMyCard()">Change</div>
+        </div>
+    </div>
+
+    <div class="change-card-div hide-my-card">
+        <img src="/images/back-btn.svg" onclick="showMyCard()"/>
+        <div class="card-list">
+            <div class="card-div">
+                <div class="card-info">
+                    <img src="/images/mastercard.svg">
+                    <div class="card-num">***123</div>
+                </div>
+                <div class="card-change-btn choose-card-btn applyed-card">Applyed</div>
+            </div>
+
+            <div class="card-div">
+                <div class="card-info">
+                    <img src="/images/mastercard.svg">
+                    <div class="card-num">***245</div>
+                </div>
+                <div class="card-change-btn choose-card-btn">Change</div>
+            </div>
+
+            <div class="card-div">
+                <div class="card-info">
+                    <img src="/images/visacard.svg">
+                    <div class="card-num">****9009</div>
+                </div>
+                <div class="card-change-btn choose-card-btn">Change</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fill-basic-btn" onclick="window.location.href='main-page.html'">Pay now</div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script src="/config.js"></script>

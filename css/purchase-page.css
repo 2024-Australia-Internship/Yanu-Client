@@ -1,0 +1,250 @@
+body{
+    background-color: var(--orange-30);
+    width: calc(100% - 20px * 2);
+    padding: 0 20px 0 20px;
+    height: 100%;
+}
+
+.checkout-title{
+    font-family: 'gilroy-semiBold';
+    font-size: 20px;
+    margin: 40px 0 10px 4px;
+}
+
+.checkout-products-div{
+    width: calc(100% - 20px * 2);
+    padding: 16px 20px 12px 20px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+    margin-bottom: 16px;
+}
+
+.show-all-btn{
+    display: flex;
+    align-items: center;
+    float: right;
+    margin-bottom: 6px;
+    visibility: hidden;
+}
+
+.show-all-title{
+    font-family: 'gilroy-medium';
+    font-size: 12px;
+    color: var(--orange);
+}
+
+.show-all-icon{
+    font-size: 12px;
+    color: var(--orange);
+    transform: rotate(90deg);
+    transition-duration: 0.2s;
+}
+
+.checkout-product-list{
+    height: 94px;
+    width: 100%;
+    display: grid;
+    row-gap: 8px;
+    overflow-y: hidden;
+}
+
+.product-div{
+    width: 100%;
+    height: 43px;
+    display: flex;
+    column-gap: 12px;
+}
+
+.product-img{
+    width: 43px;
+    height: 43px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.product-info-div{
+    width: calc(100% - 8px - 16px);
+    height: calc(100% - 7px - 9px);
+    padding: 7px 16px 9px 8px;
+    background-color: var(--orange-30);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-name{
+    font-size: 12px;
+}
+
+.farm-name{
+    font-family: 'gilroy-regular';
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.product-price{
+    font-size: 13px;
+}
+
+.list-more{
+    margin-top: 7px;
+    display: flex;
+    justify-content: center;
+}    
+
+.list-more-btn{
+    transform: rotate(90deg);
+    font-size: 12px;
+    visibility: hidden;
+}
+
+.total-price-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-price-div > div{
+    font-family: 'gilroy-semiBold';
+    font-size: 15px;
+}
+
+.visibility{
+    visibility: visible;
+}
+
+.auto-height{
+    height: auto;
+}
+
+.rotate{
+    transform: rotate(0deg);
+    transition-duration: 0.2s;
+}
+
+.delivery-address-div{
+    width: calc(100% - 15px * 2);
+    height: calc(154px - 12px * 2);
+    padding: 12px 15px 12px 15px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+    margin-bottom: 16px;
+}
+
+.delivery-address-title{
+    font-family: 'gilroy-semiBold';
+    font-size: 17px;
+    margin-bottom: 16px;
+}
+
+.user-info{
+    display: flex;
+    align-items: baseline;
+    column-gap: 10px;
+    margin-bottom: 7px;
+}
+
+.user-name{
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+}
+
+.user-phone-num{
+    font-family: 'gilroy-medium';
+    font-size: 11px;
+}
+
+.user-address{
+    width: calc(100% - 10px * 2);
+    height: calc(71px - 10px * 2);
+    padding: 10px;
+    background-color: var(--orange-30);
+    border-radius: 8px;
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+    overflow: hidden;
+}
+
+.payment-method-div{
+    display: block;
+    width: calc(100% - 16px * 2);
+    height: calc(154px - 12px);
+    padding: 12px 16px 0 16px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-type-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my-card{
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+}
+
+.payment-method-title{
+    font-family: 'gilroy-semiBold';
+    font-size: 17px;
+    margin-bottom: 44px;
+}
+
+.card-num{
+    font-family: 'gilroy-medium';
+    font-size: 15px;
+    color: black;
+}
+
+.card-change-btn{
+    font-family: 'gilroy-semiBold';
+    font-size: 15px;
+    color: var(--orange);
+}
+
+.change-card-div{
+    display: block;
+    padding: 17px 18px 40px 10px;
+    width: calc(100% - 18px - 10px);
+    background-color: white;
+    border-radius: 16px;
+}
+
+.card-list{
+    width: calc(100% - 11px);
+    margin: 27px 0 0 11px;
+    display: grid;
+    row-gap: 32px;
+}
+
+.card-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-info{
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+}
+
+.applyed-card{
+    color: var(--orange-50);
+}
+
+.hide-my-card{
+    display: none;
+}
+
+.fill-basic-btn{
+    margin-top: 37px;
+    height: 56px;
+    font-size: 17px;
+}
