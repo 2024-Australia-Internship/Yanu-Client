@@ -1,0 +1,139 @@
+body{
+    background-color: var(--orange-30);
+}
+
+.header{
+    position: relative;
+}
+
+.my-order-history{
+    position: relative;
+    background-color: var(--orange-30);
+    width: calc(100% - 20px * 2);
+    padding: 0 20px 0 20px;
+}
+
+.my-order-container{
+    margin-top: 40px;
+}
+
+.order-date{
+    margin-left: 4px;
+    font-family: 'gilroy-semiBold';
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.my-order-list{
+    display: grid;
+    row-gap: 8px;
+}
+
+.my-order{
+    width: calc(100% - 10px - 13px);
+    height: calc(127px - 10px - 8px);
+    padding: 10px 10px 8px 13px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.my-order-product{
+    display: flex;
+    align-items: start;
+}
+
+.product-img{
+    width: 70px;
+    height: 68px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-left: 3px;
+    flex-shrink: 0;
+}
+
+.product-info{
+    margin-left: 24px;
+    width: calc(100% - 73px - 24px);
+}
+
+.delivery-status{
+    font-family: 'gilroy-semiBold';
+    font-size: 13px;
+    color: var(--orange-DP);
+}
+
+.product-name{
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+    color: black;
+    margin-top: 2px;
+}
+
+.farm-name{
+    font-family: 'gilroy-regular';
+    font-size: 11px;
+    color: #666666;
+}
+
+.product-price-div{
+    margin-top: 5px;
+    align-items: baseline;
+}
+
+.product-price{
+    font-size: 15px;
+    color: var(--brown);
+}
+
+.product-unit{
+    font-size: 9px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.product-detail-btn{
+    position: relative;
+    font-size: 24px;
+    transform: rotate(90deg);
+}
+
+.shipped-btn{
+    margin-top: 7px;
+    height: 30px;
+}
+
+.basic-btn{
+    border-radius: 8px;
+    column-gap: 4px;
+}
+
+.basic-btn > *{
+    color: var(--orange);
+}
+
+.review-btn{
+    font-size: 15px;
+}
+
+.btn-box{
+    margin-top: 8px;
+    height: 30px;
+    display: flex;
+    column-gap: 8px;
+}
+
+.fill-basic-btn{
+    height: 100%;
+    column-gap: 4px;
+    width: 50%;
+    border-radius: 8px;
+}
+
+.fill-basic-btn > *{
+    color: white;
+    font-size: 13px;
+    font-family: 'gilroy-medium';
+}
+
+.half-basic-btn{
+    width: 50%;
+}
