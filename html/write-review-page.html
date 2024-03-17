@@ -8,10 +8,32 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="title">Write a Review</div>
+
+    <div class="review-title">How was your products?</div>
+    <div class="star-rating">
+        <iconify-icon icon="ph:star-fill" class="star"></iconify-icon>
+        <iconify-icon icon="ph:star-fill" class="star"></iconify-icon>
+        <iconify-icon icon="ph:star-fill" class="star"></iconify-icon>
+        <iconify-icon icon="ph:star-fill" class="star"></iconify-icon>
+        <iconify-icon icon="ph:star-fill" class="star"></iconify-icon>
+    </div>
+
+    <div class="upload-img-div">
+        <div class="upload-img-btn upload-img">
+            <iconify-icon icon="fluent:camera-20-regular" class="upload-img-icon"></iconify-icon>
+            <div class="upload-img-text">Upload Image<br>(5)</div>
+        </div>
+        <input type="file" accept="image/*" style="display: none;" class="upload-file" required multiple>
+    </div>
+
+    <textarea class="evaluation-box"></textarea>
+
+    <div class="fill-basic-btn" onclick="window.location.href='./order-history-page.html'">Done</div>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script src="/config.js"></script>
-    <script src="/js/write.review-page.js"></script>
+    <script src="/js/write-review-page.js"></script>
 </body>
 </html>
