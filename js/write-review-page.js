@@ -15,6 +15,8 @@ function starRating(index){
 
 let imgUploadBtn = document.getElementsByClassName('upload-img-btn')[0];
 let realImgUploadBtn = document.getElementsByClassName('upload-file')[0];
+let currentImgLength = document.getElementsByClassName('current-img')[0];
+
 realImgUploadBtn.addEventListener('change', getImageFiles);
 
 imgUploadBtn.addEventListener('click', () => realImgUploadBtn.click());
@@ -54,6 +56,8 @@ function createElement(e, file){
     uploadImgLi.style.backgroundImage = `url(${e.target.result})`
 
     uploadImgDiv.appendChild(uploadImgLi);
+    let images = [...document.getElementsByClassName('upload-img-li')].length;
+    currentImgLength.innerText = images;
 }
 
 function deleteImg(e){
