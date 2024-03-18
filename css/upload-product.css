@@ -1,9 +1,12 @@
 header{
+    position: fixed;
+    top: 0;
     width: calc(100% - 24px - 28px);
     padding-left: 24px;
     display: flex;
     padding-top: 12px;
     justify-content: space-between;
+    background-color: white;
 }
 .upload-btn{
     width: 69px;
@@ -16,7 +19,7 @@ header{
     color: white;
 }
 .upload-img-div{
-    margin-top: 43px;
+    margin-top: 87px;
     margin-left: 24px;
     width: calc(100% - 24px);
     display: flex;
@@ -28,23 +31,29 @@ header{
     display: none;
 }
 .upload-img{
-    width: 93px;
-    height: 100px;
-    background-color: var(--orange-30);
+    width: 70px;
+    height: 72px;
+    border: 1px solid var(--orange);
     border-radius: 8px;
     flex-shrink: 0;
+}
+.upload-img * {
+    color: var(--orange);
 }
 .upload-img-btn{
     text-align: center;
 }
 .upload-img-icon{
     font-size: 24px;
-    margin-top: 24px;
+    margin-top: 14px;
 }
 .upload-img-text{
-    margin-top: 5px;
+    margin-top: 4px;
     font-family: 'gilroy-medium';
     font-size: 12px;
+    display: flex;
+    justify-content: center;
+    column-gap: 2px;
 }
 .delete-img{
     float: right;
@@ -52,6 +61,8 @@ header{
 }
 .upload-img-li{
     background-size: cover;
+    border: none;
+    background-color: var(--orange-30);
 }
 .input-product-info-div{
     margin-top: 57px;
@@ -60,26 +71,26 @@ header{
 }
 .input-div{
     margin-top: 54px;
-    display: flex;
 }
 .input-title{
     font-family: 'gilroy-semiBold';
-    font-size: 17px;
+    font-size: 15px;
     width: 100px;
-    flex-shrink: 0;
     display: flex;
     align-items: baseline;
     column-gap: 2px;
-    flex-shrink: 0;
+    margin-bottom: 8px;
 }
 .product-input{
     border: none;
-    border-bottom: 1px solid black;
-    height: 22px;
+    background-color: #F4F4F4;
+    height: 36px;
     outline: none;
-    width: 100%;
+    border-radius: 8px;
+    width: calc(100% - 16px);
+    padding-left: 16px;
     font-family: 'gilroy-medium';
-    font-size: 15px;
+    font-size: 13px;
 }
 .product-upload-category{
     width: 68px;
@@ -90,8 +101,7 @@ header{
     font-size: 9px;
 }
 .hashtag-input{
-    height: 25px;
-    max-width: calc(100% - 100px);
+    max-width: 100%;
     overflow-x: auto;
 }
 .hashtag-btn-div{
@@ -99,18 +109,20 @@ header{
     display: flex;
     column-gap: 8px;
     z-index: 1;
-    height: 32px;
+    height: 36px;
+    background-color: pink;
 }
 .hashtag-btns::-webkit-scrollbar {
     display: none;
 }
 .hashtag-btns{
     position: absolute;
-    width: calc(100% - 24px - 100px - 24px);
+    width: calc(100% - 24px * 2);
     overflow-x: auto;
-    left: 124px;
-    height: 32px;
-    margin-top: -12px;
+    left: 24px;
+    height: 36px;
+    margin-top: -36px;
+    z-index: 1000;
 }
 .hashtag-btn{
     position: relative;
@@ -122,6 +134,11 @@ header{
     color: var(--orange);
     flex-shrink: 0;
     z-index: 1;
+}
+.display-input-div{
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 .price-info-input-div{
     display: flex;
@@ -138,7 +155,8 @@ header{
     align-items: baseline;
 }
 .price-input{
-    width: 69px;
+    width: 72px;
+    padding: 0;
     text-align: center;
 }
 .phone-num-div{
@@ -225,7 +243,7 @@ header{
     padding: 12px;
     border-radius: 8px;
     border: none;
-    background-color: var(--orange-30);
+    background-color: #F4F4F4;
     outline: none;
     font-family: 'gilroy-regular';
     font-size: 15px;
