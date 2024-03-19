@@ -103,37 +103,32 @@ header{
 .hashtag-input{
     max-width: 100%;
     overflow-x: auto;
+    border: none;
+    padding-left: 4.5px;
+    overflow-y: scroll;
 }
-.hashtag-btn-div{
-    position: absolute;
-    display: flex;
-    column-gap: 8px;
-    z-index: 1;
-    height: 36px;
-    background-color: pink;
+.hashtag-input {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
-.hashtag-btns::-webkit-scrollbar {
-    display: none;
+.hashtag-input::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
-.hashtag-btns{
-    position: absolute;
-    width: calc(100% - 24px * 2);
-    overflow-x: auto;
-    left: 24px;
-    height: 36px;
-    margin-top: -36px;
-    z-index: 1000;
+.tagify__tag{
+    border: 1px solid black;
+    border-radius: 4px;
+
+    margin-inline: 8px 0;
+    height: 24px;
+    
 }
-.hashtag-btn{
-    position: relative;
-    padding: 6px;
-    border: 1px solid var(--orange);
-    border-radius: 8px;
+.tagify__tag * {
+    /* background-color: #F4F4F4; */
+}
+
+.tagify__tag-text{
     font-family: 'gilroy-medium';
-    font-size: 14px;
-    color: var(--orange);
-    flex-shrink: 0;
-    z-index: 1;
+    font-size: 13px;
 }
 .display-input-div{
     display: flex;

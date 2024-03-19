@@ -67,51 +67,6 @@ function chooseCategory(flag){
     }
 }
 
-let hashtagInput = document.getElementsByClassName('hashtag-input')[0];
-
-hashtagInput.addEventListener('keyup', function(e){
-    if(e.keyCode==32){
-        addHashtag(hashtagInput);
-    }else if(e.keyCode==8 && hashtagInput.value == ''){
-        deleteHashtag();
-    }
-})
-function moveHashtagPadding(){
-    let inputDiv = document.getElementsByClassName('hashtag-input')[0];
-    let hashtagBtnDiv = document.getElementsByClassName('hashtag-btn-div')[0];
-    console.log(inputDiv.offsetWidth);
-    console.log(hashtagBtnDiv.offsetWidth);
-    if(inputDiv.offsetWidth >= hashtagBtnDiv.offsetWidth){
-        inputDiv.style.paddingLeft = `${hashtagBtnDiv.offsetWidth + 8}px`;
-    }else{
-        inputDiv.style.paddingLeft = `${inputDiv.offsetWidth}px`;
-    }
-}
-
-function addHashtag(e){
-    let hashtagBtnDiv = document.getElementsByClassName('hashtag-btn-div')[0];
-    let hashtagBtn = document.createElement('div');
-
-    if(hashtagBtnDiv.children.length > 4){
-        return alert('최대 5개까지 가능');
-    }
-
-    hashtagBtn.className = 'hashtag-btn';
-    hashtagBtn.innerText = `#${e.value}`
-    hashtagBtnDiv.appendChild(hashtagBtn);
-    e.value = '';
-    console.log(hashtagBtnDiv.offsetWidth);
-
-    moveHashtagPadding();
-    
-}
-function deleteHashtag(){
-    let hashtagBtnDiv = document.getElementsByClassName('hashtag-btn-div')[0];
-    hashtagBtnDiv.lastChild.remove();
-
-    moveHashtagPadding();
-}
-
 const label = document.querySelector('.label');
 const countryNum = document.getElementsByClassName('select-unit-num')[0];
 const options = document.querySelectorAll('.optionItem');
@@ -217,3 +172,14 @@ function sendProductImgs(product_code){
         alert('이미지 업로드 실패');
     });
 }
+
+// tagify
+var input = document.getElementsByClassName('hashtag-input')[0];
+var tagify = new Tagify(input);
+  
+// input.
+// tagify.on('click', tagify.addTags('dsf'));
+// 태그가 추가되면 이벤트 발생
+tagify.on('add', function() {
+  console.log(tagify.value); // 입력된 태그 정보 객체
+})
