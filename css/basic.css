@@ -23,6 +23,7 @@
     color: rgba(0, 0, 0, 0.87);
 }
 :root{
+    --orange-10: #FFF2E6;
     --orange-30: #FFD7B3;
     --orange-50: #FFBD80;
     --orange: #FF7A00;
