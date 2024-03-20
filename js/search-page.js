@@ -1,11 +1,19 @@
-let deleteBtns = [...document.getElementsByClassName('recently-search-delete-icon')];
-deleteBtns.forEach((e) => {
-    e.onclick = (e) => deleteRecentlySearch(e);
-});
+window.onload = () => {
+    showRecentlySearched();
+}
 function deleteRecentlySearch(e){
-    e.target.parentNode.remove();
+    let recentSearchValue = JSON.parse(localStorage.getItem("recentSearch"));
+    let deleteText = e.parentNode.firstChild.innerText;
+    let deleteIndex = recentSearchValue.indexOf(deleteText);
+    recentSearchValue.splice(deleteIndex, 1);
+    localStorage.setItem("recentSearch", JSON.stringify(recentSearchValue));
+    showRecentlySearched();
 }
 
+function deleteAll(){
+    localStorage.setItem("recentSearch", '[]');
+    showRecentlySearched();
+}
 
 function chooseCategory(flag){
     let vegetableBtn = document.getElementsByClassName('vegetable-btn')[0];
@@ -22,7 +30,12 @@ function chooseCategory(flag){
 function search(){
     let searchValue = document.getElementsByClassName('search-input')[0].value;
     console.log(searchValue);
+    // localStorage.setItem('recentSearch', '[]');
 
+    let searchArr = JSON.parse(localStorage.getItem('recentSearch'));
+    searchArr.push(searchValue);
+    localStorage.setItem('recentSearch', JSON.stringify(searchArr));
+    showRecentlySearched();
     let chooseCategory = document.getElementsByClassName('choose-category')[0];
     console.log(chooseCategory)
     if(chooseCategory == undefined){
@@ -51,8 +64,26 @@ function search(){
                 document.getElementsByClassName('recently-search-div')[0].style.display = 'none';
             }
         });
-    }
-   
+    }  
+}
+
+function showRecentlySearched(){
+    let recentSearchList = document.getElementsByClassName('recently-search-list')[0];
+    let recentSearchValue = JSON.parse(localStorage.getItem("recentSearch"));
+    recentSearchList.innerHTML = '';
+    recentSearchValue.forEach(value => {
+        let recentlySearch = document.createElement('div');
+        recentlySearch.className = "recently-search";
+
+        let recentlySearchName = document.createElement('div');
+        recentlySearchName.className = "recently-search-name";
+        recentlySearchName.innerText = value;
+
+        recentlySearch.appendChild(recentlySearchName);
+        recentlySearch.innerHTML += `<iconify-icon icon="mynaui:x" class="recently-search-delete-icon" onclick="deleteRecentlySearch(this)"></iconify-icon>`;
+    
+        recentSearchList.appendChild(recentlySearch);
+    })
 }
 
 function showSearchAnswer(products){
