@@ -1,0 +1,148 @@
+.my-review-list{
+    position: relative;
+    margin-top: 40px;
+    display: grid;
+    row-gap: 36px;
+}
+
+.review-title{
+    margin: 0 0 4px 24px;
+    font-family: 'gilroy-semiBold';
+    font-size: 15px;
+    color: black;
+}
+
+.current-date-review-list{
+    display: grid;
+    row-gap: 8px;
+}
+
+.review-card{
+    width: calc(100% - 20px - 24px);
+    height: calc(133px - 8px - 25px);
+    padding: 8px 20px 25px 24px;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.review-star-edit-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.star-rating{
+    display: flex;
+}
+
+.star{
+    font-size: 12px;
+    color: var(--orange);
+}
+
+.edit-btn{
+    transform: rotate(90deg);
+    font-size: 24px;
+    color: #9E9E9E;
+}
+
+.product-name{
+    position: relative;
+    width: calc(100% - 4px - 12px);
+    padding-left: 12px;
+    height: 28px;
+    background-color: #F4F4F4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    margin-bottom: 14px;
+}
+
+.product-name > div{
+    position: absolute;
+    width: 80%;
+    font-family: 'gilroy-medium';
+    font-size: 10px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 		
+    word-break:break-all;
+}
+
+.product-btn{
+    position: absolute;
+    transform: rotate(90deg);
+    font-size: 24px;
+    right: 4px;
+}
+
+.review-img{
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.my-review{
+    display: flex;
+    column-gap: 8px;
+}
+
+.review{
+    font-family: 'gilroy-regular';
+    font-size: 11px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-right: 4px;
+}
+
+.edit-post-div{
+    visibility: hidden;
+    z-index: 100;
+    position: absolute;
+    width: 83px;
+    height: 64px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.12);
+    top: 97.4px;
+    left: 125px;
+}
+.edit-post,
+.delete-post{
+    height: 50%;
+    margin-left: 12px;
+    display: flex;
+    column-gap: 7px;
+    align-items: center;
+}
+
+.edit-post > iconify-icon,
+.delete-post > iconify-icon{
+    font-size: 12px;
+}
+
+.edit-post > div,
+.delete-post > div{
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+}
+
+.edit-post > *{
+    color: #202020;
+}
+
+.delete-post > *{
+    color: #ED5137;
+}
+
+.line{
+    width: 100%;
+    height: 1px;
+    border: none;
+    transform: scaleY(0.5);
+    background: #919191;
+}
