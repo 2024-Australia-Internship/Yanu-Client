@@ -1,0 +1,56 @@
+.header{
+    margin-bottom: 40px;
+}
+
+.new-address-info{
+    margin: 0 0 73px 20px;
+    width: calc(100% - 20px - 48px);
+}
+
+.input-container{
+    width: 100%;
+    display: flex;
+    column-gap: 16px;
+    margin-bottom: 32px;
+}
+
+.input-title{
+    margin-bottom: 4px;
+    font-family: 'gilroy-semiBold';
+    font-size: 13px;
+    color: black;
+}
+
+.input-box{
+    width: 100%;
+}
+
+input{
+    width: calc(100% - 12px);
+    height: 48px;
+    background-color: #F4F4F4;
+    border: none;
+    border-radius: 12px;
+    padding-left: 12px;
+    outline: none;
+    font-family: 'gilroy-regular';
+    font-size: 15px;
+    color: black;
+}
+
+.zip-code-input{
+    width: 36%;
+}
+
+.address-input-box{
+    display: grid;
+    row-gap: 4px;
+}
+
+.fill-basic-btn{
+    width: calc(100% - 35px * 2);
+    height: 57px;
+    margin-left: 35px;
+    font-family: 'gilroy-medium';
+    font-size: 17px;
+}
