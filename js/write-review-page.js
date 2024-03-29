@@ -62,4 +62,5 @@ function createElement(e, file){
 
 function deleteImg(e){
     e.parentNode.remove();
+    currentImgLength.innerText = parseInt(currentImgLength.innerText)-1;
 }

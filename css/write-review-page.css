@@ -5,6 +5,10 @@
     color: black;
 }
 
+.header{
+    margin-bottom: 65px;
+}
+
 .review-title{
     width: 100%;
     text-align: center;
