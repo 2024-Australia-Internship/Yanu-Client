@@ -3,15 +3,16 @@
 }
 
 .new-address-info{
-    margin: 0 0 73px 20px;
+    margin: 0 0 8px 20px;
     width: calc(100% - 20px - 48px);
+    display: grid;
+    row-gap: 32px;
 }
 
 .input-container{
     width: 100%;
     display: flex;
     column-gap: 16px;
-    margin-bottom: 32px;
 }
 
 .input-title{
@@ -25,7 +26,7 @@
     width: 100%;
 }
 
-input{
+input[type=text]{
     width: calc(100% - 12px);
     height: 48px;
     background-color: #F4F4F4;
@@ -53,4 +54,35 @@ input{
     margin-left: 35px;
     font-family: 'gilroy-medium';
     font-size: 17px;
+}
+
+label{
+    margin-left: 24px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 12px;
+}
+
+.check{
+    display: none;
+}
+
+label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/address-check-box.svg');
+}
+
+.check:checked + label::before {
+    background-image: url('../images/address-checked-box.svg');
+}
+
+label{
+    font-family: 'gilroy-regular';
+    font-size: 13px;
+    color: black;
+    margin-bottom: 57px;
 }
