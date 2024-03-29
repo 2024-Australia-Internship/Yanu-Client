@@ -35,6 +35,7 @@ function showEditDiv(e, i){
 }
 
 function editMyPost(i){
+    window.location.href = '../html/edit-my-review.html';
     
 }
 function deleteMyPost(i){
