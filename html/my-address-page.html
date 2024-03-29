@@ -11,40 +11,84 @@
     <div class="header">
         <div class="header-title">My Address</div>
         <div class="edit-address">
-            <Iconify-icon icon="radix-icons:plus"></Iconify-icon>
-            <Iconify-icon icon="mdi:delete"></Iconify-icon>
+            <div class="basic-component">
+                <Iconify-icon icon="radix-icons:plus" class="basic-component" onclick="addAddress()"></Iconify-icon>
+                <Iconify-icon icon="mdi:delete" class="basic-component" onclick="deleteAddres()"></Iconify-icon>
+            </div>
+            <div class="delete-component delete-done-btn hide-component" onclick="deleteAddres()">
+                Done
+            </div>
         </div>
     </div>
 
     <div class="my-address-list">
         <div class="my-address-box">
-            <div class="my-address-title-div">
-                <div class="my-address-title">Annie Johnson</div>
-                <div class="choose-address">Applyed</div>
+            <div class="delete-component hide-component">
+                <iconify-icon icon="iconamoon:check-fill" class="delete-check-btn"></iconify-icon>
             </div>
-            <div class="my-address-div">
-                <div class="my-address">
-                    [12345] 77 St Georges Rd, Preston VIC 3072, Australia
+            <div>
+                <div class="my-address-title-div">
+                    <div class="my-address-title">Annie Johnson</div>
+                    <div class="choose-address">Applyed</div>
                 </div>
+                <div class="my-address-div">
+                    <div class="my-address">
+                        [12345] 77 St Georges Rd, Preston VIC 3072,Australia
+                    </div>
+                    <div class="phone-number">412 345 678</div>
+                </div>
+            </div>
+            <div class="basic-component">
                 <iconify-icon icon="flowbite:edit-outline" class="my-address-edit-btn"></iconify-icon>
             </div>
-            <div class="phone-number">412 345 678</div>
         </div>
 
         <div class="my-address-box">
-            <div class="my-address-title-div">
-                <div class="my-address-title">Cho, Seohyun</div>
-                <div class="choose-address">Applyed</div>
+            <div class="delete-component hide-component">
+                <iconify-icon icon="iconamoon:check-fill" class="delete-check-btn"></iconify-icon>
             </div>
-            <div class="my-address-div">
-                <div class="my-address">
-                    [12345] 546, Hoam-ro, Gwanak-gu, Seoul, Republic of Korea
+            <div>
+                <div class="my-address-title-div">
+                    <div class="my-address-title">Cho, Seohyun</div>
+                    <div class="hide-component">Applyed</div>
                 </div>
+                <div class="my-address-div">
+                    <div class="my-address">
+                        [12345] 546, Hoam-ro, Gwanak-gu, Seoul, Republic of Korea
+                    </div>
+                    <div class="phone-number">010 6220 1784</div>
+                </div>
+            </div>
+            <div class="basic-component">
                 <iconify-icon icon="flowbite:edit-outline" class="my-address-edit-btn"></iconify-icon>
             </div>
-            <div class="phone-number">010 1234 5678</div>
         </div>
+
+        <div class="my-address-box">
+            <div class="delete-component hide-component">
+                <iconify-icon icon="iconamoon:check-fill" class="delete-check-btn"></iconify-icon>
+            </div>
+            <div>
+                <div class="my-address-title-div">
+                    <div class="my-address-title">Cho, Seohyun</div>
+                    <div class="hide-component">Applyed</div>
+                </div>
+                <div class="my-address-div">
+                    <div class="my-address">
+                        [12345] 546, Hoam-ro, Gwanak-gu, Seoul, Republic of Korea
+                    </div>
+                    <div class="phone-number">010 6220 1784</div>
+                </div>
+            </div>
+            <div class="basic-component">
+                <iconify-icon icon="flowbite:edit-outline" class="my-address-edit-btn"></iconify-icon>
+            </div>
+        </div>
+
+       
     </div>
+
+    <div class="fill-basic-btn delete-component hide-component">Delete</div>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>

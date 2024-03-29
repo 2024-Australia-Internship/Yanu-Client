@@ -9,16 +9,16 @@
     size: 20px;
     color: black;
 }
-.edit-address{
+.edit-address > .basic-component{
     display: flex;
     column-gap: 16px;
 }
-.edit-address > *{
+.edit-address *{
     font-size: 24px;
     color: var(--orange);
 }
 .my-address-list{
-    margin-top: 16px;
+    margin: 16px 0 190px 0;
     display: grid;
     row-gap: 16px;
     width: 100%;
@@ -29,6 +29,9 @@
     padding: 16px 25px 16px 24px;
     border-radius: 8px;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .my-address-title-div{
     display: flex;
@@ -50,10 +53,6 @@
     font-family: 'gilroy-regular';
     font-size: 13px;
     color: #606060;
-}
-.my-address-div{
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 8px;
 }
 .my-address-edit-btn{
@@ -65,4 +64,32 @@
     font-family: 'gilroy-regular';
     font-size: 13px;
     color: #9E9E9E;
+}
+
+.delete-done-btn{
+    font-family: 'gilroy-medium';
+    font-size: 15px;
+}
+
+.delete-check-btn{
+    font-size: 24px;
+    margin-right: 20px;
+    color: #C6C6C6;
+}
+
+.checked-delete-btn{
+    color: var(--orange);
+}
+
+.hide-component{
+    display: none;
+}
+
+.fill-basic-btn{
+    position: fixed;
+    width: calc(100% - 30px * 2);
+    margin-left: 30px;
+    height: 57px;
+    font-size: 17px;
+    bottom: 93px;
 }
