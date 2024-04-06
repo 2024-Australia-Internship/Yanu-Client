@@ -213,7 +213,7 @@ header{
 }
 .line{
     width: 56px;
-    background-color: black;
+    background-color: #919191;
     margin-left: 4px;
     height: 1px;
     transform: scaleY(0.5);
