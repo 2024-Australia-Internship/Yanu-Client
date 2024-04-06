@@ -117,18 +117,29 @@ header{
 .tagify__tag{
     border: 1px solid black;
     border-radius: 4px;
-
     margin-inline: 8px 0;
     height: 24px;
-    
-}
-.tagify__tag * {
-    /* background-color: #F4F4F4; */
 }
 
 .tagify__tag-text{
     font-family: 'gilroy-medium';
     font-size: 13px;
+    color: black;
+}
+.hashtag-input{
+    --tag-bg                  : none;
+    --tag-hover               : none;
+    --tag-text-color          : black;
+    --tags-border-color       : black;
+    --tag-border-radius       : 4px;
+    --tag-text-color--edit    : black;
+    --tag-remove-bg           : none;
+    --tag-remove-btn-color    : black;
+    --tag-remove-btn-bg--hover: none;
+  
+    display: inline-block;
+    min-width: 0;
+    border: none;
 }
 .display-input-div{
     display: flex;

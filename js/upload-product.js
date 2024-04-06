@@ -46,9 +46,7 @@ function createElement(e, file){
     currentImgLength.innerText = images;
 }
 
-function deleteImg(e){
-    e.parentNode.remove();
-}
+
 
 function chooseCategory(flag){
     if(flag){ // fruit
@@ -176,10 +174,12 @@ function sendProductImgs(product_code){
 // tagify
 var input = document.getElementsByClassName('hashtag-input')[0];
 var tagify = new Tagify(input);
-  
-// input.
-// tagify.on('click', tagify.addTags('dsf'));
-// 태그가 추가되면 이벤트 발생
-tagify.on('add', function() {
-  console.log(tagify.value); // 입력된 태그 정보 객체
-})
+
+tagify.on('keydown', e => onTagifyKeyDown(e))
+
+function onTagifyKeyDown(e){
+    if(e.detail.event.keyCode == 32) {
+        tagify.addTags(tagify.DOM.input.innerText);
+        tagify.DOM.input.innerText = '';
+    }
+}
