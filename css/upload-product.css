@@ -1,21 +1,26 @@
 header{
     position: fixed;
     top: 0;
-    width: calc(100% - 24px - 28px);
+    width: calc(100% - 24px * 2);
     padding-left: 24px;
     display: flex;
     padding-top: 12px;
     justify-content: space-between;
+    align-items: center;
     background-color: white;
 }
+.back-btn{
+    transform: rotate(-90deg);
+    font-size: 24px;
+}
 .upload-btn{
-    width: 69px;
-    height: 32px;
+    width: 84px;
+    height: 38px;
     background-color: var(--orange);
     border-radius: 8px;
     border: 0;
     font-family: 'gilroy-medium';
-    font-size: 13px;
+    font-size: 14px;
     color: white;
 }
 .upload-img-div{
@@ -100,35 +105,71 @@ header{
     font-family: 'gilroy-semiBold';
     font-size: 9px;
 }
+.input-title > * {
+    font-family: 'gilroy-semiBold';
+    font-size: 15px;
+}
+.hashtag-title{
+    column-gap: 10px;
+}
+.hashtag-box{
+    display: flex;
+    font-family: 'gilroy-medium';
+    column-gap: 2px;
+}
+
+.current-hashtag,
+.limit-hashtag{
+    font-family: 'gilroy-semiBold';
+    font-size: 15px;
+}
+
+.tagify{
+    display: flex;
+    flex-wrap: nowrap;
+}
 .hashtag-input{
     max-width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
     overflow-x: auto;
     border: none;
     padding-left: 4.5px;
     overflow-y: scroll;
 }
 .hashtag-input {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
 }
 .hashtag-input::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+    display: none;
 }
 .tagify__tag{
     border: 1px solid black;
     border-radius: 4px;
-
     margin-inline: 8px 0;
     height: 24px;
-    
-}
-.tagify__tag * {
-    /* background-color: #F4F4F4; */
 }
 
 .tagify__tag-text{
     font-family: 'gilroy-medium';
     font-size: 13px;
+    color: black;
+}
+.hashtag-input{
+    --tag-bg                  : none;
+    --tag-hover               : none;
+    --tag-text-color          : black;
+    --tags-border-color       : black;
+    --tag-border-radius       : 4px;
+    --tag-text-color--edit    : black;
+    --tag-remove-bg           : none;
+    --tag-remove-btn-color    : black;
+    --tag-remove-btn-bg--hover: none;
+  
+    display: flex;
+    min-width: 0;
+    border: none;
 }
 .display-input-div{
     display: flex;
@@ -140,8 +181,7 @@ header{
     column-gap: 13px;
     align-items: center;
 }
-.base-font{
-    font-family: 'gilroy-medium';
+.price-slash{
     font-size: 17px;
 }
 .price-info{
@@ -202,7 +242,7 @@ header{
 }
 .line{
     width: 56px;
-    background-color: black;
+    background-color: #919191;
     margin-left: 4px;
     height: 1px;
     transform: scaleY(0.5);

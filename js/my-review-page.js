@@ -4,6 +4,11 @@ editBtns.forEach((e, i) => {
     e.onclick = () => showEditDiv(e, i);
 })
 
+let productBox = [...document.getElementsByClassName('product-name')];
+productBox.forEach((e, i) => {
+    e.onclick = () => showProduct(e, i);
+})
+
 document.addEventListener('click', (e) => {
     let editDiv = document.getElementsByClassName('edit-post-div')[0];
     if(e.target.className != "edit-btn"){
@@ -11,6 +16,10 @@ document.addEventListener('click', (e) => {
     }
 
 });
+
+function showProduct(e, i){
+    window.location.href = '../html/product-page.html';
+}
 
 function showEditDiv(e, i){
     console.log(e, i);

@@ -6,11 +6,14 @@ let listMore = document.getElementsByClassName('list-more-btn')[0];
 let chooseCardBtnList = [...document.getElementsByClassName('choose-card-btn')];
 let changeCardDiv = document.getElementsByClassName('change-card-div')[0];
 let paymentMethodDiv = document.getElementsByClassName('payment-method-div')[0];
+let totalPriceList = document.getElementsByClassName('total-price-div')[0]
 let chooseCard = 0;
 
 if(productListlength > 2) {
     showAllBtn.classList.add('visibility');
     listMore.classList.add('visibility');
+}else{
+    totalPriceList.style.marginTop = '13px';
 }
 
 function showAllList(){

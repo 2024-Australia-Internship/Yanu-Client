@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <img src="/images/back-btn.svg" class="back-btn" onclick="window.location.href='/html/main-page.html'">
+        <iconify-icon icon="iconamoon:arrow-up-2-thin" class="back-btn" onclick="window.location.href='/html/main-page.html'"></iconify-icon>
         <button class="upload-btn" onclick="uploadProduct()">Upload</button>
     </header>
 
@@ -42,11 +42,14 @@
         </div>
 
         <div class="input-div">
-            <div class="input-title">Hashtag<p>(5)</p></div>
-            <!-- <input class="product-input hashtag-input">
-            <div class="hashtag-btns">
-                <div class="hashtag-btn-div"></div>
-            </div> -->
+            <div class="input-title hashtag-title">
+                <div>Hashtag</div>
+                <div class="hashtag-box">
+                    <div class="current-hashtag">0</div>
+                    <div class="slash">/</div>
+                    <div class="limit-hashtag">5</div>
+                </div>
+            </div>
             <input class="product-input hashtag-input">
         </div>
 
@@ -59,7 +62,7 @@
                     <p class="base-font">$</p>
                     <input class="product-input price-input">
                 </div>
-                <p class="base-font">/</p>
+                <p class="slash price-slash">/</p>
                 <div class="select-unit-div user-input">
                     <button class="label">
                         <p class="select-unit-num">kg</p>
