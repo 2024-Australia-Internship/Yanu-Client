@@ -46,7 +46,10 @@ function createElement(e, file){
     currentImgLength.innerText = images;
 }
 
-
+function deleteImg(e){
+    e.parentNode.remove();
+    currentImgLength.innerHTML = parseInt(currentImgLength.innerHTML)-1;
+}
 
 function chooseCategory(flag){
     if(flag){ // fruit
