@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @font-face {
     font-family: 'gilroy-regular';
     src: url('/font/Gilroy-Regular.ttf');
@@ -222,4 +223,9 @@
     font-family: 'gilroy-semiBold';
     font-size: 20px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+.slash{
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
 }

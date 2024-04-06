@@ -2,7 +2,7 @@ const user_code = getCookie('user_code');
 let imgUploadBtn = document.getElementsByClassName('upload-img-btn')[0];
 let realImgUploadBtn = document.getElementsByClassName('upload-file')[0];
 let currentImgLength = document.getElementsByClassName('current-img')[0];
-
+let currentHashTagLength = document.getElementsByClassName('current-hashtag')[0];
 realImgUploadBtn.addEventListener('change', getImageFiles);
 
 imgUploadBtn.addEventListener('click', () => realImgUploadBtn.click());
@@ -179,10 +179,21 @@ var input = document.getElementsByClassName('hashtag-input')[0];
 var tagify = new Tagify(input);
 
 tagify.on('keydown', e => onTagifyKeyDown(e))
+tagify.on('add', showList);
 
 function onTagifyKeyDown(e){
     if(e.detail.event.keyCode == 32) {
         tagify.addTags(tagify.DOM.input.innerText);
         tagify.DOM.input.innerText = '';
     }
+}
+
+function showList(){
+    if(tagify.value.length > 5){
+        tagify.removeTag();
+        currentHashTagLength.innerText = 5;
+    }else {
+        currentHashTagLength.innerText = tagify.value.length;
+    }
+    
 }
