@@ -73,6 +73,7 @@
     padding: 6px 12px 6px 12px;
     font-family: 'gilroy-medium';
     font-size: 15px;
+    color: var(--orange);
 }
 .farmer-info-btn-div{
     display: flex;
@@ -193,8 +194,8 @@
 }
 .reviews-div{
     margin-top: 24px;
-    width: calc(100% - 20px);
-    padding-left: 20px;
+    width: calc(100% - 24px * 2);
+    padding-left: 24px;
     display: none;
 }
 .review-title-div{
@@ -222,15 +223,16 @@
     color: var(--orange);
 }
 .all-reviews{
+    width: 100%;
     margin-top: 24px;
     display: grid;
     row-gap: 12px;
     padding-bottom: 150px;
 }
 .all-review{
-    width: calc(100% - 20px - 17px * 2);
+    width: 100%;
     height: calc(111px - 12px - 8px);
-    padding: 12px 17px 8px 17px;
+    padding: 12px 0 8px 0;
 }
 .all-review-title-div{
     display: flex;
