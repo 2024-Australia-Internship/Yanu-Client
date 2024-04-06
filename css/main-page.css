@@ -106,4 +106,6 @@ body{
 .registration-product-icon{
     font-size: 24px;
     color: white;
+    stroke: white;
+    stroke-width: 0.5px;
 }
