@@ -7,7 +7,7 @@
     margin-bottom: 6px;
 }
 .user-div{
-    width: 288px;
+    width: 75vw;
     margin: 0 auto;
     margin-top: 57px;
 }
@@ -24,7 +24,7 @@
     text-decoration: underline;
 }
 .login-btn{
-    width: 304px;
+    width: 75vw;
     height: 56px;
     margin: 0 auto;
     margin-top: 175px;
