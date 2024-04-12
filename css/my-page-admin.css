@@ -43,12 +43,17 @@
     color: white;
     margin-left: 16px;
 }
+.user-info-box{
+    width: 262px;
+    display: grid;
+    row-gap: 20px;
+    margin-top: 33px;
+}
 .user-history-div{
     width: 262px;
     height: 96px;
     background-color: white;
     border-radius: 12px;
-    margin-top: 33px;
 }
 .history-div{
     display: flex;
@@ -83,7 +88,6 @@
     border-right: 1px solid #D4D4D4;
 }
 .user-ugly-percent-div{
-    margin-top: 28px;
     width: 262px;
     height: 112px;
     background-color: #FFD7B3;
@@ -116,7 +120,6 @@
     font-size: 24px;
 }
 .etc-div{
-    margin-top: 28px;
     width: 262px;
     height: 168px;
     border-radius: 12px;
