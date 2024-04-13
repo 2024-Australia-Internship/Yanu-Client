@@ -1,10 +1,10 @@
 body{
-    width: 288px;
+    width: 75vw;
     margin: 0 auto;
 }
 .logo-img{
     width: 58px;
-    margin-left: calc((288px - 58px) / 2);
+    margin-left: calc((75vw - 58px) / 2);
     margin-top: 42px;
 }
 .title{
@@ -15,15 +15,16 @@ body{
     left: -10px;
 }
 .email-input-div{
+    width: 75vw;
     margin-top: 16px;
-    display: flex;
     height: 51px;
-    align-items: center;
 }
-.email-input{
-    width: 191px;
-    padding-right: calc(288px - 191px);
+.user-input{
+    position: relative;
+    width: calc(100% - 20px - 37px);
+    padding-right: 37px;
 }
+
 .email-input-div button{
     position: absolute;
     z-index: 1;
@@ -47,10 +48,8 @@ body{
     display: grid;
     row-gap: 12px;
 }
-.user-input{
-    width: 231px;
-    padding-right: 37px;
-}
+
+
 .phone-num-div{
     display: flex;
     justify-content: space-between;
@@ -139,5 +138,5 @@ body{
 .phone-num-input{
     position: relative;
     height: 48px;
-    width: calc(288px - 83px - 69px);
+    width: calc(75vw - 83px - 69px);
 }

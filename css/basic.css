@@ -71,6 +71,7 @@
     outline: 1.2px solid var(--orange);
 }
 .confirm-pw-div{
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -83,7 +84,7 @@
 }
 .eye-div{
     position: absolute;
-    margin-left: 251px;
+    right: 16px;
     font-size: 24px;
     width: 24px;
     height: 24px;
