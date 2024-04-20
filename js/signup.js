@@ -21,29 +21,25 @@ label.addEventListener('click', function(){
     }
 });
 
-function checkEmail(flag){
+function checkEmail(){
     let myEmail = document.getElementsByClassName('email-input')[0].value;
 
     let checkEmail = document.getElementsByClassName('email-comment')[0];
 
     axios.post(`${BASE_URL}/users/duplication/${myEmail}`)
     .then(response => {
-        console.log("성ㅅ공성공");
         console.log(response);
         if((/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/).test(myEmail)){
             checkEmail.innerText = "You can use this E-mail."
             checkEmail.style.color = "#66CC00";
         }
-        if(flag) signup();
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
-        console.log(error.response.status);
-        if(error.response.status == 409){
+        if(error.response.status == 400){
             checkEmail.innerText = "Someone is already using this E-mail."
             checkEmail.style.color = "#FF6F6F"; 
         }
-        if(flag) alert('이메일을 확인해주세요');
     });
 }
 
@@ -173,12 +169,10 @@ function signup(){
     axios.post(`${BASE_URL}/users`, req)
     .then(response => {
         console.log(response)
-        let user_code = response.data.result.user_code;
-        console.log(user_code);
-        window.localStorage.setItem('first-login', true);
-        window.location.href = `/html/setting-profile.html?user_code=${user_code}`;
+        window.location.href = `/html/setting-profile.html?email=${user_email}`;
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
+        alert(error.response.data.message);
     });
 }

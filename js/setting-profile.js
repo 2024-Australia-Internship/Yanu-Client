@@ -24,15 +24,15 @@ function getImageFiles(e){
 }
 function settingProfile(){
     let urlParams = new URL(location.href).searchParams;
-    let user_code = urlParams.get('user_code');
-    console.log(user_code);
+    let email = urlParams.get('email');
+    console.log(email);
 
     const formData = new FormData();
 
     let file = document.getElementsByClassName('upload-file')[0].files[0];
     console.log(file);
 
-    formData.append('profile_image', file);
+    formData.append('profile', file);
 
     const config = {
         headers: {
@@ -41,15 +41,10 @@ function settingProfile(){
     };
 
     let nickname = document.getElementsByClassName('nickname-input')[0].value;
-    let introduction = document.getElementsByClassName('introduction-input')[0].value;
-
-    console.log(nickname);
-    console.log(introduction);
 
     if(nickname == '') return alert('input your nickname');
-    if(introduction == '') return alert('input your introduction');
 
-    axios.post(`${BASE_URL}/users/${user_code}/profile`, formData, config)
+    axios.post(`${BASE_URL}/users/profile/img/${email}`, formData, config)
     .then(response => {
         console.log(response);
         alert('이미지 업로드 성공');
@@ -60,13 +55,11 @@ function settingProfile(){
     });
 
     const req = {
-        nickname: nickname,
-        user_introduction: introduction
+        nickname: nickname
     }
 
-    axios.post(`${BASE_URL}/users/${user_code}/profile/info`, req)
+    axios.post(`${BASE_URL}/users/profile/info/${email}`, req)
     .then(response => {
-        localStorage.setItem('recentSearch', '[]');
         window.location.href = '/index.html';
     })
     .catch(error => {

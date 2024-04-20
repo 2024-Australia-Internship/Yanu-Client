@@ -105,21 +105,17 @@ function changePw(){
     console.log(user_pw);
 
     var req = {
-        user_email: user_email,
-        new_password: user_pw
+        email: user_email,
+        password: user_pw
     }
     
-    axios.patch(`${BASE_URL}/users/forget/password`, req)
+    axios.put(`${BASE_URL}/users/password`, req)
     .then(response => {
         console.log(response);
-        alert('로그인 성공');
-        console.log(response.status);
         window.location.href = "/index.html";
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
-        console.log(error.response.status);
-        if(error.response.status == 404) return alert('존재하지 않는 이메일입니다.');
-        alert('로그인 실패');
+        alert(error.response.data.message);
     });
 }

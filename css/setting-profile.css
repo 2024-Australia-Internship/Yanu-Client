@@ -3,7 +3,11 @@ body{
     margin: 0 auto;
 }
 .profile-img-div{
+    position: relative;
     height: 100px;
+    width: 106px;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 .profile-img{
     width: 100px;
@@ -20,13 +24,13 @@ body{
     object-fit: cover;
 }
 .edit-image-btn{
-    position: relative;
+    position: absolute;
     width: 30px;
     height: 30px;
+    top: 70px;
+    left: 76px;
     background-color: var(--orange);
     border-radius: 50%;
-    top: -30px;
-    left: 166px;
     display: flex;
     justify-content: center;
     align-items: center;
