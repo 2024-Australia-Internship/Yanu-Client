@@ -25,12 +25,11 @@ function checkEmail(flag){
     let myEmail = document.getElementsByClassName('email-input')[0].value;
 
     let checkEmail = document.getElementsByClassName('email-comment')[0];
-    const req = {
-        user_email: myEmail
-    }
-    axios.post(`${BASE_URL}/users/check/email`, req)
+
+    axios.post(`${BASE_URL}/users/duplication/${myEmail}`)
     .then(response => {
-        console.log(response)
+        console.log("성ㅅ공성공");
+        console.log(response);
         if((/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/).test(myEmail)){
             checkEmail.innerText = "You can use this E-mail."
             checkEmail.style.color = "#66CC00";
@@ -167,11 +166,11 @@ function signup(){
     user_phonenumber = `${user_country_num} ${user_phonenumber}`
 
     const req = {
-        user_email: user_email,
-        user_pw: user_pw, 
-        user_phonenumber: user_phonenumber
+        email: user_email,
+        password: user_pw, 
+        phonenumber: user_phonenumber
     }
-    axios.post(`${BASE_URL}/users/register`, req)
+    axios.post(`${BASE_URL}/users`, req)
     .then(response => {
         console.log(response)
         let user_code = response.data.result.user_code;
