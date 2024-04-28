@@ -3,11 +3,8 @@ if(window.localStorage.getItem('first-login') === 'false'){
     popup.style.visibility = "hidden";
 }
 
-let user_code = getCookie('user_code');
-console.log(user_code);
-
 window.onload = () => {
-    axios.get(`${BASE_URL}/users/${user_code}`)
+    axios.get(`${BASE_URL}/users`)
     .then(response => {
         console.log(response);
         let username = document.getElementsByClassName('welcome-username')[0];
@@ -24,7 +21,7 @@ window.onload = () => {
 
 
 function getProducts(){
-    axios.get(`${BASE_URL}/products/list`)
+    axios.get(`${BASE_URL}/products`)
     .then(response => {
         console.log(response);
         let farmName = response.data.farmName;
