@@ -26,7 +26,11 @@ function checkEmail(){
 
     let checkEmail = document.getElementsByClassName('email-comment')[0];
 
-    axios.post(`${BASE_URL}/users/duplication/${myEmail}`)
+    const req = {
+        "email": myEmail
+    }
+
+    axios.post(`${BASE_URL}/users/duplication/email`, req)
     .then(response => {
         console.log(response);
         if((/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/).test(myEmail)){
@@ -149,14 +153,14 @@ function signup(){
 
     // pw 확인 - 조건에 충족하는지
     if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^*+=-]).{8,16}$/).test(user_confirm_pw)){
-        return alert('비번 조건에 안 맞음');
+        return alert('Please check your password');
     }
 
     // phone number 확인
     console.log(user_country_num);
     if(!((user_country_num == '+ 61' && (/^04\d{8}$/).test(user_phonenumber)) ||
        (user_country_num == '+ 82' && (/^010\d{8}$/).test(user_phonenumber)))){
-        return alert('전화번호 틀림');
+        return alert('Please check your phone number');
     }
 
     user_phonenumber = `${user_country_num} ${user_phonenumber}`
