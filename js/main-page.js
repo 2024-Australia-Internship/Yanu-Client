@@ -4,13 +4,14 @@ if(window.localStorage.getItem('first-login') === 'false'){
 }
 
 window.onload = () => {
-    axios.get(`${BASE_URL}/users`)
+    axios.get(`${BASE_URL}/users`, config)
     .then(response => {
-        console.log(response);
         let username = document.getElementsByClassName('welcome-username')[0];
-        username.innerText = response.data.userAllInfo[0].nickname
-        if(response.data.userAllInfo[0].is_farmer){
+        username.innerText = response.data.nickname
+        if(response.data.is_farmer){
             document.getElementsByClassName('registration-product-btn')[0].style.display = 'flex';
+        }else{
+            document.getElementsByClassName('popup-background')[0].style.visibility = 'visible';
         }
         getProducts();
     })
@@ -21,9 +22,8 @@ window.onload = () => {
 
 
 function getProducts(){
-    axios.get(`${BASE_URL}/products`)
+    axios.get(`${BASE_URL}/products`, config)
     .then(response => {
-        console.log(response);
         let farmName = response.data.farmName;
         showProducts(response.data.products, response.data.firstProductImageURL, farmName);
     })
@@ -109,8 +109,6 @@ function moveProductPage(id, user_code){
     console.log(id);
     window.location.href = `/html/product-page.html?product_code=${id}&user_code=${user_code}`
 }
-
-
 
 function hidePopup(flag){
     console.log(window.localStorage.getItem('first-login'));
