@@ -12,16 +12,20 @@ function showMyPw(){
 }
 
 function checkInfo(){
-
     let idValue = document.getElementsByClassName('id-input')[0].value;
     let pwValue = document.getElementsByClassName('my-pw-input')[0].value;
+
     const req = {
         email: idValue,
         password: pwValue
     }
     
     axios.post(`${BASE_URL}/users/login`, req)
-    .then(() => {
+    .then((res) => {
+        let expireDate = new Date();
+        expireDate.setMonth(expireDate.getMonth() + 1); // 한 달동안 저장
+
+        document.cookie = `token=Bearer ${res.data.token}; path=/; expires=${expireDate};`; 
         window.location.href = '/html/main-page.html'
     })
     .catch(error => {
