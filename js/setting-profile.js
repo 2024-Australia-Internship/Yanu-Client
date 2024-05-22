@@ -11,7 +11,7 @@ function getImageFiles(e){
     console.log(file);
 
     if (!file.type.match("image/.*")) {
-        alert('이미지 파일만 업로드가 가능합니다.');
+        alert('Only image files can be uploaded');
         return;
     }
 
@@ -22,17 +22,19 @@ function getImageFiles(e){
     img.src = URL.createObjectURL(file); 
     parent.replaceChildren(img);
 }
-function settingProfile(){
+
+async function settingProfile(){
     let urlParams = new URL(location.href).searchParams;
     let email = urlParams.get('email');
-    console.log(email);
-
-    const formData = new FormData();
 
     let file = document.getElementsByClassName('upload-file')[0].files[0];
-    console.log(file);
 
+    let nickname = document.getElementsByClassName('nickname-input')[0].value;
+    if(nickname == '') return alert('input your nickname');
+
+    const formData = new FormData();
     formData.append('profile', file);
+    formData.append('email', email);
 
     const config = {
         headers: {
@@ -40,30 +42,26 @@ function settingProfile(){
         },
     };
 
-    let nickname = document.getElementsByClassName('nickname-input')[0].value;
-
-    if(nickname == '') return alert('input your nickname');
-
-    axios.post(`${BASE_URL}/users/profile/img/${email}`, formData, config)
-    .then(response => {
-        console.log(response);
-        alert('이미지 업로드 성공');
-    })
-    .catch(error => {
-        console.error('There has been a problem with your axios request:', error);
-        alert('이미지 업로드 실패');
-    });
-
-    const req = {
-        nickname: nickname
-    }
-
-    axios.post(`${BASE_URL}/users/profile/info/${email}`, req)
+    await axios.post(`${BASE_URL}/users/profile/img`, formData, config)
     .then(response => {
         window.location.href = '/index.html';
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
-        alert('이미지 업로드 실패');
+        alert('Image upload failed');
+    });
+
+    const req = {
+        email: email,
+        nickname: nickname
+    }
+
+    await axios.post(`${BASE_URL}/users/profile/info`, req)
+    .then(response => {
+        
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+        alert('Nickname registration failed');
     });
 }
