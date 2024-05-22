@@ -4,6 +4,12 @@ function getCookie(key){
     return key.test(document.cookie) ? unescape(RegExp.$1) : '';
 }
 
+const config = {
+    headers: {
+        'Authorization': getCookie('token')
+    },
+};
+
 
 function heartToggle(e){
     console.log(e.target.parentNode.parentNode.parentNode.id);

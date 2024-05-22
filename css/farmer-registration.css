@@ -16,7 +16,7 @@
 }
 .input-form{
     margin-top: 36px;
-    width: 292px;
+    width: calc(100vw - 20px - 48px);
     margin-left: 20px;
 }
 .input-div{
@@ -35,11 +35,11 @@
     display: flex;
     column-gap: 16px;
 }
-.last-name-input{
-    width: 154px;
+.last-name-input-div{
+    width: 55%;
 }
-.family-name-input{
-    width: 122px;
+.family-name-input-div{
+    width: 45%;
 }
 .address-input{
     display: grid;
