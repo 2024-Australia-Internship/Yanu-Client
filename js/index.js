@@ -11,7 +11,7 @@ function showMyPw(){
     }
 }
 
-function checkInfo(){
+async function checkInfo(){
     let idValue = document.getElementsByClassName('id-input')[0].value;
     let pwValue = document.getElementsByClassName('my-pw-input')[0].value;
 
@@ -20,16 +20,39 @@ function checkInfo(){
         password: pwValue
     }
     
-    axios.post(`${BASE_URL}/users/login`, req)
-    .then((res) => {
-        let expireDate = new Date();
-        expireDate.setMonth(expireDate.getMonth() + 1); // 한 달동안 저장
+    let expireDate = new Date();
+    expireDate.setMonth(expireDate.getMonth() + 1); // 한 달동안 저장
 
+    await axios.post(`${BASE_URL}/users/login`, req)
+    .then((res) => {
         document.cookie = `token=Bearer ${res.data.token}; path=/; expires=${expireDate};`; 
-        window.location.href = '/html/main-page.html'
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
         alert(error.response.data.message);
+    });
+
+    console.log(config);
+    await axios.get(`${BASE_URL}/users`, config)
+    .then(response => {
+        console.log(response);
+    
+        const { is_farmer, nickname, profile_image, ugly_percent } = response.data;
+
+        const data = {
+            is_farmer: is_farmer,
+            nickname: nickname,
+            profile_image: profile_image,
+            ugly_percent: ugly_percent
+        }
+
+        const jsonData = JSON.stringify(data);
+
+        document.cookie = `userdata=${jsonData}; path=/; expires=${expireDate};`; 
+    
+        window.location.href = '/html/main-page.html';
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
     });
 }
