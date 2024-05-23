@@ -135,6 +135,9 @@
     display: flex;
     column-gap: 2px;
 }
+.ugly-tomato{
+    height: 40px;
+}
 .ugly-cnt{
     font-family: 'gilroy-semiBold';
     font-size: 24px;
