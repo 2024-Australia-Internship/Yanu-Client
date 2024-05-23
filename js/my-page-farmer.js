@@ -1,19 +1,25 @@
-const user_code = getCookie('user_code');
 window.onload = () => {
-    axios.get(`${BASE_URL}/users/${user_code}`)
+    let name = document.getElementsByClassName('user-name')[0];
+    let farm_name = document.getElementsByClassName('user-farm-name')[0];
+    let profile_img = document.getElementsByClassName('profile-img')[0];
+    let farm_img = document.getElementsByClassName('farm-back-img')[0];
+    let uglyPercent = document.getElementsByClassName('ugly-cnt')[0];
+    let uglyTomato = document.getElementsByClassName('ugly-tomato')[0];
+
+    axios.get(`${BASE_URL}/farms/5`, config)
     .then(response => {
         console.log(response);
-        document.getElementsByClassName('user-name')[0].innerText = 
-            response.data.userAllInfo[0].nickname;
-        document.getElementsByClassName('user-farm-name')[0].innerText = 
-            response.data.farmInfo.business_name;
-        document.getElementsByClassName('profile-img')[0].src = 
-            response.data.profile_image;
-            console.log(response.data.profile_image);
-        document.getElementsByClassName('farm-back-img')[0].src = 
-            response.data.farm_image;
-        document.getElementsByClassName('ugly-cnt')[0].innerText = 
-            response.data.userAllInfo[0].user_ugly;
+        const { farmName, businessName, ugly_percent } = response.data;
+        name.innerText = farmName;
+        farm_name.innerText = businessName;
+        // profile_img.src = response.data.profile_image;
+        // farm_img.src = response.data.farm_image;
+        if(ugly_percent > 66){
+            uglyTomato.src = '/images/ugly-tomato-big.svg'
+        }else if(ugly_percent > 33){
+            uglyTomato.src = '/images/ugly-tomato-middle.svg'
+        }
+        uglyPercent.innerText = ugly_percent;
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);

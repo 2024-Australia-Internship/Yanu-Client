@@ -159,7 +159,7 @@
 }
 .product-detail,
 .favorites-product-detail{
-    margin-top: 5px;
+    margin-top: 3px;
     display: flex;
     justify-content: space-between;
     align-items: center;

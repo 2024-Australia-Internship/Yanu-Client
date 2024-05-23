@@ -1,30 +1,45 @@
 const urlParams = new URL(location.href).searchParams;
 const product_code = urlParams.get('product_code');
-const user_code = urlParams.get('user_code');
-window.onload = () => {
-  axios.get(`${BASE_URL}/products/${user_code}/${product_code}`)
-    .then(response => {
-      console.log(response);
-      document.getElementsByClassName('product-price')[0].innerText = `$ ${response.data.infoProduct.product_price}`      
-      makeImages(response.data.images);
-      showProductInfo(response.data.infoProduct);
-    })
-    .catch(error => {
-      console.error('There has been a problem with your axios request:', error);
-    });
 
-  axios.get(`${BASE_URL}/users/${user_code}`)
+window.onload = () => {
+  
+
+  axios.get(`${BASE_URL}/products/product/14`, config)
     .then(response => {
       console.log(response);
-      document.getElementsByClassName('profile-img')[0].src = response.data.profile_image;
-      document.getElementsByClassName('farmer-name')[0].innerText = response.data.userAllInfo[0].nickname;
-      document.getElementsByClassName('farm-name')[0].innerText = response.data.farmInfo.business_name;
+
+      const { title, farm_name, hashtag, price, description } = response.data;
+      showInfo(title, farm_name, hashtag, price, description)
+      makeImages(response.data.images);
     })
     .catch(error => {
       console.error('There has been a problem with your axios request:', error);
     });
 }
 
+
+function showInfo(title, farm_name, hashtag, price, description){
+  console.log(title)
+  let product_title = document.getElementsByClassName('product-name')[0];
+  let product_price = document.getElementsByClassName('product-price')[0]
+  let profile_img = document.getElementsByClassName('profile-img')[0];
+  let farmer_name = document.getElementsByClassName('farmer-name')[0];
+  let farmName = document.getElementsByClassName('farm-name')[0];
+  let product_description = document.getElementsByClassName('product-description')[0];
+  let product_hashtag = document.getElementsByClassName('product-hashtag')[0];
+
+  product_title.innerText = title;
+  product_price.innerText = `$ ${price}`
+  farmer_name.innerText = farm_name;
+  product_description.innerText = description;
+  
+  JSON.parse(hashtag).forEach(value => {
+    let myHashtag = document.createElement('div');
+    myHashtag.className = 'hashtag';
+    myHashtag.innerText = `# ${value}`;
+    product_hashtag.appendChild(myHashtag);
+  })
+}
 
 let productImgSlider = document.getElementsByClassName('product-img-slider')[0];
 
@@ -41,15 +56,6 @@ function makeImages(images) {
   imgRadio();
 }
 
-function showProductInfo(product_info) {
-  let productTitleDiv = document.getElementsByClassName('product-name')[0];
-  let productInfoDiv = document.getElementsByClassName('product-info-div')[0];
-  let productPriceDiv = document.getElementsByClassName('product-price')[0];
-
-  productTitleDiv.innerText = product_info.product_title;
-  productInfoDiv.innerText = product_info.product_description;
-  productPriceDiv.innerText = `$ ${product_info.product_price}`;
-}
 // 스크롤 중 여부를 확인하기 위한 변수
 let isScrolling = false;
 

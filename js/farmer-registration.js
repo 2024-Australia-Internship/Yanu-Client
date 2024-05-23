@@ -5,73 +5,89 @@ function termSelectAll(){
     }
 }
 
-function submit(){
+async function submit(){
     let businessName = document.getElementsByClassName('business-name-input')[0].value;
     let name = document.getElementsByClassName('name-input')[0].value;
-    let familyName = document.getElementsByClassName('family-name-input')[1].value;
+    let familyName = document.getElementsByClassName('family-name-input')[0].value;
     let phoneNumber = document.getElementsByClassName('phone-number-input')[0].value;
     let email = document.getElementsByClassName('e-mail-input')[0].value;
-    let adress1 = document.getElementsByClassName('address-input1')[0].value;
-    let adress2 = document.getElementsByClassName('address-input2')[0].value;
+    let address1 = document.getElementsByClassName('address-input1')[0].value;
+    let address2 = document.getElementsByClassName('address-input2')[0].value;
 
-    if(businessName === '') return alert('businessName null');
-    if(name === '') return alert('name null');
-    if(familyName === '') return alert('familyName null');
-    if(phoneNumber === '') return alert('phoneNumber null');
-    if(email === '') return alert('email null');
-    if(adress1 === '') return alert('adress1 null');
-    if(adress2 === '') return alert('adress2 null');
+    if(businessName === '') return alert('Please input your business name');
+    if(name === '') return alert('Please input your name');
+    if(familyName === '') return alert('Please input your family name');
+    if(phoneNumber === '') return alert('Please input your phone number');
+    if(email === '') return alert('Please input your email');
+    if(address1 === '') return alert('Please input your address');
+    if(address2 === '') return alert('Please input your address');
 
     if(!(((/^04\d{8}$/).test(phoneNumber)) || ((/^010\d{8}$/).test(phoneNumber)))){
-        return alert('전화번호 제대로 입력하셈')
+        return alert('Please re-enter your phone number')
     }
 
     if(!(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/).test(email)){
-        return alert('이메일 다시 입력하셈');
+        return alert('Please re-enter your email');
     }
 
-    const reqE = {
-        user_email: email
+    let checkBtns = [...document.getElementsByClassName('terms-checkbox')];
+    for(let checkBtn of checkBtns){
+        if(!checkBtn.checked) return alert('Please agree to the Terms of Use')
     }
-    axios.post(`${BASE_URL}/users/check/email`, reqE)
+
+    const config = {
+        headers: {
+            'Content-type': 'application/json;charset=UTF-8',
+            'Authorization': `KakaoAK c8186e379b5da64f7a1079e758952925`
+        }
+    }
+
+    let x;
+    let y;
+
+    await axios.get(`https://dapi.kakao.com/v2/local/search/address?query=${address1}`, config)
+    .then(response => {
+        x = response.data.documents[0].x;
+        y = response.data.documents[0].y;
+    })
+    .catch(error => {
+        console.error(error);
+    })
+
+    const reqE = {
+        email: email
+    }
+
+    await axios.post(`${BASE_URL}/users/duplication/email`, reqE)
+    .then(response => {
+        return alert('This email doesn\'t exist');
+    })
+    .catch(error => {
+        if(error.response.status === 400){
+            register(businessName, familyName, name, phoneNumber, email, address1, address2, x, y);
+        }else{
+            console.error('There has been a problem with your axios request:', error);
+        }
+    });
+}
+
+function register(businessName, familyName, name, phoneNumber, email, address1, address2, x, y){
+    const req = {
+        business_name: businessName, 
+        farm_name: `${familyName} ${name}`, 
+        phonenumber: phoneNumber, 
+        email: email,
+        address: `${address1}, ${address2}`,
+        latitude: x,
+        longitude: y 
+    }
+
+    axios.post(`${BASE_URL}/farms`, req, config)
     .then(response => {
         console.log(response)
-        return alert('존재하지 않는 이메일입니다.');
+        window.location.href = '/html/main-page.html';
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
-        let checkBtns = [...document.getElementsByClassName('terms-checkbox')];
-        for(let checkBtn of checkBtns){
-            if(!checkBtn.checked) return alert('terms 동의 please')
-        }
-
-        let user_code = getCookie('user_code');
-
-        console.log(user_code);
-        console.log(businessName);
-        console.log(`${familyName} ${name}`);
-        console.log(phoneNumber);
-        console.log(email);
-        console.log(`${adress1} ${adress2}`);
-
-        const req = {
-            user_code: user_code, 
-            business_name: businessName, 
-            farmer_name: `${familyName} ${name}`, 
-            farm_phonenumber: phoneNumber, 
-            farm_email: email, 
-            farm_address: `${adress1} ${adress2}`
-        }
-        axios.post(`${BASE_URL}/farms/register`, req)
-        .then(response => {
-            console.log(response)
-            window.location.href = '/html/main-page.html';
-        })
-        .catch(error => {
-            console.error('There has been a problem with your axios request:', error);
-        });
-        
     });
-
-    
 }
