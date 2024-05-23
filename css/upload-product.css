@@ -149,6 +149,7 @@ header{
     border-radius: 4px;
     margin-inline: 8px 0;
     height: 24px;
+    flex-shrink: 0;
 }
 
 .tagify__tag-text{

@@ -94,17 +94,11 @@ label.addEventListener('click', function(){
 function uploadProduct(){
     let title = document.getElementsByClassName('product-title-input')[0].value;
     let category = document.getElementsByClassName('choose-category')[0];
-    let hashtag = `[${document.getElementsByClassName('hashtag-btn-div')[0].innerText.split('\n')}]`;
     let price = document.getElementsByClassName('price-input')[0].value;
     let unit = document.getElementsByClassName('select-unit-num')[0].innerText;
     let description = document.getElementsByClassName('description-input')[0].value;
+    let hashtag = JSON.stringify(tagify.value.map(hashtag => hashtag.value));
 
-    console.log(title);
-    console.log(hashtag);
-    console.log(typeof hashtag);
-    console.log(price);
-    console.log(unit);
-    console.log(description);
     if(title === '') return alert('title');
     if(hashtag == '[]') return alert('hashtag');
     if(price == '' || isNaN(price)) return alert('price');
@@ -112,28 +106,29 @@ function uploadProduct(){
 
     let categoryBoolean = 0;
     if(category == undefined){
-        return alert('카테고리 선택');
+        return alert('Please choose a category');
     }else if(category.classList.contains('fruit-category')){
-        categoryBoolean = 0;
+        categoryBoolean = 'fruit';
     }else if(category.classList.contains('vegetable-category')){
-        categoryBoolean = 1;
+        categoryBoolean = 'vegetable';
     }
 
-    console.log(categoryBoolean);
+    console.log(hashtag);
 
     const req = {
-        product_title: title,
-        product_category: categoryBoolean, 
-        product_hashtag: hashtag, 
-        product_price: price, 
-        product_weight: 100, 
-        product_unit: unit, 
-        product_description: description
+        title: title,
+        category: categoryBoolean,
+        hashtag: hashtag,
+        price: price,
+        unit: unit,
+        description: description
     }
-    axios.post(`${BASE_URL}/products/${user_code}/create/info`, req)
+
+    axios.post(`${BASE_URL}/products`, req, config)
     .then(response => {
-        console.log(response.data.product_code);
-        sendProductImgs(response.data.product_code);
+        console.log(response);
+        // console.log(response.data.product_code);
+        // sendProductImgs(response.data.product_code);
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
@@ -180,6 +175,7 @@ var tagify = new Tagify(input);
 
 tagify.on('keydown', e => onTagifyKeyDown(e))
 tagify.on('add', showList);
+tagify.on('remove', showList);
 
 function onTagifyKeyDown(e){
     if(e.detail.event.keyCode == 32) {
