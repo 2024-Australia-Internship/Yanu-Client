@@ -114,15 +114,33 @@ input[type='radio']:checked {
 }
 .product-detail-div{
     width: calc(100% - 20px);
+    height: 100%;
     margin: 24px 0 0 20px;
     padding: 0;
 }
 .product-info-div{
     width: calc(100% - 20px);
+}
+.product-description{
     word-break: break-all;
     white-space: inherit;
     display:inherit;
-    
+    margin-bottom: 100px; /* 나중에 값 수정하기 */
+}
+.product-hashtag{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 8px;
+    row-gap: 4px;
+}
+.hashtag{
+    border: 1px solid var(--orange);
+    border-radius: 8px;
+    padding: 6px;
+    font-family: 'Gilroy-medium';
+    font-size: 12px;
+    color: var(--orange);
+    flex-shrink: 0;
 }
 .product-review-div{
     width: 100%;
