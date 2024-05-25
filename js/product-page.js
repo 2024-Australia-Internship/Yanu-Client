@@ -1,25 +1,38 @@
 const urlParams = new URL(location.href).searchParams;
 const product_code = urlParams.get('product_code');
+const user_code = urlParams.get('user_code');
+const farm_code = urlParams.get('farm_code');
+const heartBtn = document.getElementsByClassName('heart-btn')[0];
 
 window.onload = () => {
-  
-
-  axios.get(`${BASE_URL}/products/product/14`, config)
+  axios.get(`${BASE_URL}/products/product/${product_code}`, config)
     .then(response => {
       console.log(response);
-
-      const { title, farm_name, hashtag, price, description } = response.data;
-      showInfo(title, farm_name, hashtag, price, description)
-      makeImages(response.data.images);
+      showInfo(response.data)
+      makeImages(response.data);
     })
     .catch(error => {
       console.error('There has been a problem with your axios request:', error);
     });
 }
 
+function addCart(){
+  const req = {
+    productId: {id: product_code}
+  }
 
-function showInfo(title, farm_name, hashtag, price, description){
-  console.log(title)
+  axios.post(`${BASE_URL}/carts`, req, config)
+  .then(response => {
+    alert('A product has been added to your shopping cart.');
+  })
+  .catch(error => {
+    console.error('There has been a problem with your axios request:', error);
+  });
+}
+
+function showInfo(data){
+  const { business_name, farmId, title, farm_name, hashtag, price, description } = data;
+
   let product_title = document.getElementsByClassName('product-name')[0];
   let product_price = document.getElementsByClassName('product-price')[0]
   let profile_img = document.getElementsByClassName('profile-img')[0];
@@ -40,6 +53,8 @@ function showInfo(title, farm_name, hashtag, price, description){
     product_hashtag.appendChild(myHashtag);
   })
 }
+
+heartBtn.onclick = () => clickFavorites(product_code, 'product', heartBtn);
 
 let productImgSlider = document.getElementsByClassName('product-img-slider')[0];
 
@@ -104,8 +119,6 @@ function imgRadio() {
 }
 // 스크롤 이벤트 리스너 등록
 slider.addEventListener('wheel', handleScroll);
-
-
 
 function nextSlide() {
   let totalsliderWidth = document.getElementsByClassName('product-img-slider')[0];
@@ -246,5 +259,5 @@ for (let i = 0; i < 20; i++) {
 }
 
 function moveFarmerPage() {
-  window.location.href = `/html/farmer-page.html?user_code=${user_code}`;
+  window.location.href = `/html/farmer-page.html?user_code=${user_code}&farm_code=${farm_code}`;
 }

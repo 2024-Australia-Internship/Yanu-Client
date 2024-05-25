@@ -6,14 +6,16 @@ window.onload = () => {
     let uglyPercent = document.getElementsByClassName('ugly-cnt')[0];
     let uglyTomato = document.getElementsByClassName('ugly-tomato')[0];
 
-    axios.get(`${BASE_URL}/farms/5`, config)
+    let profileImgSrc = JSON.parse(getCookie('userdata')).profile_image;
+
+    axios.get(`${BASE_URL}/farms`, config)
     .then(response => {
         console.log(response);
         const { farmName, businessName, ugly_percent } = response.data;
         name.innerText = farmName;
         farm_name.innerText = businessName;
-        // profile_img.src = response.data.profile_image;
-        // farm_img.src = response.data.farm_image;
+        profile_img.src = profileImgSrc;
+
         if(ugly_percent > 66){
             uglyTomato.src = '/images/ugly-tomato-big.svg'
         }else if(ugly_percent > 33){
@@ -30,6 +32,7 @@ window.onload = () => {
 function editbackImg(){
     document.getElementsByClassName('upload-file')[0].click();
 }
+
 let fileUpload = document.getElementsByClassName('upload-file')[0];
 
 fileUpload.addEventListener('change', getImageFiles);
@@ -54,14 +57,14 @@ function getImageFiles(e){
         },
     };
 
-    axios.post(`${BASE_URL}/farms/register/image/${user_code}`, formData, config)
-    .then(response => {
-        console.log(response);
-        img.src = URL.createObjectURL(file); 
-        alert('이미지 업로드 성공');
-    })
-    .catch(error => {
-        console.error('There has been a problem with your axios request:', error);
-        alert('이미지 업로드 실패');
-    });
+    // axios.post(`${BASE_URL}/farms/register/image/${user_code}`, formData, config)
+    // .then(response => {
+    //     console.log(response);
+    //     img.src = URL.createObjectURL(file); 
+    //     alert('이미지 업로드 성공');
+    // })
+    // .catch(error => {
+    //     console.error('There has been a problem with your axios request:', error);
+    //     alert('이미지 업로드 실패');
+    // });
 }

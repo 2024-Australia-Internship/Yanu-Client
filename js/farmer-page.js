@@ -1,73 +1,48 @@
 const urlParams = new URL(location.href).searchParams;
 const user_code = urlParams.get('user_code');
+const farm_code = urlParams.get('farm_code');
+
 window.onload = () => {
-    axios.get(`${BASE_URL}/users/${user_code}`)
+    let farmName = document.getElementsByClassName('farm-name')[0];
+    let backImg = document.getElementsByClassName('farmer-title-div')[0];
+    let profileImg = document.getElementsByClassName('farmer-profile-img')[0];
+    let uglyPercent = document.getElementsByClassName('farmer-kind-percent')[0];
+    let productsCnt = document.getElementsByClassName('farmer-products-cnt')[0];
+
+    axios.get(`${BASE_URL}/farms/${user_code}`, config)
     .then(response => {
         console.log(response);
-        document.getElementsByClassName('farm-name')[0].innerText = 
-            response.data.farmInfo.business_name;
-        document.getElementsByClassName('farmer-title-div')[0].style.backgroundImage = 
-            `url(${response.data.farm_image})`;
-        console.log(document.getElementsByClassName('farmer-title-div')[0].style)
-        document.getElementsByClassName('farmer-profile-img')[0].src = 
-            `${response.data.profile_image}`;
+        const { businessName, ugly_percent } = response.data;
+        farmName.innerText = businessName;
+        uglyPercent.innerText = `${ugly_percent}%`
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
     });
 
-    axios.get(`${BASE_URL}/products/${user_code}`)
+    axios.get(`${BASE_URL}/products/farm/${farm_code}`, config)
     .then(response => {
-        console.log(response.data.productList[0]);
-        showFarmerProducts(response.data.productList[0], response.data.firstProductImageURL);
+        console.log(response);
+        productsCnt.innerText = `${response.data.length} products`;
+        showFarmerProducts(response.data);
+        showBestSellers(response.data)
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
     });
 }
 
-let bestSellerDiv = document.getElementsByClassName('best-sellers')[0];
-for(let i = 0; i<20; i++){
-    let bestSeller = document.createElement('div');
-    bestSeller.className = 'best-seller';
-
-    let bestSellerImgDiv = document.createElement('div');
-    bestSellerImgDiv.className = "best-seller-img-div";
-    bestSellerImgDiv.innerHTML += `<img src="/images/product-img.png" class="best-seller-img">`;
-
-    let productInfoDiv = document.createElement('div');
-    productInfoDiv.className = 'product-info-div';
-
-    let productTitle = document.createElement('div');
-    productTitle.className = "product-title";
-    productTitle.innerText = "Fresh carrots!";
-
-    let productDetailDiv = document.createElement('div');
-    productDetailDiv.className = 'best-product-detail-div';
-
-    let productPrice = document.createElement('div');
-    productPrice.className = 'product-price';
-    productPrice.innerText = '$ 19';
-
-    let productUnit = document.createElement('div');
-    productUnit.className = 'product-unit';
-    productUnit.innerText = '/ kg';
-
-    productDetailDiv.appendChild(productPrice);
-    productDetailDiv.appendChild(productUnit);
-
-    productInfoDiv.appendChild(productTitle);
-    productInfoDiv.appendChild(productDetailDiv);
-
-    bestSeller.appendChild(bestSellerImgDiv);
-    bestSeller.appendChild(productInfoDiv);
-
-    bestSellerDiv.appendChild(bestSeller);
+function clickFavoriteIcon(event){
+    console.log(event.target);
+    console.log(farm_code, 'farm', event.target)
+    clickFavorites(farm_code, 'farm', event.target);
 }
 
-function showFarmerProducts(products, images){
+function showFarmerProducts(products){
     let allProductsDiv = document.getElementsByClassName('all-products')[0];
-    for(let i = 0; i<products.length; i++){
+    products.forEach(value => {
+        console.log(value)
+
         let product = document.createElement('div');
         product.className = 'product';
     
@@ -76,11 +51,11 @@ function showFarmerProducts(products, images){
     
         let productName = document.createElement('div');
         productName.className = 'product-name';
-        productName.innerText = products[i].product_title;
+        productName.innerText = value.title;
     
         let productFarmName = document.createElement('div');
         productFarmName.className = 'product-farm-name';
-        productFarmName.innerText = "Annie's Farm";
+        productFarmName.innerText = value.business_name;
     
         let productDetail = document.createElement('div');
         productDetail.className = "product-detail";
@@ -90,40 +65,90 @@ function showFarmerProducts(products, images){
     
         let productPrice = document.createElement('div');
         productPrice.className = "product-price";
-        productPrice.innerText = `$ ${products[i].product_price}`;
+        productPrice.innerText = `$ ${value.price}`;
     
         let productUnit = document.createElement('div');
         productUnit.className = "product-unit";
-        productUnit.innerText = ` / ${products[i].product_unit}`;
+        productUnit.innerText = ` / ${value.unit}`;
     
         productPriceDiv.appendChild(productPrice);
         productPriceDiv.appendChild(productUnit);
     
+        let productLike = document.createElement('iconify-icon');
+        productLike.icon = "ph:heart";
+        productLike.classList.add("heart-btn")
+        productLike.classList.add("product-btn")
+
         productDetail.appendChild(productPriceDiv);
-        productDetail.innerHTML += '<iconify-icon icon="ph:heart" class="heart-btn"></iconify-icon>';
+        productDetail.appendChild(productLike);
     
         productDetailDiv.appendChild(productName);
         productDetailDiv.appendChild(productFarmName);
         productDetailDiv.appendChild(productDetail);
     
         let productImg = document.createElement('img');
-        productImg.src = images[i];
+        // productImg.src = images[i];
         productImg.className = 'product-img';
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);
         
-        productName.onclick = () => moveProductPage(product.id, products[i].user_code);
-        productImg.onclick = () => moveProductPage(product.id, products[i].user_code);
-    
+        productName.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
+        productImg.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
+
+        productLike.onclick = () => clickFavorites(value.productId, 'product', productLike)
+
         allProductsDiv.appendChild(product);
+    })
+}
+
+function moveProductPage(id, userId, farmId){
+    window.location.href = `/html/product-page.html?product_code=${id}&user_code=${userId}&farm_code=${farmId}`
+}
+
+function showBestSellers(products){
+    let bestSellerDiv = document.getElementsByClassName('best-sellers')[0];
+    
+    for(let i = 0; i<5; i++){
+        let bestSeller = document.createElement('div');
+        bestSeller.className = 'best-seller';
+    
+        let bestSellerImgDiv = document.createElement('div');
+        bestSellerImgDiv.className = "best-seller-img-div";
+        bestSellerImgDiv.innerHTML += `<img src="/images/product-img.png" class="best-seller-img">`;
+    
+        let productInfoDiv = document.createElement('div');
+        productInfoDiv.className = 'product-info-div';
+    
+        let productTitle = document.createElement('div');
+        productTitle.className = "product-title";
+        productTitle.innerText = products[i].title;
+    
+        let productDetailDiv = document.createElement('div');
+        productDetailDiv.className = 'best-product-detail-div';
+    
+        let productPrice = document.createElement('div');
+        productPrice.className = 'product-price';
+        productPrice.innerText = `$ ${products[i].price}`;
+    
+        let productUnit = document.createElement('div');
+        productUnit.className = 'product-unit';
+        productUnit.innerText = `/ ${products[i].unit}`;
+    
+        productDetailDiv.appendChild(productPrice);
+        productDetailDiv.appendChild(productUnit);
+    
+        productInfoDiv.appendChild(productTitle);
+        productInfoDiv.appendChild(productDetailDiv);
+    
+        bestSeller.appendChild(bestSellerImgDiv);
+        bestSeller.appendChild(productInfoDiv);
+    
+        bestSellerDiv.appendChild(bestSeller);
+
+        bestSeller.onclick = () => moveProductPage(products[i].productId, products[i].userId, products[i].farmId);
     }
+    
 }
-
-function moveProductPage(id, user_code){
-    console.log(id);
-    window.location.href = `/html/product-page.html?product_code=${id}&user_code=${user_code}`
-}
-
 
 let allReviewsDiv = document.getElementsByClassName('all-reviews')[0];
 for(let i = 0; i<20; i++){

@@ -40,14 +40,11 @@ let prductsDiv = document.getElementsByClassName('products-div')[0];
 
 function showProducts(products){
     console.log(products);
-    // 상품 id, title, farmname, price, unit, 
 
     products.forEach(value => {
-        // console.log(i.product_image.split(',')[0]);
         let product = document.createElement('div');
         product.classList.add('product');
-        // product.classList.add(`${products[i].user_code}`);
-        // product.id = products[i].product_code;
+        product.id = value.productId;
 
         let productDetailDiv = document.createElement('div');
         productDetailDiv.className = 'product-detail-div';
@@ -58,7 +55,7 @@ function showProducts(products){
 
         let productFarmName = document.createElement('div');
         productFarmName.className = 'product-farm-name';
-        // productFarmName.innerText = farmNames[i];
+        productFarmName.innerText = value.business_name;
 
         let productDetail = document.createElement('div');
         productDetail.className = "product-detail";
@@ -77,8 +74,13 @@ function showProducts(products){
         productPriceDiv.appendChild(productPrice);
         productPriceDiv.appendChild(productUnit);
 
+        let productLike = document.createElement('iconify-icon');
+        productLike.icon = "ph:heart";
+        productLike.classList.add("heart-btn")
+        productLike.classList.add("product-btn")
+
         productDetail.appendChild(productPriceDiv);
-        productDetail.innerHTML += `<iconify-icon icon="ph:heart" class="heart-btn product-btn"></iconify-icon>`;
+        productDetail.appendChild(productLike);
 
         productDetailDiv.appendChild(productName);
         productDetailDiv.appendChild(productFarmName);
@@ -90,16 +92,13 @@ function showProducts(products){
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);
 
-        // productName.onclick = () => moveProductPage(product.id);
-        // productImg.onclick = () => moveProductPage(product.id);
+        productName.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
+        productImg.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
+
+        productLike.onclick = () => clickFavorites(value.productId, 'product', productLike)
 
         prductsDiv.appendChild(product);
     })
-
-    // let heartBtns = [...document.getElementsByClassName("heart-btn")];
-    // heartBtns.forEach((e) => {
-    //     e.onclick = (e) => heartToggle(e);
-    // });
 }
 
 
@@ -111,8 +110,8 @@ productss.forEach((e) => {
     }
 })
 
-function moveProductPage(id){
-    window.location.href = `/html/product-page.html?product_code=${id}`
+function moveProductPage(id, userId, farmId){
+    window.location.href = `/html/product-page.html?product_code=${id}&user_code=${userId}&farm_code=${farmId}`
 }
 
 function hidePopup(flag){
