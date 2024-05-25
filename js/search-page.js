@@ -1,6 +1,9 @@
+const recentlySearchDiv = document.getElementsByClassName('recently-search-div')[0];
+
 window.onload = () => {
     showRecentlySearched();
 }
+
 function deleteRecentlySearch(e){
     let recentSearchValue = JSON.parse(localStorage.getItem("recentSearch"));
     let deleteText = e.parentNode.firstChild.innerText;
@@ -29,51 +32,59 @@ function chooseCategory(flag){
 
 function search(){
     let searchValue = document.getElementsByClassName('search-input')[0].value;
-    console.log(searchValue);
-    // localStorage.setItem('recentSearch', '[]');
 
     let searchArr = JSON.parse(localStorage.getItem('recentSearch'));
     searchArr.push(searchValue);
     localStorage.setItem('recentSearch', JSON.stringify(searchArr));
     showRecentlySearched();
+
     let chooseCategory = document.getElementsByClassName('choose-category')[0];
-    console.log(chooseCategory)
-    if(chooseCategory == undefined){
-        axios.get(`${BASE_URL}/products/search/${searchValue}`)
-        .then(response => {
-            console.log(response.data.searchProduct);
-            showSearchAnswer(response.data.searchProduct);
-        })
-        .catch(error => {
-            console.error('There has been a problem with your axios request:', error);
-            if(error.response.status == 404) {
-                document.getElementsByClassName('recently-search-div')[0].style.display = 'none';
-            }
-        });
-    }else{
+
+    if(chooseCategory == undefined){ // 카테고리를 선택하지 않은 경우
+        searchProduct(searchValue);
+    }else{ // 카테고리를 선택한 경우
         chooseCategory = chooseCategory.innerText.toLowerCase();
-        console.log(chooseCategory);
-        axios.get(`${BASE_URL}/products/search/${chooseCategory}/${searchValue}`)
-        .then(response => {
-            console.log(response);
-            showSearchAnswer(response.data.searchProduct);
-        })
-        .catch(error => {
-            console.error('There has been a problem with your axios request:', error);
-            if(error.response.status == 404) {
-                document.getElementsByClassName('recently-search-div')[0].style.display = 'none';
-            }
-        });
+        searchProductWithCategory(searchValue, chooseCategory);
     }  
+}
+
+function searchProduct(searchValue){
+    axios.get(`${BASE_URL}/searches/${searchValue}`, config)
+    .then(response => {
+        showSearchAnswer(response.data);
+        console.log(response);
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+        if(error.response.status == 404) {
+            recentlySearchDiv.style.display = 'none';
+        }
+    });
+}
+
+function searchProductWithCategory(searchValue, chooseCategory){
+    axios.get(`${BASE_URL}/searches/${chooseCategory}/${searchValue}`, config)
+    .then(response => {
+        console.log(response);
+        showSearchAnswer(response.data);
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+        if(error.response.status == 404) {
+            recentlySearchDiv.style.display = 'none';
+        }
+    });
 }
 
 function showRecentlySearched(){
     let recentSearchList = document.getElementsByClassName('recently-search-list')[0];
     let recentSearchValue = JSON.parse(localStorage.getItem("recentSearch"));
     recentSearchList.innerHTML = '';
+
     recentSearchValue.forEach(value => {
         let recentlySearch = document.createElement('div');
         recentlySearch.className = "recently-search";
+        recentlySearch.onclick = () => searchProduct(value)
 
         let recentlySearchName = document.createElement('div');
         recentlySearchName.className = "recently-search-name";
@@ -87,27 +98,26 @@ function showRecentlySearched(){
 }
 
 function showSearchAnswer(products){
-    document.getElementsByClassName('recently-search-div')[0].style.display = 'none';
+    recentlySearchDiv.style.display = 'none';
+
     let prductsDiv = document.getElementsByClassName('products-div')[0];
     prductsDiv.innerHTML = ''
     prductsDiv.style.display = 'grid';
 
-    for(let i = 0; i<products.length; i++){
+    products.forEach(value => {
         let product = document.createElement('div');
         product.classList.add('product');
-        product.classList.add(`${products[i].user_code}`);
-        product.id = products[i].product_code;
     
         let productDetailDiv = document.createElement('div');
         productDetailDiv.className = 'product-detail-div';
     
         let productName = document.createElement('div');
         productName.className = 'product-name';
-        productName.innerText = products[i].product_title;
+        productName.innerText = value.title;
     
         let productFarmName = document.createElement('div');
         productFarmName.className = 'product-farm-name';
-        productFarmName.innerText = "Annie's Farm";
+        productFarmName.innerText = value.business_name;
     
         let productDetail = document.createElement('div');
         productDetail.className = "product-detail";
@@ -117,17 +127,22 @@ function showSearchAnswer(products){
     
         let productPrice = document.createElement('div');
         productPrice.className = "product-price";
-        productPrice.innerText = `$ ${products[i].product_price}`;
+        productPrice.innerText = `$ ${value.price}`;
     
         let productUnit = document.createElement('div');
         productUnit.className = "product-unit";
-        productUnit.innerText = ` / ${products[i].product_unit}`;
+        productUnit.innerText = ` / ${value.unit}`;
     
         productPriceDiv.appendChild(productPrice);
         productPriceDiv.appendChild(productUnit);
     
+        let productLike = document.createElement('iconify-icon');
+        productLike.icon = "ph:heart";
+        productLike.classList.add("heart-btn")
+        productLike.classList.add("product-btn")
+
         productDetail.appendChild(productPriceDiv);
-        productDetail.innerHTML += `<iconify-icon icon="ph:heart" class="heart-btn product-btn"></iconify-icon>`;
+        productDetail.appendChild(productLike);
     
         productDetailDiv.appendChild(productName);
         productDetailDiv.appendChild(productFarmName);
@@ -139,13 +154,11 @@ function showSearchAnswer(products){
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);
         
-        // productName.onclick = () => moveProductPage(product.id, products[i].user_code);
-        // productImg.onclick = () => moveProductPage(product.id, products[i].user_code);
+        productName.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
+        productImg.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
     
         prductsDiv.appendChild(product);
-    }
-    let heartBtns = [...document.getElementsByClassName("heart-btn")];
-    heartBtns.forEach((e) => {
-        e.onclick = (e) => heartToggle(e);
-    });
+
+        // productLike.onclick = () => clickFavorites(value.id)
+    })
 }
