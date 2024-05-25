@@ -23,23 +23,27 @@ async function checkInfo(){
     let expireDate = new Date();
     expireDate.setMonth(expireDate.getMonth() + 1); // 한 달동안 저장
 
-    await axios.post(`${BASE_URL}/users/login`, req)
-    .then((res) => {
-        document.cookie = `token=Bearer ${res.data.token}; path=/; expires=${expireDate};`; 
-    })
-    .catch(error => {
-        console.error('There has been a problem with your axios request:', error);
-        alert(error.response.data.message);
-    });
+    try{
+        // 로그인
+        const login = await axios.post(`${BASE_URL}/users/login`, req)
+        document.cookie = `token=Bearer ${login.data.token}; path=/; expires=${expireDate}; secure`; 
 
-    console.log(config);
-    await axios.get(`${BASE_URL}/users`, config)
-    .then(response => {
-        console.log(response);
-    
-        const { is_farmer, nickname, profile_image, ugly_percent } = response.data;
+        // 헤더 가져오기
+        let value = document.cookie.match('(^|;) ?' + 'token' + '=([^;]*)(;|$)');
+        const token = value? value[2] : null;
+
+        const config =  {
+            headers: {
+                'Authorization': token
+            },
+        };
+
+        // 유저 정보 저장
+        const getInfo = await axios.get(`${BASE_URL}/users`, config)
+        const { id, is_farmer, nickname, profile_image, ugly_percent } = getInfo.data;
 
         const data = {
+            id: id,
             is_farmer: is_farmer,
             nickname: nickname,
             profile_image: profile_image,
@@ -48,11 +52,11 @@ async function checkInfo(){
 
         const jsonData = JSON.stringify(data);
 
-        document.cookie = `userdata=${jsonData}; path=/; expires=${expireDate};`; 
+        document.cookie = `userdata=${jsonData}; path=/; expires=${expireDate}; secure`; 
     
         window.location.href = '/html/main-page.html';
-    })
-    .catch(error => {
+    }catch(error){
         console.error('There has been a problem with your axios request:', error);
-    });
+        alert(error.response.data.message);
+    }
 }
