@@ -16,6 +16,19 @@ window.onload = () => {
     });
 }
 
+function addCart(){
+  const req = {
+    productId: {id: product_code}
+  }
+
+  axios.post(`${BASE_URL}/carts`, req, config)
+  .then(response => {
+    alert('A product has been added to your shopping cart.');
+  })
+  .catch(error => {
+    console.error('There has been a problem with your axios request:', error);
+  });
+}
 
 function showInfo(data){
   const { business_name, farmId, title, farm_name, hashtag, price, description } = data;
