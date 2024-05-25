@@ -92,8 +92,8 @@ function showProducts(products){
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);
 
-        productName.onclick = () => moveProductPage(value.productId);
-        productImg.onclick = () => moveProductPage(value.productId);
+        productName.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
+        productImg.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
 
         productLike.onclick = () => clickFavorites(value.productId, 'product', productLike)
 
@@ -110,8 +110,8 @@ productss.forEach((e) => {
     }
 })
 
-function moveProductPage(id){
-    window.location.href = `/html/product-page.html?product_code=${id}`
+function moveProductPage(id, userId, farmId){
+    window.location.href = `/html/product-page.html?product_code=${id}&user_code=${userId}&farm_code=${farmId}`
 }
 
 function hidePopup(flag){
