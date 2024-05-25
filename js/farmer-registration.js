@@ -45,14 +45,14 @@ async function submit(){
     let x;
     let y;
 
-    await axios.get(`https://dapi.kakao.com/v2/local/search/address?query=${address1}`, config)
-    .then(response => {
-        x = response.data.documents[0].x;
-        y = response.data.documents[0].y;
-    })
-    .catch(error => {
-        console.error(error);
-    })
+    const addressRes =  await axios.get(`https://dapi.kakao.com/v2/local/search/address?query=${address1}`, config)
+
+    if(addressRes.data.documents.length === 0){
+        return alert('Please enter your address again')
+    }
+
+    x = addressRes.data.documents[0].x;
+    y = addressRes.data.documents[0].y;
 
     const reqE = {
         email: email
