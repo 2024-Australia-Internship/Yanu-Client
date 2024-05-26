@@ -1,0 +1,44 @@
+.header{
+    padding-right: 24px;
+    width: calc(100vw - 24px * 2);
+    justify-content: space-between;
+}
+
+.add-btn{
+    font-size: 24px;
+    color: var(--orange);
+}
+
+.card-list{
+    margin-top: 20px;
+}
+
+.card{
+    padding: 36px 0px 36px 30px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+    display: flex;
+    column-gap: 20px;
+}
+
+.card-title{
+    display: flex;
+    column-gap: 8px;
+    margin-bottom: 6px;
+}
+
+.card-name{
+    font-family: 'gilroy-semiBold';
+    font-size: 15px;
+}
+
+.applyed{
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+    color: var(--orange);
+}
+
+.card-num{
+    font-family: 'gilroy-regular';
+    font-size: 15px;
+    color: #606060;
+}
