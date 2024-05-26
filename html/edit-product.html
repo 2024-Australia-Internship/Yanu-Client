@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/basic.css">
+    <link rel="stylesheet" href="/css/upload-product.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <iconify-icon icon="iconamoon:arrow-up-2-thin" class="back-btn" onclick="window.location.href='/html/main-page.html'"></iconify-icon>
+        <button class="upload-btn" onclick="editProduct()">Upload</button>
+    </header>
+
+    <div class="upload-img-div">
+        <div class="upload-img-btn upload-img">
+            <iconify-icon icon="fluent:camera-20-regular" class="upload-img-icon"></iconify-icon>
+            <div class="upload-img-text">
+                <div class="current-img">0</div>
+                <div>/</div>
+                <div class="max-img">5</div>
+            </div>
+        </div>
+
+        <input type="file" accept="image/*" style="display: none;" class="upload-file" required multiple>
+    </div>
+
+    <div class="input-product-info-div">
+        <div class="input-div">
+            <div class="input-title">Title</div>
+            <input class="product-input product-title-input">
+        </div>
+
+        <div class="input-div">
+            <div class="input-title">Category</div>
+            <div class="category-btns">
+                <img src="/images/product-upload-fruit.svg" class="product-upload-category fruit-category" onclick="chooseCategory(true)">
+                <img src="/images/product-upload-vegetable.svg" class="product-upload-category vegetable-category" onclick="chooseCategory(false)">
+            </div>
+        </div>
+
+        <div class="input-div">
+            <div class="input-title hashtag-title">
+                <div>Hashtag</div>
+                <div class="hashtag-box">
+                    <div class="current-hashtag">0</div>
+                    <div class="slash">/</div>
+                    <div class="limit-hashtag">5</div>
+                </div>
+            </div>
+            <input class="product-input hashtag-input">
+        </div>
+
+        
+
+        <div class="input-div display-input-div">
+            <div class="input-title">Price</div>
+            <div class="price-info-input-div">
+                <div class="price-info">
+                    <p class="base-font">$</p>
+                    <input class="product-input price-input">
+                </div>
+                <p class="slash price-slash">/</p>
+                <div class="select-unit-div user-input">
+                    <button class="label">
+                        <p class="select-unit-num">kg</p>
+                        <img src="/images/arrow-down.svg" class="arrow-icon">
+                    </button>
+                    <ul class="optionList">
+                        <li class="blank-option"></li>
+                        <li class="optionItem option-g">g</li>
+                        <div class="line"></div>
+                        <li class="optionItem option-kg">kg</li>
+                        <div class="line"></div>
+                        <li class="optionItem option-Box">Box</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-div description-div">
+            <div class="input-title">Description</div>
+            <textarea class="description-input"></textarea>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <script src="/config.js"></script>
+    <script src="/js/basic.js"></script>
+    <script src="/js/edit-product.js"></script>
+</body>
+</html>
