@@ -6,12 +6,12 @@ function applyNewAddress(){
     let address1 = document.getElementsByClassName('address-input1')[0].value;
     let address2 = document.getElementsByClassName('address-input2')[0].value;
 
-    if(!name) return alert('이름을 입력해주세요')
-    if(!familyName) return alert('이름을 입력해주세요')
+    if(!name) return alert('Please enter your name')
+    if(!familyName) return alert('Please enter your name')
     if(!((/^04\d{8}$/).test(phoneNumber) || (/^010\d{8}$/).test(phoneNumber))) 
-        return alert('전화번호를 입력해주세요.');
-    if(!(((/^\d{5}$/).test(zipCode)))) return alert('우편번호를 입력해주세요')
-    if(!address1 || !address2) return alert('주소를 입력해주세요 입력해주세요')
+        return alert('Please enter your phone number');
+    if(!(((/^\d{5}$/).test(zipCode)))) return alert('Please enter your zip code')
+    if(!address1 || !address2) return alert('Please enter your address')
 
     window.location.href = '/html/my-address-page.html';
 }
