@@ -159,6 +159,6 @@ function showSearchAnswer(products){
     
         prductsDiv.appendChild(product);
 
-        // productLike.onclick = () => clickFavorites(value.id)
+        productLike.onclick = () => clickFavorites(value.productId, 'product', productLike)
     })
 }

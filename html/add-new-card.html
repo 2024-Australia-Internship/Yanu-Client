@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/basic.css">
+    <link rel="stylesheet" href="/css/add-new-card.css">
+</head>
+<body>
+    <div class="header">Add New Card</div>
+
+    <div class="input-list-div">
+        <div class="input-div">
+            <div class="input-title">Card Number</div>
+            <input class="user-input card-num">
+        </div>
+
+        <div class="input-div">
+            <div class="input-title">Card Holder</div>
+            <input class="user-input card-holder">
+        </div>
+
+        <div class="flex-input-div">
+            <div>
+                <div class="input-title">Expiration Date</div>
+                <input class="user-input expiration-date" placeholder="MM/YY">
+            </div>
+            <div>
+                <div class="input-title">CVC Code</div>
+                <input class="user-input cvc-code">
+            </div>
+        </div>
+    </div>
+
+    <input type="checkbox" id="check" class="check">
+    <label for="check">Set up to main payment method</label>
+
+    <div class="fill-basic-btn" onclick="applyNewCard()">Done</div>
+
+    
+    <script src="/js/basic.js"></script>
+    <script src="/js/add-new-card.js"></script>
+</body>
+</html>

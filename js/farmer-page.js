@@ -101,9 +101,6 @@ function showFarmerProducts(products){
     })
 }
 
-function moveProductPage(id, userId, farmId){
-    window.location.href = `/html/product-page.html?product_code=${id}&user_code=${userId}&farm_code=${farmId}`
-}
 
 function showBestSellers(products){
     let bestSellerDiv = document.getElementsByClassName('best-sellers')[0];

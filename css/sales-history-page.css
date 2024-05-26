@@ -1,0 +1,92 @@
+.history-list-div{
+    margin: 37px 20px 40px 20px;
+    width: calc(100vw - 20px * 2);
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
+
+.sale-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.title{
+    font-family: 'gilroy-semiBold';
+    font-size: 17px;
+    margin-bottom: 14px;
+}
+
+.product-box{
+    width: calc(100% - 30px - 16px);
+    padding: 15px 30px 8px 16px;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.12);
+    display: flex;
+    column-gap: 25px;
+}
+
+.product-title-box{
+    width: calc(100% - 75px - 25px);
+}
+
+.product-title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.delivery-status{
+    position: relative;
+    padding: 5px;
+    border-radius: 4px;
+    color: var(--orange);
+    font-family: 'gilroy-medium';
+    font-size: 11px;
+    background-color: var(--orange-10);
+    border: 1px solid var(--orange);
+    margin-right: 10px;
+}
+
+.product-name{
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.consumer-name{
+    font-family: 'gilroy-medium';
+    font-size: 13px;
+    color: #818181;
+    margin-left: 4px;
+}
+
+.price-title,
+.quantity-title{
+    margin-top: 3px;
+    font-family: 'gilroy-regular';
+    font-size: 11px;
+    color: #9E9E9E;
+    text-align: center;
+}
+
+.product-price,
+.product-quantity{
+    margin-top: 18px;
+    font-family: 'gilroy-semiBold';
+    font-size: 20px;
+    text-align: center;
+}
+
+.product-detail-box{
+    display: flex;
+    justify-content: space-between;
+    width: 75px;
+    flex-shrink: 0;
+}
+
+.product-detail{
+    display:inline;
+}

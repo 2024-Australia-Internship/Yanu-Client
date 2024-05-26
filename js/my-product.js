@@ -1,5 +1,13 @@
+const urlParams = new URL(location.href).searchParams;
+const farmId = urlParams.get('id');
+let productId;
+
 window.onload = () => {
-    axios.get(`${BASE_URL}/products/farm/5`, config)
+    getProducts();
+}
+
+function getProducts() {
+    axios.get(`${BASE_URL}/products/farm/${farmId}`, config)
     .then(response => {
         console.log(response);
         showProducts(response.data);
@@ -12,13 +20,11 @@ window.onload = () => {
 function showProducts(products){
     console.log(products);
     let prductsDiv = document.getElementsByClassName('products-div')[0];
-    // 상품 id, title, farmname, price, unit, 
+    prductsDiv.innerHTML = '';
 
     products.forEach(value => {
         let product = document.createElement('div');
         product.classList.add('product');
-        // product.classList.add(`${products[i].user_code}`);
-        // product.id = products[i].product_code;
 
         let productDetailDiv = document.createElement('div');
         productDetailDiv.className = 'product-detail-div';
@@ -29,7 +35,7 @@ function showProducts(products){
 
         let productFarmName = document.createElement('div');
         productFarmName.className = 'product-farm-name';
-        productFarmName.innerText = 'Annie\'s Farm';
+        productFarmName.innerText = value.business_name;
 
         let productDetail = document.createElement('div');
         productDetail.className = "product-detail";
@@ -48,8 +54,13 @@ function showProducts(products){
         productPriceDiv.appendChild(productPrice);
         productPriceDiv.appendChild(productUnit);
 
+        let editBtn = document.createElement('iconify-icon');
+        editBtn.className = 'edit-btn';
+        editBtn.icon = 'quill:meatballs-h';
+        editBtn.id = value.productId;
+
         productDetail.appendChild(productPriceDiv);
-        productDetail.innerHTML += `<iconify-icon icon="quill:meatballs-h" class="edit-btn"></iconify-icon>`;
+        productDetail.appendChild(editBtn);
 
         productDetailDiv.appendChild(productName);
         productDetailDiv.appendChild(productFarmName);
@@ -61,21 +72,22 @@ function showProducts(products){
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);
 
-        productName.onclick = () => moveProductPage(product.id);
-        productImg.onclick = () => moveProductPage(product.id);
-
+        productName.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
+        productImg.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
+        
         prductsDiv.appendChild(product);
     })
 
 }
 
-window.onclick = e => editProduct(e);
+window.onclick = e => clickEditBtn(e);
 
 
-function editProduct(e){
+function clickEditBtn(e){
     let editPopup = document.getElementsByClassName('edit-popup')[0];
 
     if(e.target.className === 'edit-btn'){
+        productId = e.target.id;
         let position = e.target.getBoundingClientRect();
 
         editPopup.style.display = 'block';
@@ -86,6 +98,25 @@ function editProduct(e){
     }
 }
 
-function moveProductPage(id){
-    window.location.href = `/html/product-page.html?product_code=${id}`
+function editProduct(){
+    window.location.href = `./edit-product.html?id=${productId}&farmId=${farmId}`
+}
+
+function deleteProduct() {
+    console.log(productId)
+    if(confirm('Are you sure you want to delete it?')){
+        axios.delete(`${BASE_URL}/products`, {
+            ...config,
+            data: {
+                productId:  productId  
+            }
+        })
+        .then(response => {
+            console.log(response);
+            getProducts();
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    }
 }

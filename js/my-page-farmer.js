@@ -1,3 +1,5 @@
+let farm_id;
+
 window.onload = () => {
     let name = document.getElementsByClassName('user-name')[0];
     let farm_name = document.getElementsByClassName('user-farm-name')[0];
@@ -11,7 +13,9 @@ window.onload = () => {
     axios.get(`${BASE_URL}/farms`, config)
     .then(response => {
         console.log(response);
-        const { farmName, businessName, ugly_percent } = response.data;
+        const { farmName, businessName, ugly_percent, farmId } = response.data;
+        
+        farm_id = farmId;
         name.innerText = farmName;
         farm_name.innerText = businessName;
         profile_img.src = profileImgSrc;
@@ -28,6 +32,9 @@ window.onload = () => {
     });
 }
 
+function clickMyProduct(){
+    window.location.href=`./my-product.html?id=${farm_id}`
+}
 
 function editbackImg(){
     document.getElementsByClassName('upload-file')[0].click();
