@@ -1,17 +1,33 @@
-const user_code = getCookie('user_code');
-
+const productDiv = document.getElementsByClassName('products-div')[0];
+const favoritesFarmsDiv = document.getElementsByClassName('favorites-farms-div')[0];
 
 window.onload = () => {
-    console.log(user_code);
-    axios.get(`${BASE_URL}/hearts/${user_code}/product`)
-        .then(response => {
-            console.log(response)
-            console.log(response.data.productList[0].product);
-            showProducts(response.data.productList[0].product, response.data.firstProductImageURL);
-        })
-        .catch(error => {
-            console.error('There has been a problem with your axios request:', error);
-        });
+    // axios.get(`${BASE_URL}/hearts/${user_code}/product`)
+    // .then(response => {
+    //     console.log(response)
+    //     console.log(response.data.productList[0].product);
+    //     showProducts(response.data.productList[0].product, response.data.firstProductImageURL);
+    // })
+    // .catch(error => {
+    //     console.error('There has been a problem with your axios request:', error);
+    // });
+    getRecentProduct();
+}
+
+function getRecentProduct(){
+    let recentItems = JSON.parse(localStorage.getItem('recent'));
+    getRecentProductInfo(recentItems)
+}
+
+async function getRecentProductInfo(recentItems){
+    for (const recent of recentItems) {
+        try {
+            let product = await axios.get(`${BASE_URL}/products/product/${recent}`, config);
+            showRecentProduct(product.data)
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
 
 function showProducts(productList, images) {
@@ -73,8 +89,10 @@ function showProducts(productList, images) {
     }
 
 }
-let productDiv = document.getElementsByClassName('products-div')[0];
-for (let i = 0; i < 20; i++) {
+
+function showRecentProduct(productData) {
+    const { userId, farmId, productId, title, price, unit } = productData;
+
     let product = document.createElement('div');
     product.className = 'product';
 
@@ -83,18 +101,18 @@ for (let i = 0; i < 20; i++) {
 
     let productName = document.createElement('div');
     productName.className = "product-name";
-    productName.innerText = "[Annie] Carrot";
+    productName.innerText = title;
 
     let productPriceDiv = document.createElement('div');
     productPriceDiv.className = "product-price-div";
 
     let productPrice = document.createElement('div');
     productPrice.className = "product-price";
-    productPrice.innerText = "$ 20";
+    productPrice.innerText = `$ ${price}`;
 
     let productUnit = document.createElement('div');
     productUnit.className = "product-unit";
-    productUnit.innerText = "/ kg";
+    productUnit.innerText = `/ ${unit}`;
 
     productPriceDiv.appendChild(productPrice);
     productPriceDiv.appendChild(productUnit);
@@ -102,16 +120,26 @@ for (let i = 0; i < 20; i++) {
     productDetailDiv.appendChild(productName);
     productDetailDiv.appendChild(productPriceDiv);
 
-    product.innerHTML += `<img src="/images/product-img.png" class="product-img">`;
-    product.innerHTML += `<iconify-icon icon="ph:heart" class="heart-btn"></iconify-icon>`;
+    let productImg = document.createElement('img');
+    productImg.className = 'product-img';
+    productImg.src = "/images/product-img.png";
+
+    let heartBtn = document.createElement('iconify-icon');
+    heartBtn.className = 'heart-btn';
+    heartBtn.icon = 'ph:heart';
+
+    product.appendChild(productImg);
+    product.appendChild(heartBtn);
     product.appendChild(productDetailDiv);
 
     productDiv.appendChild(product);
+
+    productName.onclick = () => moveProductPage(productId, userId, farmId);
+    productImg.onclick = () => moveProductPage(productId, userId, farmId);
+
+    heartBtn.onclick = () => clickFavorites(productId, 'product', heartBtn)
 }
 
-
-
-let favoritesFarmsDiv = document.getElementsByClassName('favorites-farms-div')[0];
 
 for (let i = 0; i < 20; i++) {
 

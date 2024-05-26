@@ -8,12 +8,29 @@ window.onload = () => {
   axios.get(`${BASE_URL}/products/product/${product_code}`, config)
     .then(response => {
       console.log(response);
+      addRecentlyView();
       showInfo(response.data)
       makeImages(response.data);
     })
     .catch(error => {
       console.error('There has been a problem with your axios request:', error);
     });
+}
+
+function addRecentlyView() {
+  let recentItem = JSON.parse(localStorage.getItem('recent'));
+  if(recentItem){ // 값이 있을 경우
+    // 최근 본 상품 가장 앞에 추가
+    recentItem.unshift(product_code);
+
+    // 최대 10개 까지 저장 가능
+    let newRecentItem = [...new Set(recentItem)].slice(0, 10);
+
+    // 값 저장
+    localStorage.setItem('recent', JSON.stringify(newRecentItem));
+  }else{ // 값이 없을 경우
+    localStorage.setItem('recent', `["${product_code}"]`);
+  }
 }
 
 function addCart(){
