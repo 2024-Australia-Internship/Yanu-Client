@@ -110,9 +110,7 @@ productss.forEach((e) => {
     }
 })
 
-function moveProductPage(id, userId, farmId){
-    window.location.href = `/html/product-page.html?product_code=${id}&user_code=${userId}&farm_code=${farmId}`
-}
+
 
 function hidePopup(flag){
     console.log(window.localStorage.getItem('first-login'));

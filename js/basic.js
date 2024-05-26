@@ -17,12 +17,14 @@ function clickFavorites(id, type, element){
     }
 
     if(element.icon === 'ph:heart-fill'){ // 찜 삭제
-        console.log('삭제한다')
         deleteFavorites(req, element)
     }else{ // 찜 추가
-        console.log('추가한다')
         addFavorites(req, element)
     }
+}
+
+function moveProductPage(id, userId, farmId){
+    window.location.href = `/html/product-page.html?product_code=${id}&user_code=${userId}&farm_code=${farmId}`
 }
 
 function addFavorites(req, element) {

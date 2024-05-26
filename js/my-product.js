@@ -120,7 +120,3 @@ function deleteProduct() {
         })
     }
 }
-
-function moveProductPage(id){
-    window.location.href = `/html/product-page.html?product_code=${id}`
-}
