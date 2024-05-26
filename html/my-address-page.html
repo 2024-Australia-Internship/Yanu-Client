@@ -24,7 +24,7 @@
     <div class="my-address-list">
         <div class="my-address-box">
             <div class="delete-component hide-component">
-                <iconify-icon icon="iconamoon:check-fill" class="delete-check-btn"></iconify-icon>
+                <iconify-icon icon="iconamoon:check-fill" class="delete-check-btn" onclick="deleteCheck(event)"></iconify-icon>
             </div>
             <div>
                 <div class="my-address-title-div">
@@ -45,12 +45,11 @@
 
         <div class="my-address-box">
             <div class="delete-component hide-component">
-                <iconify-icon icon="iconamoon:check-fill" class="delete-check-btn"></iconify-icon>
+                <iconify-icon icon="iconamoon:check-fill" class="delete-check-btn" onclick="deleteCheck(event)"></iconify-icon>
             </div>
             <div>
                 <div class="my-address-title-div">
                     <div class="my-address-title">Cho, Seohyun</div>
-                    <div class="hide-component">Applyed</div>
                 </div>
                 <div class="my-address-div">
                     <div class="my-address">
@@ -63,32 +62,9 @@
                 <iconify-icon icon="flowbite:edit-outline" class="my-address-edit-btn"></iconify-icon>
             </div>
         </div>
-
-        <div class="my-address-box">
-            <div class="delete-component hide-component">
-                <iconify-icon icon="iconamoon:check-fill" class="delete-check-btn"></iconify-icon>
-            </div>
-            <div>
-                <div class="my-address-title-div">
-                    <div class="my-address-title">Cho, Seohyun</div>
-                    <div class="hide-component">Applyed</div>
-                </div>
-                <div class="my-address-div">
-                    <div class="my-address">
-                        [12345] 546, Hoam-ro, Gwanak-gu, Seoul, Republic of Korea
-                    </div>
-                    <div class="phone-number">010 6220 1784</div>
-                </div>
-            </div>
-            <div class="basic-component">
-                <iconify-icon icon="flowbite:edit-outline" class="my-address-edit-btn"></iconify-icon>
-            </div>
-        </div>
-
-       
     </div>
 
-    <div class="fill-basic-btn delete-component hide-component">Delete</div>
+    <div class="fill-basic-btn delete-component hide-component" onclick="deleteAddres()">Delete</div>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
