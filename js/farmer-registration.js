@@ -38,7 +38,7 @@ async function submit(){
     const config = {
         headers: {
             'Content-type': 'application/json;charset=UTF-8',
-            'Authorization': `KakaoAK c8186e379b5da64f7a1079e758952925`
+            'Authorization': `KakaoAK ${window.env.KAKAO_MAP_REST_API}`
         }
     }
 
