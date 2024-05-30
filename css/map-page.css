@@ -2,3 +2,33 @@
     width: 100vw;
     height: calc(100vh - 54px);
 }
+
+.input-box{
+    position: absolute;
+    z-index: 1000;
+    top: 46px;
+    width: calc(100vw - 30px * 2);
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.find-icon{
+    position: absolute;
+    font-size: 24px;
+    color: var(--orange);
+    margin-left: 16px;
+}
+
+.input{
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 10px;
+    height: 40px;
+    border-radius: 61px;
+    outline: none;
+    border: none;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.08);
+    font-family: 'gilroy-regular';
+    font-size: 13px;
+}
