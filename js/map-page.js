@@ -14,47 +14,178 @@ window.onload = () => {
 
 			// 지도 생성
 			const map = new kakao.maps.Map(mapContainer, mapOption);
-
-			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 						
 			var positions = [
 				{
-					title: '카카오', 
-					latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+					title: 'Owen\' farm',
+					star: 4, 
+					farm_id: 1,
+					latlng: new kakao.maps.LatLng(33.450705, 126.570677),
+					sub_overlay: null
 				},
 				{
 					title: '생태연못', 
-					latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+					star: 3,
+					farm_id: 2,
+					latlng: new kakao.maps.LatLng(33.450936, 126.569477),
+					sub_overlay: null
 				},
 				{
 					title: '텃밭', 
-					latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+					star: 1,
+					farm_id: 3,
+					latlng: new kakao.maps.LatLng(33.450879, 126.569940),
+					sub_overlay: null
 				},
 				{
 					title: '근린공원',
-					latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+					star: 5,
+					farm_id: 4,
+					latlng: new kakao.maps.LatLng(33.451393, 126.570738),
+					sub_overlay: null
 				},
 				{
-					title: '미림마이스터고',
-					latlng: new kakao.maps.LatLng(37.4668, 126.9326)
+					title: 'Owen\'s farm',
+					star: 2,
+					farm_id: 5,
+					latlng: new kakao.maps.LatLng(37.4668, 126.9326),
+					sub_overlay: null
 				}
 			];
 
-			for (var i = 0; i < positions.length; i ++) {
-    
-				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(24, 35); 
-				
-				// 마커 이미지를 생성합니다    
-				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-				
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					map: map, // 마커를 표시할 지도
-					position: positions[i].latlng, // 마커를 표시할 위치
-					title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-					image : markerImage // 마커 이미지 
+			let overlays = {};
+
+			positions.forEach((position, index) => {
+				let content = document.createElement('div');
+				content.className = "overlay";
+
+				let farmName = document.createElement('div');
+				farmName.className = 'farm-name'
+				farmName.innerText = position.title;
+
+				let farmInfo = document.createElement('div');
+				farmInfo.className = 'farm-info';
+
+				let starBox = document.createElement('div');
+				starBox.className = 'star-box';
+
+				let starIcon = document.createElement('iconify-icon');
+				starIcon.className = 'star-icon';
+				starIcon.icon = 'ph:star-fill';
+
+				let starRating = document.createElement('div');
+				starRating.className = 'star-rating';
+				starRating.innerText = position.star;
+
+				starBox.appendChild(starIcon);
+				starBox.appendChild(starRating);
+
+				let distance = document.createElement('div');
+				distance.className = 'distance';
+				distance.innerText = '200m';
+
+				farmInfo.appendChild(starBox);
+				farmInfo.appendChild(distance);
+
+				content.appendChild(farmName)
+				content.appendChild(farmInfo)
+
+				content.onclick = () => {
+					console.log('click!')
+					clickOverlay(position.title, position.star, position.farm_id, position.latlng, index);
+				}
+
+				// 커스텀 오버레이 생성
+				var customOverlay  = new kakao.maps.CustomOverlay({
+					position: position.latlng,
+					content: content
 				});
+				customOverlay.setMap(map);
+			})
+
+			function clickOverlay(title, star, farm_id, latlng, index){
+				let key = `overlay${index}`
+
+				console.log(key)
+				if(overlays[key]){
+					overlays[key].setMap(null);
+                    overlays[key] = null;
+				}
+				else{
+					let content = document.createElement('div');
+					content.className = 'sub-overlay';
+	
+					let farmTitle = document.createElement('div');
+					farmTitle.className = 'farm-title';
+	
+					let div = document.createElement('div');
+	
+					let farmName = document.createElement('div');
+					farmName.className = 'farm-name';
+					farmName.innerText = title;
+	
+					let subFarmInfo = document.createElement('div');
+					subFarmInfo.className = 'sub-farm-info'
+	
+					let starBox = document.createElement('star-box');
+					starBox.className = 'star-box';
+	
+					let starIcon = document.createElement('iconify-icon');
+					starIcon.className = 'star-icon'
+					starIcon.icon = 'ph:star-fill';
+	
+					let starRating = document.createElement('div');
+					starRating.className = 'star-rating';
+					starRating.innerText = star;
+	
+					starBox.appendChild(starIcon);
+					starBox.appendChild(starRating);
+	
+					let distance = document.createElement('div');
+					distance.className = 'distance';
+					distance.innerText = '200m';
+	
+					subFarmInfo.appendChild(starBox);
+					subFarmInfo.appendChild(distance);
+	
+					div.appendChild(farmName);
+					div.appendChild(subFarmInfo);
+	
+					let arrowIcon = document.createElement('iconify-icon');
+					arrowIcon.className = 'arrow-icon';
+					arrowIcon.icon = 'iconamoon:arrow-up-2-thin';
+	
+					farmTitle.appendChild(div)
+					farmTitle.appendChild(arrowIcon)
+	
+					let farmImgBox = document.createElement('div');
+					farmImgBox.className = 'farm-img-box';
+	
+					let farmImg = document.createElement('img');
+					farmImg.className = 'farm-img';
+					farmImg.src = '../images/farmer-registration-back-img.svg';
+	
+					farmImgBox.appendChild(farmImg);
+	
+					content.appendChild(farmTitle)
+					content.appendChild(farmImgBox)
+	
+					arrowIcon.onclick = () => {
+						window.location.href = `/html/farmer-page.html?user_code=9&farm_code=${farm_id}`
+					}
+				
+					var anotherOverlay = new kakao.maps.CustomOverlay({
+						content: content,
+						map: map,
+						position: latlng
+					});
+				
+					anotherOverlay.setMap(map);
+
+					// overlays[key] = anotherOverlay;
+					// position.sub_overlay = anotherOverlay;
+				}
+				
 			}
       	});
     };
@@ -62,3 +193,4 @@ window.onload = () => {
     // script 태그를 문서에 추가
     document.head.appendChild(script);
 }
+
