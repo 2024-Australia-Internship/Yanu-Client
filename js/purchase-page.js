@@ -128,6 +128,17 @@ function showMyCard(){
     cardNum.innerText = cardNumArr[chooseCard];
 }
 
-function pay() {
-    window.location.href = `./success-order.html?order_info=${product_info}`
+async function pay() {
+    const req = {
+        orders: [
+            json_product_info
+        ]
+    }
+
+    try{
+        const response = await axios.post(`${BASE_URL}/orders`, req, config);
+        window.location.href = `./success-order.html?order_info=${product_info}`
+    }catch(error){
+        console.error(error);
+    }
 }
