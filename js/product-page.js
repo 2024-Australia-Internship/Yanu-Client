@@ -4,17 +4,15 @@ const user_code = urlParams.get('user_code');
 const farm_code = urlParams.get('farm_code');
 const heartBtn = document.getElementsByClassName('heart-btn')[0];
 
-window.onload = () => {
-  axios.get(`${BASE_URL}/products/product/${product_code}`, config)
-    .then(response => {
-      console.log(response);
-      addRecentlyView();
-      showInfo(response.data)
-      makeImages(response.data);
-    })
-    .catch(error => {
-      console.error('There has been a problem with your axios request:', error);
-    });
+window.onload = async() => {
+  try{
+    const response = await axios.get(`${BASE_URL}/products/product/${product_code}`, config);
+    addRecentlyView();
+    showInfo(response.data)
+    // makeImages(response.data);
+  }catch(error){
+    console.log(error)
+  }
 }
 
 function addRecentlyView() {
@@ -33,18 +31,32 @@ function addRecentlyView() {
   }
 }
 
-function addCart(){
+async function addCart(){
   const req = {
     productId: {id: product_code}
   }
 
-  axios.post(`${BASE_URL}/carts`, req, config)
-  .then(response => {
+  try{
+    const response = await axios.post(`${BASE_URL}/carts`, req, config);
     alert('A product has been added to your shopping cart.');
-  })
-  .catch(error => {
-    console.error('There has been a problem with your axios request:', error);
-  });
+    window.location.href = './my-cart.html';
+  }catch(error){
+    console.error(error);
+    if(error.response.status === 400){
+      alert('This product has already been added.')
+    }
+  }
+}
+
+function orderProduct() {
+  let arr = {
+      productId: product_code,
+      quantity: 1
+  }
+
+  const stringArr = JSON.stringify(arr);
+
+  window.location.href = `./purchase-page.html?product_info=${stringArr}`
 }
 
 function showInfo(data){
