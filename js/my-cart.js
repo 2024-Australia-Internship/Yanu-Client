@@ -1,92 +1,116 @@
-window.onload = () =>{
-    const userId = JSON.parse(getCookie('userdata')).id;
-
-    axios.get(`${BASE_URL}/carts`, config)
-    .then((response) => {
-        console.log(response);
-    })
-    .catch(error => {
-        console.error(error);
-    })
-    showProducts();
+window.onload = async() =>{
+    getProducts();
 }
 
-function showProducts(){
+async function getProducts() {
+    try{
+        const response = await axios.get(`${BASE_URL}/carts`, config)
+        showProducts(response.data);
+    }catch(error){
+        console.error(error);
+    }
+}
+
+function showProducts(products){
     let productListDiv = document.getElementsByClassName('product-list-div')[0];
+    productListDiv.innerText = '';
+    
+    products.forEach(product => {
+        let productDiv = document.createElement('div');
+        productDiv.className = 'product-div';
 
-    let productDiv = document.createElement('div');
-    productDiv.className = 'product-div';
+        let productInfoDiv = document.createElement('div');
+        productInfoDiv.className = 'product-info-div';
 
-    let productInfoDiv = document.createElement('div');
-    productInfoDiv.className = 'product-info-div';
+        let productName = document.createElement('div');
+        productName.className = 'product-name';
+        productName.innerText = 'Fresh carrot!';
 
-    let productName = document.createElement('div');
-    productName.className = 'product-name';
-    productName.innerText = 'Fresh carrot!';
+        let productFarmName = document.createElement('div');
+        productFarmName.className = 'product-farm-name';
+        productFarmName.innerText = 'Annie\'s farm';
 
-    let productFarmName = document.createElement('div');
-    productFarmName.className = 'product-farm-name';
-    productFarmName.innerText = 'Annie\'s farm';
+        let productDescription = document.createElement('div');
+        productDescription.className = 'product-description';
+        productDescription.innerText = 'These carrots are ones I grew with great care. The taste and aroma are so good';
 
-    let productDescription = document.createElement('div');
-    productDescription.className = 'product-description';
-    productDescription.innerText = 'These carrots are ones I grew with great care. The taste and aroma are so good';
+        let productDetail = document.createElement('div');
+        productDetail.className = 'product-detail';
 
-    let productDetail = document.createElement('div');
-    productDetail.className = 'product-detail';
+        let productUnitDiv = document.createElement('div');
+        productUnitDiv.className = 'product-unit-div';
 
-    let productUnitDiv = document.createElement('div');
-    productUnitDiv.className = 'product-unit-div';
+        let productPrice = document.createElement('div');
+        productPrice.className = 'product-price';
+        productPrice.innerText = '$ 57';
 
-    let productPrice = document.createElement('div');
-    productPrice.className = 'product-price';
-    productPrice.innerText = '$ 57';
+        let productUnit = document.createElement('div');
+        productUnit.className = 'product-unit';
+        productUnit.innerText = '/ kg';
 
-    let productUnit = document.createElement('div');
-    productUnit.className = 'product-unit';
-    productUnit.innerText = '/ kg';
+        productUnitDiv.appendChild(productPrice)
+        productUnitDiv.appendChild(productUnit)
 
-    productUnitDiv.appendChild(productPrice)
-    productUnitDiv.appendChild(productUnit)
+        let productQuantity = document.createElement('div');
+        productQuantity.className = 'product-quantity';
 
-    let productQuantity = document.createElement('div');
-    productQuantity.className = 'product-quantity';
+        let productQuantityBtnMinus = document.createElement('iconify-icon');
+        productQuantityBtnMinus.className = 'product-quantity-btn';
+        productQuantityBtnMinus.icon = "system-uicons:minus"
 
-    let productQuantityBtnMinus = document.createElement('iconify-icon');
-    productQuantityBtnMinus.className = 'product-quantity-btn';
-    productQuantityBtnMinus.icon = "system-uicons:minus"
+        let productMyquantity = document.createElement('div');
+        productMyquantity.className = 'product-my-quantity';
+        productMyquantity.innerText = '3';
 
-    let productMyquantity = document.createElement('div');
-    productMyquantity.className = 'product-my-quantity';
-    productMyquantity.innerText = '3';
+        let productQuantityBtnPlus = document.createElement('iconify-icon');
+        productQuantityBtnPlus.className = 'product-quantity-btn';
+        productQuantityBtnPlus.icon = "iconoir:plus"
 
-    let productQuantityBtnPlus = document.createElement('iconify-icon');
-    productQuantityBtnPlus.className = 'product-quantity-btn';
-    productQuantityBtnPlus.icon = "iconoir:plus"
+        productQuantity.appendChild(productQuantityBtnMinus);
+        productQuantity.appendChild(productMyquantity);
+        productQuantity.appendChild(productQuantityBtnPlus);
 
-    productQuantity.appendChild(productQuantityBtnMinus);
-    productQuantity.appendChild(productMyquantity);
-    productQuantity.appendChild(productQuantityBtnPlus);
+        productDetail.appendChild(productUnitDiv);
+        productDetail.appendChild(productQuantity);
 
-    productDetail.appendChild(productUnitDiv);
-    productDetail.appendChild(productQuantity);
+        productInfoDiv.appendChild(productName);
+        productInfoDiv.appendChild(productFarmName);
+        productInfoDiv.appendChild(productDescription);
+        productInfoDiv.appendChild(productDetail);
 
-    productInfoDiv.appendChild(productName);
-    productInfoDiv.appendChild(productFarmName);
-    productInfoDiv.appendChild(productDescription);
-    productInfoDiv.appendChild(productDetail);
+        let productImg = document.createElement('img');
+        productImg.className = 'product-img';
+        productImg.src = '/images/product-img.png';
 
-    let productImg = document.createElement('img');
-    productImg.className = 'product-img';
-    productImg.src = '/images/product-img.png';
+        let productDeleteBtn = document.createElement('iconify-icon');
+        productDeleteBtn.className = 'product-delete-btn';
+        productDeleteBtn.icon = 'mynaui:x';
 
-    let productDeleteBtn = document.createElement('iconify-icon');
-    productDeleteBtn.className = 'product-delete-btn';
-    productDeleteBtn.icon = 'mynaui:x';
+        productDiv.appendChild(productImg);    
+        productDiv.appendChild(productInfoDiv);    
+        productDiv.appendChild(productDeleteBtn);    
 
-    productDiv.appendChild(productImg);    
-    productDiv.appendChild(productInfoDiv);    
-    productDiv.appendChild(productDeleteBtn);    
+        productListDiv.appendChild(productDiv);
 
-    productListDiv.appendChild(productDiv);
+        productDeleteBtn.onclick = () => {
+            deleteProdcut(product.productId);
+        }
+    })
+}
+
+async function deleteProdcut(productId) {
+    const req = {
+        ...config,
+        data: {
+            productId: {id: productId}
+        }
+    } 
+
+    try{
+        const response = await axios.delete(`${BASE_URL}/carts`, req)
+        console.log(response);
+        getProducts();
+    }catch(error){  
+        console.error(error);
+    }
 }
