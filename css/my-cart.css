@@ -1,11 +1,13 @@
+body{
+    background-color: var(--orange-30);
+}
+
 .product-list-div{
     position: absolute;
     width: calc(100% - 20px * 2);
-    min-height: calc(100vh - 67px - 122px);
     top: 0;
     padding: 67px 20px 122px 20px;
     z-index: -1;
-    background-color: var(--orange-30);
     display: grid;
     row-gap: 12px;
 }
