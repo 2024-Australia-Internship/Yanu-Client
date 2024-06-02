@@ -48,6 +48,17 @@ async function addCart(){
   }
 }
 
+function orderProduct() {
+  let arr = {
+      productId: product_code,
+      quantity: 1
+  }
+
+  const stringArr = JSON.stringify(arr);
+
+  window.location.href = `./purchase-page.html?product_info=${stringArr}`
+}
+
 function showInfo(data){
   const { business_name, farmId, title, farm_name, hashtag, price, description } = data;
 
