@@ -1,20 +1,10 @@
 let index = -1;
-let editBtns = [...document.getElementsByClassName('edit-btn')];
-editBtns.forEach((e, i) => {
-    e.onclick = () => showEditDiv(e, i);
-})
-
-let productBox = [...document.getElementsByClassName('product-name')];
-productBox.forEach((e, i) => {
-    e.onclick = () => showProduct(e, i);
-})
 
 document.addEventListener('click', (e) => {
     let editDiv = document.getElementsByClassName('edit-post-div')[0];
     if(e.target.className != "edit-btn"){
         editDiv.style.visibility = "hidden";
     }
-
 });
 
 window.onload = () => {
@@ -75,6 +65,8 @@ async function getReview() {
 function showReviews(reviewHistory) {
     const keys = Object.keys(reviewHistory);
     const myReviewHistory = document.getElementsByClassName('my-review-list')[0];
+
+    myReviewHistory.innerHTML = ''
 
     keys.forEach(key => {
         let value = reviewHistory[key];
@@ -144,16 +136,23 @@ function showReviews(reviewHistory) {
             reviewCard.appendChild(myReview)
 
             currentDateReviewList.appendChild(reviewCard)
+
+            editBtn.onclick = () => {
+                showEditDiv(editBtn, product.productId);
+            }
+
+            productName.onclick = () => {
+                showProduct();
+            }
         })
     })
 }
 
-function showProduct(e, i){
+function showProduct(){
     window.location.href = '../html/product-page.html';
 }
 
 function showEditDiv(e, i){
-    console.log(e, i);
     let editDiv = document.getElementsByClassName('edit-post-div')[0];
     if(index != i){
         let buttonRect = e.getBoundingClientRect();
@@ -175,9 +174,22 @@ function showEditDiv(e, i){
 }
 
 function editMyPost(i){
-    window.location.href = '../html/edit-my-review.html';
+    window.location.href = `../html/edit-my-review.html?product_id=${i}`;
     
 }
-function deleteMyPost(i){
+async function deleteMyPost(i){
 
+    const req = {
+        ...config,
+        data: {
+            productId: {id: i}
+        }
+    }
+
+    try{
+        const response = await axios.delete(`${BASE_URL}/reviews`, req);
+        getReview();
+    }catch(error){
+        console.error(error);
+    }
 }
