@@ -1,8 +1,14 @@
-let starArr = [...document.getElementsByClassName('star')];
+const urlParams = new URL(location.href).searchParams;
+const product_id = urlParams.get('product_id');
 
-starArr.forEach((value, index) => {
-    value.addEventListener('click', () => starRating(index));
-});
+const starArr = [...document.getElementsByClassName('star')];
+
+window.onload = () => {
+    starArr.forEach((value, index) => {
+        value.addEventListener('click', () => starRating(index));
+    });
+}
+
 
 function starRating(index){
     for(let star of starArr){
