@@ -1,8 +1,14 @@
-let starArr = [...document.getElementsByClassName('star')];
+const urlParams = new URL(location.href).searchParams;
+const product_id = urlParams.get('product_id');
 
-starArr.forEach((value, index) => {
-    value.addEventListener('click', () => starRating(index));
-});
+const starArr = [...document.getElementsByClassName('star')];
+
+window.onload = () => {
+    starArr.forEach((value, index) => {
+        value.addEventListener('click', () => starRating(index));
+    });
+}
+
 
 function starRating(index){
     for(let star of starArr){
@@ -63,4 +69,34 @@ function createElement(e, file){
 function deleteImg(e){
     e.parentNode.remove();
     currentImgLength.innerText = parseInt(currentImgLength.innerText)-1;
+}
+
+async function postReview(){
+    let starrating = document.getElementsByClassName('fill-star').length;
+    let content = document.getElementsByClassName('evaluation-box')[0].value;
+    if(starrating === 0) {
+        return alert('Please enter a rating')
+    }
+
+    if(content === ''){
+        return alert('Please enter a content')
+    }
+
+    const req = {
+        productId: {id: product_id},
+        starrating: starrating,
+        content: content
+    }
+
+    try{
+        const response = await axios.post(`${BASE_URL}/reviews`, req, config)
+        window.location.href='./order-history-page.html'
+    }catch(error){
+        console.error(error)
+        if(error.response.status === 400) {
+            window.location.href='./order-history-page.html'
+            return alert('You have already registered a review')
+        }
+    }
+    
 }

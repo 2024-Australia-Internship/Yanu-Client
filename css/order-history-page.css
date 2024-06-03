@@ -11,6 +11,7 @@ body{
     background-color: var(--orange-30);
     width: calc(100% - 20px * 2);
     padding: 0 20px 0 20px;
+    margin-bottom: 50px;
 }
 
 .my-order-container{
