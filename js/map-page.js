@@ -1,11 +1,15 @@
 window.onload = () => {
 	const script = document.createElement('script');
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${window.env.KAKAO_MAP_JS_API}&autoload=false`;
-   
+	
+	showFarmList();
+
     script.onload = () => {
+		const markerX = 37.4668;
+		const markerY = 126.9326;
 
       // 스크립트가 로드된 후에 kakao map 호출
-    	kakao.maps.load(() => {
+    	kakao.maps.load(async() => {
 			const mapContainer = document.getElementById('map');
 			const mapOption = {
 				center: new kakao.maps.LatLng(37.4668, 126.9326),
@@ -20,7 +24,7 @@ window.onload = () => {
 				imageOption = {offset: new kakao.maps.Point(63, 63)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
       
 			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-				markerPosition = new kakao.maps.LatLng(37.4668, 126.9326);
+				markerPosition = new kakao.maps.LatLng(markerX, markerY);
 
 			// 마커를 생성합니다
 			var marker = new kakao.maps.Marker({
@@ -30,6 +34,18 @@ window.onload = () => {
 
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
+
+			const config = {
+				headers: {
+					'Content-type': 'application/json;charset=UTF-8',
+					'Authorization': `KakaoAK ${window.env.KAKAO_MAP_REST_API}`
+				}
+			}
+
+			const response = await axios.get(`https://dapi.kakao.com/v2/local/geo/transcoord?x=${markerX}&y=${markerY}&output_coord=WTM`, config);
+
+			const x1 = response.data.documents[0].x;
+			const y1 = response.data.documents[0].y;
 
 			var positions = [
 				{
@@ -64,149 +80,237 @@ window.onload = () => {
 					title: 'Owen\'s farm',
 					star: 2,
 					farm_id: 5,
-					latlng: new kakao.maps.LatLng(37.4655, 126.9330),
-					sub_overlay: null
+					latlng: new kakao.maps.LatLng(37.4952, 126.9569),
+					sub_overlay: null,
+					show: false
 				}
 			];
 
-			let overlays = {};
+			positions.forEach(async(position, index) => {
+				try{
+					const x = position.latlng.getLat();
+					const y = position.latlng.getLng();
 
-			positions.forEach((position, index) => {
-				let content = document.createElement('div');
-				content.className = "overlay";
+					const response = await axios.get(`https://dapi.kakao.com/v2/local/geo/transcoord?x=${x}&y=${y}&output_coord=WTM`, config);
 
-				let farmName = document.createElement('div');
-				farmName.className = 'farm-name'
-				farmName.innerText = position.title;
+					const x2 = response.data.documents[0].x;
+					const y2 = response.data.documents[0].y;
 
-				let farmInfo = document.createElement('div');
-				farmInfo.className = 'farm-info';
+					const myDistance = getDistance(x1, y1, x2, y2);
+					console.log(myDistance);
 
-				let starBox = document.createElement('div');
-				starBox.className = 'star-box';
+					let box = document.createElement('div');
+					box.className = 'overlay-box'
 
-				let starIcon = document.createElement('iconify-icon');
-				starIcon.className = 'star-icon';
-				starIcon.icon = 'ph:star-fill';
-
-				let starRating = document.createElement('div');
-				starRating.className = 'star-rating';
-				starRating.innerText = position.star;
-
-				starBox.appendChild(starIcon);
-				starBox.appendChild(starRating);
-
-				let distance = document.createElement('div');
-				distance.className = 'distance';
-				distance.innerText = '200m';
-
-				farmInfo.appendChild(starBox);
-				farmInfo.appendChild(distance);
-
-				content.appendChild(farmName)
-				content.appendChild(farmInfo)
-
-				content.onclick = () => {
-					console.log('click!')
-					clickOverlay(position.title, position.star, position.farm_id, position.latlng, index);
-				}
-
-				// 커스텀 오버레이 생성
-				var customOverlay  = new kakao.maps.CustomOverlay({
-					position: position.latlng,
-					content: content
-				});
-				customOverlay.setMap(map);
-			})
-
-			function clickOverlay(title, star, farm_id, latlng, index){
-				let key = `overlay${index}`
-
-				console.log(key)
-				if(overlays[key]){
-					overlays[key].setMap(null);
-                    overlays[key] = null;
-				}
-				else{
 					let content = document.createElement('div');
-					content.className = 'sub-overlay';
-	
-					let farmTitle = document.createElement('div');
-					farmTitle.className = 'farm-title';
-	
-					let div = document.createElement('div');
-	
+					content.className = "overlay";
+
 					let farmName = document.createElement('div');
-					farmName.className = 'farm-name';
-					farmName.innerText = title;
-	
-					let subFarmInfo = document.createElement('div');
-					subFarmInfo.className = 'sub-farm-info'
-	
-					let starBox = document.createElement('star-box');
-					starBox.className = 'star-box';
-	
+					farmName.className = 'overlay-farm-name'
+					farmName.innerText = position.title;
+
+					let farmInfo = document.createElement('div');
+					farmInfo.className = 'overlay-farm-info';
+
+					let starBox = document.createElement('div');
+					starBox.className = 'overlay-star-box';
+
 					let starIcon = document.createElement('iconify-icon');
-					starIcon.className = 'star-icon'
+					starIcon.className = 'overlay-star-icon';
 					starIcon.icon = 'ph:star-fill';
-	
+
 					let starRating = document.createElement('div');
-					starRating.className = 'star-rating';
-					starRating.innerText = star;
-	
+					starRating.className = 'overlay-star-rating';
+					starRating.innerText = position.star;
+
 					starBox.appendChild(starIcon);
 					starBox.appendChild(starRating);
-	
+
 					let distance = document.createElement('div');
-					distance.className = 'distance';
-					distance.innerText = '200m';
-	
-					subFarmInfo.appendChild(starBox);
-					subFarmInfo.appendChild(distance);
-	
-					div.appendChild(farmName);
+					distance.className = 'overlay-distance';
+					distance.innerText = `${myDistance}m`;
+
+					farmInfo.appendChild(starBox);
+					farmInfo.appendChild(distance);
+
+					content.appendChild(farmName)
+					content.appendChild(farmInfo)
+
+					let subContent = document.createElement('div');
+					subContent.className = 'sub-overlay';
+					subContent.classList.add('sub-overlay');
+					subContent.classList.add('hide-overlay');
+
+					let farmTitle = document.createElement('div');
+					farmTitle.className = 'overlay-farm-title';
+
+					let div = document.createElement('div');
+
+					let subFarmName = document.createElement('div');
+					subFarmName.className = 'overlay-farm-name';
+					subFarmName.innerText = position.title;
+
+					let subFarmInfo = document.createElement('div');
+					subFarmInfo.className = 'overlay-sub-farm-info'
+
+					let subStarBox = document.createElement('star-box');
+					subStarBox.className = 'overlay-star-box';
+
+					let subStarIcon = document.createElement('iconify-icon');
+					subStarIcon.className = 'overlay-star-icon'
+					subStarIcon.icon = 'ph:star-fill';
+
+					let subStarRating = document.createElement('div');
+					subStarRating.className = 'overlay-star-rating';
+					starRating.innerText = position.star;
+
+					subStarBox.appendChild(subStarIcon);
+					subStarBox.appendChild(subStarRating);
+
+					let subDistance = document.createElement('div');
+					subDistance.className = 'overlay-distance';
+					subDistance.innerText = '200m';
+
+					subFarmInfo.appendChild(subStarBox);
+					subFarmInfo.appendChild(subDistance);
+
+					div.appendChild(subFarmName);
 					div.appendChild(subFarmInfo);
-	
+
 					let arrowIcon = document.createElement('iconify-icon');
 					arrowIcon.className = 'arrow-icon';
 					arrowIcon.icon = 'iconamoon:arrow-up-2-thin';
-	
+
 					farmTitle.appendChild(div)
 					farmTitle.appendChild(arrowIcon)
-	
+
 					let farmImgBox = document.createElement('div');
-					farmImgBox.className = 'farm-img-box';
-	
+					farmImgBox.className = 'overlay-farm-img-box';
+
 					let farmImg = document.createElement('img');
-					farmImg.className = 'farm-img';
+					farmImg.className = 'overlay-farm-img';
 					farmImg.src = '../images/farmer-registration-back-img.svg';
-	
+
 					farmImgBox.appendChild(farmImg);
-	
-					content.appendChild(farmTitle)
-					content.appendChild(farmImgBox)
-	
+
+					subContent.appendChild(farmTitle)
+					subContent.appendChild(farmImgBox)
+
+					box.appendChild(subContent);
+					box.appendChild(content);
+
 					arrowIcon.onclick = () => {
 						window.location.href = `/html/farmer-page.html?user_code=9&farm_code=${farm_id}`
 					}
-				
-					var anotherOverlay = new kakao.maps.CustomOverlay({
-						content: content,
-						map: map,
-						position: latlng
-					});
-				
-					anotherOverlay.setMap(map);
 
-					// overlays[key] = anotherOverlay;
-					// position.sub_overlay = anotherOverlay;
+					// 커스텀 오버레이 생성
+					var customOverlay  = new kakao.maps.CustomOverlay({
+						position: position.latlng,
+						content: box,
+						xAnchor: 0.5,
+						yAnchor: 0.20
+					});
+					
+					customOverlay.setMap(map);
+					
+					content.onclick = () => {
+						subContent.classList.toggle('hide-overlay')
+					}
+				}catch(error){
+					console.error(error);
 				}
-				
-			}
+			})
       	});
     };
 
     // script 태그를 문서에 추가
     document.head.appendChild(script);
+}
+
+const listMap = document.getElementsByClassName('list-map')[0];
+
+function showList() {
+	listMap.classList.toggle('hide-list')
+}
+
+function getDistance(x1, y1, x2, y2) {
+	return Math.round(Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2));
+}
+
+function showFarmList() {
+	const farmList = document.getElementsByClassName('farm-list')[0];
+
+	for(let i = 0; i<3; i++){
+		let farmBox = document.createElement('div');
+		farmBox.className = 'farm-box';
+
+		let farmImgBox = document.createElement('div');
+		farmImgBox.className = 'farm-img-box';
+
+		let farmImg = document.createElement('img');
+		farmImg.className = 'farm-img';
+		farmImg.src = '../images/farmer-registration-back-img.svg';
+
+		let heart = document.createElement('iconify-icon');
+		heart.className = 'heart';
+		heart.icon = 'ph:heart';
+
+		farmImgBox.appendChild(farmImg)
+		farmImgBox.appendChild(heart)
+
+		let farmTitle = document.createElement('div');
+		farmTitle.className = 'farm-title';
+
+		let farmName = document.createElement('div');
+		farmName.className = 'farm-name';
+		farmName.innerText = 'Owen’s Farm'
+
+		let starRating = document.createElement('div');
+		starRating.className = 'star-rating';
+		
+		let starIcon = document.createElement('iconify-icon');
+		starIcon.className = 'star-icon';
+		starIcon.icon = 'ph:star-fill';
+
+		let star = document.createElement('div');
+		star.className = 'star';
+		star.innerText = '5';
+
+		starRating.appendChild(starIcon)
+		starRating.appendChild(star)
+
+		farmTitle.appendChild(farmName)
+		farmTitle.appendChild(starRating)
+
+		let farmerName = document.createElement('div');
+		farmerName.className = 'farmer-name';
+		farmerName.innerText = 'Owen Farmer';
+
+		let farmInfo = document.createElement('div');
+		farmInfo.className = 'farm-info';
+		
+		let distance = document.createElement('div');
+		distance.className = 'distance';
+		distance.innerText = '200m';
+
+		let products = document.createElement('div');
+		products.className = 'products'
+		products.innerText = '11 products';
+
+		let reviews = document.createElement('div');
+		reviews.className = 'reviews';
+		reviews.innerText = '12 reviews';
+
+		farmInfo.appendChild(distance)
+		farmInfo.appendChild(products)
+		farmInfo.appendChild(reviews)
+
+		farmBox.appendChild(farmImgBox)
+		farmBox.appendChild(farmTitle)
+		farmBox.appendChild(farmerName)
+		farmBox.appendChild(farmInfo)
+
+		farmList.appendChild(farmBox);
+	}
 }
 
