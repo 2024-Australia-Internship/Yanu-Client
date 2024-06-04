@@ -33,6 +33,11 @@
     font-size: 13px;
 }
 
+.content-box{
+    position: relative;
+    display:inline-block;
+}
+
 .overlay{
     padding: 9px 16px;
     border-radius: 32px;
@@ -47,6 +52,7 @@
 }
 
 .farm-info{
+    width: auto;
     display: flex;
     justify-content: space-between;
 }
@@ -65,17 +71,24 @@
 }
 
 .sub-overlay{
+    width: calc(141px - 4px - 8px);
+    position: absolute;
+    left: 30px;
+    bottom: 50px;
     padding: 9px 4px 9px 8px;
     border-radius: 12px;
     background-color: white;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.08);
-    margin-bottom: 170px;
-    margin-left: 55px;
+}
+
+.hide-overlay{
+    display: none;
 }
 
 .farm-title{
     display: flex;
     align-items: end;
+    justify-content: space-between;
     column-gap: 25px;
     margin-bottom: 10px;
 }
@@ -92,7 +105,7 @@
 }
 
 .farm-img-box{
-    width: 100%;
+    width: calc(100% - 4px);
     height: 59px;
     border-radius: 8px;
     overflow: hidden;
