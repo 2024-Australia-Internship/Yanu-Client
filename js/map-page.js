@@ -78,28 +78,28 @@ window.onload = () => {
 				content.className = "overlay";
 
 				let farmName = document.createElement('div');
-				farmName.className = 'farm-name'
+				farmName.className = 'overlay-farm-name'
 				farmName.innerText = position.title;
 
 				let farmInfo = document.createElement('div');
-				farmInfo.className = 'farm-info';
+				farmInfo.className = 'overlay-farm-info';
 
 				let starBox = document.createElement('div');
-				starBox.className = 'star-box';
+				starBox.className = 'overlay-star-box';
 
 				let starIcon = document.createElement('iconify-icon');
-				starIcon.className = 'star-icon';
+				starIcon.className = 'overlay-star-icon';
 				starIcon.icon = 'ph:star-fill';
 
 				let starRating = document.createElement('div');
-				starRating.className = 'star-rating';
+				starRating.className = 'overlay-star-rating';
 				starRating.innerText = position.star;
 
 				starBox.appendChild(starIcon);
 				starBox.appendChild(starRating);
 
 				let distance = document.createElement('div');
-				distance.className = 'distance';
+				distance.className = 'overlay-distance';
 				distance.innerText = '200m';
 
 				farmInfo.appendChild(starBox);
@@ -114,33 +114,33 @@ window.onload = () => {
 				subContent.classList.add('hide-overlay');
 
 				let farmTitle = document.createElement('div');
-				farmTitle.className = 'farm-title';
+				farmTitle.className = 'overlay-farm-title';
 
 				let div = document.createElement('div');
 
 				let subFarmName = document.createElement('div');
-				subFarmName.className = 'farm-name';
+				subFarmName.className = 'overlay-farm-name';
 				subFarmName.innerText = position.title;
 
 				let subFarmInfo = document.createElement('div');
-				subFarmInfo.className = 'sub-farm-info'
+				subFarmInfo.className = 'overlay-sub-farm-info'
 
 				let subStarBox = document.createElement('star-box');
-				subStarBox.className = 'star-box';
+				subStarBox.className = 'overlay-star-box';
 
 				let subStarIcon = document.createElement('iconify-icon');
-				subStarIcon.className = 'star-icon'
+				subStarIcon.className = 'overlay-star-icon'
 				subStarIcon.icon = 'ph:star-fill';
 
 				let subStarRating = document.createElement('div');
-				subStarRating.className = 'star-rating';
+				subStarRating.className = 'overlay-star-rating';
 				starRating.innerText = position.star;
 
 				subStarBox.appendChild(subStarIcon);
 				subStarBox.appendChild(subStarRating);
 
 				let subDistance = document.createElement('div');
-				subDistance.className = 'distance';
+				subDistance.className = 'overlay-distance';
 				subDistance.innerText = '200m';
 
 				subFarmInfo.appendChild(subStarBox);
@@ -157,10 +157,10 @@ window.onload = () => {
 				farmTitle.appendChild(arrowIcon)
 
 				let farmImgBox = document.createElement('div');
-				farmImgBox.className = 'farm-img-box';
+				farmImgBox.className = 'overlay-farm-img-box';
 
 				let farmImg = document.createElement('img');
-				farmImg.className = 'farm-img';
+				farmImg.className = 'overlay-farm-img';
 				farmImg.src = '../images/farmer-registration-back-img.svg';
 
 				farmImgBox.appendChild(farmImg);
@@ -195,5 +195,11 @@ window.onload = () => {
 
     // script 태그를 문서에 추가
     document.head.appendChild(script);
+}
+
+const listMap = document.getElementsByClassName('list-map')[0];
+
+function showList() {
+	listMap.classList.toggle('hide-list')
 }
 
