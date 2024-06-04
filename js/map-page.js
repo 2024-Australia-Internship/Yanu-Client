@@ -65,13 +65,15 @@ window.onload = () => {
 					star: 2,
 					farm_id: 5,
 					latlng: new kakao.maps.LatLng(37.4655, 126.9330),
-					sub_overlay: null
+					sub_overlay: null,
+					show: false
 				}
 			];
 
-			let overlays = {};
-
 			positions.forEach((position, index) => {
+				let box = document.createElement('div');
+				box.className = 'overlay-box'
+
 				let content = document.createElement('div');
 				content.className = "overlay";
 
@@ -106,103 +108,88 @@ window.onload = () => {
 				content.appendChild(farmName)
 				content.appendChild(farmInfo)
 
-				content.onclick = () => {
-					console.log('click!')
-					clickOverlay(position.title, position.star, position.farm_id, position.latlng, index);
+				let subContent = document.createElement('div');
+				subContent.className = 'sub-overlay';
+				subContent.classList.add('sub-overlay');
+				subContent.classList.add('hide-overlay');
+
+				let farmTitle = document.createElement('div');
+				farmTitle.className = 'farm-title';
+
+				let div = document.createElement('div');
+
+				let subFarmName = document.createElement('div');
+				subFarmName.className = 'farm-name';
+				subFarmName.innerText = position.title;
+
+				let subFarmInfo = document.createElement('div');
+				subFarmInfo.className = 'sub-farm-info'
+
+				let subStarBox = document.createElement('star-box');
+				subStarBox.className = 'star-box';
+
+				let subStarIcon = document.createElement('iconify-icon');
+				subStarIcon.className = 'star-icon'
+				subStarIcon.icon = 'ph:star-fill';
+
+				let subStarRating = document.createElement('div');
+				subStarRating.className = 'star-rating';
+				starRating.innerText = position.star;
+
+				subStarBox.appendChild(subStarIcon);
+				subStarBox.appendChild(subStarRating);
+
+				let subDistance = document.createElement('div');
+				subDistance.className = 'distance';
+				subDistance.innerText = '200m';
+
+				subFarmInfo.appendChild(subStarBox);
+				subFarmInfo.appendChild(subDistance);
+
+				div.appendChild(subFarmName);
+				div.appendChild(subFarmInfo);
+
+				let arrowIcon = document.createElement('iconify-icon');
+				arrowIcon.className = 'arrow-icon';
+				arrowIcon.icon = 'iconamoon:arrow-up-2-thin';
+
+				farmTitle.appendChild(div)
+				farmTitle.appendChild(arrowIcon)
+
+				let farmImgBox = document.createElement('div');
+				farmImgBox.className = 'farm-img-box';
+
+				let farmImg = document.createElement('img');
+				farmImg.className = 'farm-img';
+				farmImg.src = '../images/farmer-registration-back-img.svg';
+
+				farmImgBox.appendChild(farmImg);
+
+				subContent.appendChild(farmTitle)
+				subContent.appendChild(farmImgBox)
+
+				box.appendChild(subContent);
+				box.appendChild(content);
+
+				arrowIcon.onclick = () => {
+					window.location.href = `/html/farmer-page.html?user_code=9&farm_code=${farm_id}`
 				}
 
 				// 커스텀 오버레이 생성
 				var customOverlay  = new kakao.maps.CustomOverlay({
 					position: position.latlng,
-					content: content
+					content: box,
+					xAnchor: 0.5,
+    				yAnchor: 0.20
 				});
+				
 				customOverlay.setMap(map);
+				
+				content.onclick = () => {
+					subContent.classList.toggle('hide-overlay')
+				}
+
 			})
-
-			function clickOverlay(title, star, farm_id, latlng, index){
-				let key = `overlay${index}`
-
-				console.log(key)
-				if(overlays[key]){
-					overlays[key].setMap(null);
-                    overlays[key] = null;
-				}
-				else{
-					let content = document.createElement('div');
-					content.className = 'sub-overlay';
-	
-					let farmTitle = document.createElement('div');
-					farmTitle.className = 'farm-title';
-	
-					let div = document.createElement('div');
-	
-					let farmName = document.createElement('div');
-					farmName.className = 'farm-name';
-					farmName.innerText = title;
-	
-					let subFarmInfo = document.createElement('div');
-					subFarmInfo.className = 'sub-farm-info'
-	
-					let starBox = document.createElement('star-box');
-					starBox.className = 'star-box';
-	
-					let starIcon = document.createElement('iconify-icon');
-					starIcon.className = 'star-icon'
-					starIcon.icon = 'ph:star-fill';
-	
-					let starRating = document.createElement('div');
-					starRating.className = 'star-rating';
-					starRating.innerText = star;
-	
-					starBox.appendChild(starIcon);
-					starBox.appendChild(starRating);
-	
-					let distance = document.createElement('div');
-					distance.className = 'distance';
-					distance.innerText = '200m';
-	
-					subFarmInfo.appendChild(starBox);
-					subFarmInfo.appendChild(distance);
-	
-					div.appendChild(farmName);
-					div.appendChild(subFarmInfo);
-	
-					let arrowIcon = document.createElement('iconify-icon');
-					arrowIcon.className = 'arrow-icon';
-					arrowIcon.icon = 'iconamoon:arrow-up-2-thin';
-	
-					farmTitle.appendChild(div)
-					farmTitle.appendChild(arrowIcon)
-	
-					let farmImgBox = document.createElement('div');
-					farmImgBox.className = 'farm-img-box';
-	
-					let farmImg = document.createElement('img');
-					farmImg.className = 'farm-img';
-					farmImg.src = '../images/farmer-registration-back-img.svg';
-	
-					farmImgBox.appendChild(farmImg);
-	
-					content.appendChild(farmTitle)
-					content.appendChild(farmImgBox)
-	
-					arrowIcon.onclick = () => {
-						window.location.href = `/html/farmer-page.html?user_code=9&farm_code=${farm_id}`
-					}
-				
-					var anotherOverlay = new kakao.maps.CustomOverlay({
-						content: content,
-						map: map,
-						position: latlng
-					});
-				
-					anotherOverlay.setMap(map);
-
-					// overlays[key] = anotherOverlay;
-					// position.sub_overlay = anotherOverlay;
-				}
-				
-			}
       	});
     };
 
