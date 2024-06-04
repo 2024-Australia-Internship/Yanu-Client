@@ -2,6 +2,8 @@ window.onload = () => {
 	const script = document.createElement('script');
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${window.env.KAKAO_MAP_JS_API}&autoload=false`;
 	
+	showFarmList();
+
     script.onload = () => {
 		const markerX = 37.4668;
 		const markerY = 126.9326;
@@ -233,5 +235,82 @@ function showList() {
 
 function getDistance(x1, y1, x2, y2) {
 	return Math.round(Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2));
+}
+
+function showFarmList() {
+	const farmList = document.getElementsByClassName('farm-list')[0];
+
+	for(let i = 0; i<3; i++){
+		let farmBox = document.createElement('div');
+		farmBox.className = 'farm-box';
+
+		let farmImgBox = document.createElement('div');
+		farmImgBox.className = 'farm-img-box';
+
+		let farmImg = document.createElement('img');
+		farmImg.className = 'farm-img';
+		farmImg.src = '../images/farmer-registration-back-img.svg';
+
+		let heart = document.createElement('iconify-icon');
+		heart.className = 'heart';
+		heart.icon = 'ph:heart';
+
+		farmImgBox.appendChild(farmImg)
+		farmImgBox.appendChild(heart)
+
+		let farmTitle = document.createElement('div');
+		farmTitle.className = 'farm-title';
+
+		let farmName = document.createElement('div');
+		farmName.className = 'farm-name';
+		farmName.innerText = 'Owen’s Farm'
+
+		let starRating = document.createElement('div');
+		starRating.className = 'star-rating';
+		
+		let starIcon = document.createElement('iconify-icon');
+		starIcon.className = 'star-icon';
+		starIcon.icon = 'ph:star-fill';
+
+		let star = document.createElement('div');
+		star.className = 'star';
+		star.innerText = '5';
+
+		starRating.appendChild(starIcon)
+		starRating.appendChild(star)
+
+		farmTitle.appendChild(farmName)
+		farmTitle.appendChild(starRating)
+
+		let farmerName = document.createElement('div');
+		farmerName.className = 'farmer-name';
+		farmerName.innerText = 'Owen Farmer';
+
+		let farmInfo = document.createElement('div');
+		farmInfo.className = 'farm-info';
+		
+		let distance = document.createElement('div');
+		distance.className = 'distance';
+		distance.innerText = '200m';
+
+		let products = document.createElement('div');
+		products.className = 'products'
+		products.innerText = '11 products';
+
+		let reviews = document.createElement('div');
+		reviews.className = 'reviews';
+		reviews.innerText = '12 reviews';
+
+		farmInfo.appendChild(distance)
+		farmInfo.appendChild(products)
+		farmInfo.appendChild(reviews)
+
+		farmBox.appendChild(farmImgBox)
+		farmBox.appendChild(farmTitle)
+		farmBox.appendChild(farmerName)
+		farmBox.appendChild(farmInfo)
+
+		farmList.appendChild(farmBox);
+	}
 }
 
