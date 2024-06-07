@@ -75,7 +75,7 @@ function showProducts(products){
         productPriceDiv.appendChild(productUnit);
 
         let productLike = document.createElement('iconify-icon');
-        productLike.icon = "ph:heart";
+        productLike.icon = value.heart ? "ph:heart-fill" : "ph:heart";
         productLike.classList.add("heart-btn")
         productLike.classList.add("product-btn")
 
@@ -95,7 +95,7 @@ function showProducts(products){
         productName.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
         productImg.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
 
-        productLike.onclick = () => clickFavorites(value.productId, 'product', productLike)
+        productLike.onclick = () => clickFavorites(value.productId, 'productId', 'products', productLike)
 
         prductsDiv.appendChild(product);
     })

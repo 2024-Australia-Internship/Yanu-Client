@@ -8,10 +8,12 @@ window.onload = () => {
     let profileImg = document.getElementsByClassName('farmer-profile-img')[0];
     let uglyPercent = document.getElementsByClassName('farmer-kind-percent')[0];
     let productsCnt = document.getElementsByClassName('farmer-products-cnt')[0];
+    let heartBtn = document.getElementsByClassName('favorite-icon')[0];
 
     axios.get(`${BASE_URL}/farms/${user_code}`, config)
     .then(response => {
         console.log(response);
+        heartBtn.icon = response.data.heart ? "ph:heart-fill" : "ph:heart";
         const { businessName, ugly_percent } = response.data;
         farmName.innerText = businessName;
         uglyPercent.innerText = `${ugly_percent}%`
@@ -23,7 +25,7 @@ window.onload = () => {
     axios.get(`${BASE_URL}/products/farm/${farm_code}`, config)
     .then(response => {
         console.log(response);
-        productsCnt.innerText = `${response.data.length} products`;
+        // productsCnt.innerText = `${response.data.length} products`;
         showFarmerProducts(response.data);
         showBestSellers(response.data)
     })
@@ -33,9 +35,7 @@ window.onload = () => {
 }
 
 function clickFavoriteIcon(event){
-    console.log(event.target);
-    console.log(farm_code, 'farm', event.target)
-    clickFavorites(farm_code, 'farm', event.target);
+    clickFavorites(farm_code, 'farmId', 'farms', event.target);
 }
 
 function showFarmerProducts(products){
@@ -75,7 +75,7 @@ function showFarmerProducts(products){
         productPriceDiv.appendChild(productUnit);
     
         let productLike = document.createElement('iconify-icon');
-        productLike.icon = "ph:heart";
+        productLike.icon = value.heart ? "ph:heart-fill" : "ph:heart";
         productLike.classList.add("heart-btn")
         productLike.classList.add("product-btn")
 
@@ -95,7 +95,7 @@ function showFarmerProducts(products){
         productName.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
         productImg.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
 
-        productLike.onclick = () => clickFavorites(value.productId, 'product', productLike)
+        productLike.onclick = () => clickFavorites(value.productId, 'productId', 'products', productLike)
 
         allProductsDiv.appendChild(product);
     })
