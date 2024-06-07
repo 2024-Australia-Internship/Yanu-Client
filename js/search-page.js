@@ -32,8 +32,8 @@ function chooseCategory(flag){
 
 function search(){
     let searchValue = document.getElementsByClassName('search-input')[0].value;
-
-    let searchArr = JSON.parse(localStorage.getItem('recentSearch'));
+    let searchArr = getRecentlySearched();
+    
     searchArr.push(searchValue);
     localStorage.setItem('recentSearch', JSON.stringify(searchArr));
     showRecentlySearched();
@@ -63,7 +63,7 @@ function searchProduct(searchValue){
 }
 
 function searchProductWithCategory(searchValue, chooseCategory){
-    axios.get(`${BASE_URL}/searches/${chooseCategory}/${searchValue}`, config)
+    axios.get(`${BASE_URL}/searches/${searchValue}/${chooseCategory}`, config)
     .then(response => {
         console.log(response);
         showSearchAnswer(response.data);
@@ -76,9 +76,19 @@ function searchProductWithCategory(searchValue, chooseCategory){
     });
 }
 
+function getRecentlySearched() {
+    let recentSearchValue = localStorage.getItem("recentSearch");
+    if(!recentSearchValue){
+        localStorage.setItem("recentSearch", []);
+        return [];
+    }
+    return JSON.parse(recentSearchValue);
+}
+
 function showRecentlySearched(){
     let recentSearchList = document.getElementsByClassName('recently-search-list')[0];
-    let recentSearchValue = JSON.parse(localStorage.getItem("recentSearch"));
+    let recentSearchValue = getRecentlySearched();
+    console.log(recentSearchValue);
     recentSearchList.innerHTML = '';
 
     recentSearchValue.forEach(value => {
@@ -98,6 +108,7 @@ function showRecentlySearched(){
 }
 
 function showSearchAnswer(products){
+    console.log(products)
     recentlySearchDiv.style.display = 'none';
 
     let prductsDiv = document.getElementsByClassName('products-div')[0];
@@ -159,6 +170,6 @@ function showSearchAnswer(products){
     
         prductsDiv.appendChild(product);
 
-        productLike.onclick = () => clickFavorites(value.productId, 'product', productLike)
+        productLike.onclick = () => clickFavorites(value.productId, 'productId', 'products', productLike)
     })
 }
