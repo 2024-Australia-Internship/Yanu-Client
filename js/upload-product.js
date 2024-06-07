@@ -128,7 +128,7 @@ function uploadProduct(){
     .then(response => {
         console.log(response);
         // console.log(response.data.product_code);
-        // sendProductImgs(response.data.product_code);
+        sendProductImgs(response.data);
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
@@ -142,30 +142,18 @@ function sendProductImgs(product_code){
     console.log([...files]);
 
 
-     for(let file of files){
-         console.log(file);
-        //formData.append('images', [...files]);
-        formData.append('images', file);
+    for(let file of files){
+        formData.append('image', file);
+    }
+    formData.append('productId', product_code);
 
-     }
-
-    const config = {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    };
-
-    console.log(formData);
-
-    axios.post(`${BASE_URL}/products/${user_code}/create/image/${product_code}`, formData, config)
+    axios.post(`${BASE_URL}/products/image`, formData, config)
     .then(response => {
         console.log(response);
-        alert('이미지 업로드 성공');
         window.location.href = '/html/main-page.html';
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
-        alert('이미지 업로드 실패');
     });
 }
 
