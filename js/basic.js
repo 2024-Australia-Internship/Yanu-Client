@@ -10,16 +10,15 @@ const config = {
     },
 };
 
-function clickFavorites(id, type, element){
+function clickFavorites(id, type, name, element){
     const req = {
-        productId: {id: id},
-        type: type
+        [type]: {id: id}
     }
 
     if(element.icon === 'ph:heart-fill'){ // 찜 삭제
-        deleteFavorites(req, element)
+        deleteFavorites(req, element, name)
     }else{ // 찜 추가
-        addFavorites(req, element)
+        addFavorites(req, element, name)
     }
 }
 
@@ -27,8 +26,8 @@ function moveProductPage(id, userId, farmId){
     window.location.href = `/html/product-page.html?product_code=${id}&user_code=${userId}&farm_code=${farmId}`
 }
 
-function addFavorites(req, element) {
-    axios.post(`${BASE_URL}/favorites`, req, config)
+function addFavorites(req, element, name) {
+    axios.post(`${BASE_URL}/favorites/${name}`, req, config)
     .then(res => {
         element.icon = 'ph:heart-fill';
     })
@@ -37,8 +36,8 @@ function addFavorites(req, element) {
     })
 }
 
-function deleteFavorites(req, element) {
-    axios.delete(`${BASE_URL}/favorites`, {
+function deleteFavorites(req, element, name) {
+    axios.delete(`${BASE_URL}/favorites/${name}`, {
         data: req,
         ...config
     })
