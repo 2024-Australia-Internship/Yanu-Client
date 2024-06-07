@@ -73,8 +73,12 @@ function showProducts(productList, images) {
                 productPriceDiv.appendChild(productPrice);
                 productPriceDiv.appendChild(productUnit);
 
+                let favoritesHeartBtn = document.createElement('iconify-icon');
+                favoritesHeartBtn.className = 'favorites-heart-btn';
+                favoritesHeartBtn.icon = 'ph:heart-fill';
+
                 productDetail.appendChild(productPriceDiv);
-                productDetail.innerHTML += '<iconify-icon icon="ph:heart-fill" class="favorites-heart-btn"></iconify-icon>';
+                productDetail.appendChild(favoritesHeartBtn);
 
                 productDetailDiv.appendChild(productName);
                 productDetailDiv.appendChild(productFarmName);
@@ -84,6 +88,8 @@ function showProducts(productList, images) {
                 product.appendChild(productDetailDiv);
 
                 favoritesProductsDiv.appendChild(product);
+
+                // favoritesHeartBtn.onclick = () => clickFavorites()
             }
         }
     }
@@ -91,7 +97,8 @@ function showProducts(productList, images) {
 }
 
 function showRecentProduct(productData) {
-    const { userId, farmId, productId, title, price, unit } = productData;
+    console.log(productData);
+    const { userId, farmId, productId, title, price, unit, heart } = productData;
 
     let product = document.createElement('div');
     product.className = 'product';
@@ -126,7 +133,7 @@ function showRecentProduct(productData) {
 
     let heartBtn = document.createElement('iconify-icon');
     heartBtn.className = 'heart-btn';
-    heartBtn.icon = 'ph:heart';
+    heartBtn.icon = heart ? 'ph:heart-fill' : 'ph:heart';
 
     product.appendChild(productImg);
     product.appendChild(heartBtn);
@@ -137,7 +144,7 @@ function showRecentProduct(productData) {
     productName.onclick = () => moveProductPage(productId, userId, farmId);
     productImg.onclick = () => moveProductPage(productId, userId, farmId);
 
-    heartBtn.onclick = () => clickFavorites(productId, 'product', heartBtn)
+    heartBtn.onclick = () => clickFavorites(productId, 'productId', 'products', heartBtn)
 }
 
 
