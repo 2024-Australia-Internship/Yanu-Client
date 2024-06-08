@@ -1,7 +1,20 @@
 const productDiv = document.getElementsByClassName('products-div')[0];
 const favoritesFarmsDiv = document.getElementsByClassName('favorites-farms-div')[0];
 
-window.onload = () => {
+window.onload = async() => {
+    try{
+        const productReq = {
+            type: "product"
+        }
+
+        const farmReq = {
+            type: "farm"
+        }
+
+        const productRes = await axios.get(`${BASE_URL}/favorites/products`, config)
+    }catch(err){
+        console.error(err);
+    }
     // axios.get(`${BASE_URL}/hearts/${user_code}/product`)
     // .then(response => {
     //     console.log(response)
@@ -11,15 +24,21 @@ window.onload = () => {
     // .catch(error => {
     //     console.error('There has been a problem with your axios request:', error);
     // });
-    getRecentProduct();
+    getRecentProductInfo();
 }
 
 function getRecentProduct(){
-    let recentItems = JSON.parse(localStorage.getItem('recent'));
-    getRecentProductInfo(recentItems)
+    let recentItems = localStorage.getItem('recent');
+    if(!recentItems){
+        localStorage.setItem('recent', []);
+        return [];
+    }
+    return JSON.parse(recentItems);
 }
 
-async function getRecentProductInfo(recentItems){
+async function getRecentProductInfo(){
+    const recentItems = getRecentProduct();
+    console.log(recentItems);
     for (const recent of recentItems) {
         try {
             let product = await axios.get(`${BASE_URL}/products/product/${recent}`, config);

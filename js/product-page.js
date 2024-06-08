@@ -16,9 +16,10 @@ window.onload = async() => {
 }
 
 function addRecentlyView() {
-  let recentItem = JSON.parse(localStorage.getItem('recent'));
+  let recentItem = localStorage.getItem('recent');
   if(recentItem){ // 값이 있을 경우
     // 최근 본 상품 가장 앞에 추가
+    recentItem = JSON.parse(recentItem);
     recentItem.unshift(product_code);
 
     // 최대 10개 까지 저장 가능

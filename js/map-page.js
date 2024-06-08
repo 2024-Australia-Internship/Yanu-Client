@@ -1,8 +1,8 @@
+const listMap = document.getElementsByClassName('list-map')[0];
+
 window.onload = () => {
 	const script = document.createElement('script');
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${window.env.KAKAO_MAP_JS_API}&autoload=false`;
-	
-	showFarmList();
 
     script.onload = () => {
 		const markerX = 37.4668;
@@ -227,7 +227,40 @@ window.onload = () => {
     document.head.appendChild(script);
 }
 
-const listMap = document.getElementsByClassName('list-map')[0];
+const inputMap = document.getElementsByClassName('input-map')[0];
+const inputList = document.getElementsByClassName('input-list')[0];
+
+inputMap.onkeydown = e => {
+	if(e.keyCode === 13){
+		findFarm('input-map')
+	}
+}
+
+inputList.onkeydown = e => {
+	if(e.keyCode === 13){
+		findFarm('input-list')
+	}
+}
+
+async function findFarm(input){
+	let farm = document.getElementsByClassName(input)[0].value;
+	console.log(farm);
+	console.log(listMap.classList.contains('hide-list'))
+
+	if(listMap.classList.contains('hide-list')){ // list가 아래로 내려가있을때
+		listMap.classList.remove('hide-list')
+	}
+
+	try{
+		const response = await axios.get(`${BASE_URL}/searches/farms/${farm}`, config);
+		console.log(response.data);
+		showFarmList(response.data)
+
+	}catch(err){
+		console.error(err);
+	}
+}
+
 
 function showList() {
 	listMap.classList.toggle('hide-list')
@@ -237,10 +270,10 @@ function getDistance(x1, y1, x2, y2) {
 	return Math.round(Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2));
 }
 
-function showFarmList() {
+function showFarmList(farms) {
 	const farmList = document.getElementsByClassName('farm-list')[0];
 
-	for(let i = 0; i<3; i++){
+	farms.forEach(farm => {
 		let farmBox = document.createElement('div');
 		farmBox.className = 'farm-box';
 
@@ -263,7 +296,7 @@ function showFarmList() {
 
 		let farmName = document.createElement('div');
 		farmName.className = 'farm-name';
-		farmName.innerText = 'Owen’s Farm'
+		farmName.innerText = farm.businessName
 
 		let starRating = document.createElement('div');
 		starRating.className = 'star-rating';
@@ -284,7 +317,7 @@ function showFarmList() {
 
 		let farmerName = document.createElement('div');
 		farmerName.className = 'farmer-name';
-		farmerName.innerText = 'Owen Farmer';
+		farmerName.innerText = farm.farmName;
 
 		let farmInfo = document.createElement('div');
 		farmInfo.className = 'farm-info';
@@ -311,6 +344,6 @@ function showFarmList() {
 		farmBox.appendChild(farmInfo)
 
 		farmList.appendChild(farmBox);
-	}
+	})
 }
 
