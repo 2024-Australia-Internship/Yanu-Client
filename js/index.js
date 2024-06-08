@@ -53,7 +53,7 @@ async function checkInfo(){
         const jsonData = JSON.stringify(data);
 
         document.cookie = `userdata=${jsonData}; path=/; expires=${expireDate}; secure`; 
-    
+        localStorage.setItem('firstLogin', 1);
         window.location.href = '/html/main-page.html';
     }catch(error){
         console.error('There has been a problem with your axios request:', error);

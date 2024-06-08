@@ -1,8 +1,3 @@
-if(window.localStorage.getItem('first-login') === 'false'){
-    let popup = document.getElementsByClassName('popup-background')[0];
-    popup.style.visibility = "hidden";
-}
-
 window.onload = () => {
     let username = document.getElementsByClassName('welcome-username')[0];
     let button = document.getElementsByClassName('registration-product-btn')[0];
@@ -18,12 +13,23 @@ window.onload = () => {
             popup.style.visibility = 'visible';
         }
         getProducts();
+        getFirstLogin();
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
     });
 }
 
+function getFirstLogin() {
+    let popup = document.getElementsByClassName('popup-background')[0];
+    const firstLogin = Boolean(parseInt(localStorage.getItem('firstLogin')));
+
+    if(!firstLogin){
+        popup.style.visibility = "hidden";
+    }else{
+        localStorage.setItem('firstLogin', 0);
+    }
+}
 
 function getProducts(){
     axios.get(`${BASE_URL}/products`, config)
