@@ -11,15 +11,15 @@
 <body>
     <div id="map"></div>
     <div class="input-box">
-        <iconify-icon icon="basil:search-outline" class="find-icon"></iconify-icon>
-        <input class="input">
+        <iconify-icon icon="basil:search-outline" class="find-icon" onclick="findFarm('input-map')"></iconify-icon>
+        <input class="input-map input">
     </div>
 
     <div class="list-map hide-list" ondragstart="showList()">
         <div class="up-btn"></div>
         <div class="input-box list-input">
-            <iconify-icon icon="basil:search-outline" class="find-icon"></iconify-icon>
-            <input class="input" placeholder="Nearest farm">
+            <iconify-icon icon="basil:search-outline" class="find-icon" onclick="findFarm('input-list')"></iconify-icon>
+            <input class="input input-list" placeholder="Nearest farm">
         </div>
         <div class="farm-list"></div>
     </div>
