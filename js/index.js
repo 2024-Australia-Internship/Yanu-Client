@@ -40,14 +40,13 @@ async function checkInfo(){
 
         // 유저 정보 저장
         const getInfo = await axios.get(`${BASE_URL}/users`, config)
-        const { id, is_farmer, nickname, profile_image, ugly_percent } = getInfo.data;
+        const { id, is_farmer, nickname, profile_image } = getInfo.data;
 
         const data = {
             id: id,
             is_farmer: is_farmer,
             nickname: nickname,
             profile_image: profile_image,
-            ugly_percent: ugly_percent
         }
 
         const jsonData = JSON.stringify(data);

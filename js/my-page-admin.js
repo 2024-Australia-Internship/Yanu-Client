@@ -4,11 +4,11 @@ const uglyPercent = document.getElementsByClassName('ugly-cnt')[0];
 const uglyTomato = document.getElementsByClassName('ugly-tomato')[0];
 
 window.onload = () => {
-    const { id, nickname, profile_image, ugly_percent } = JSON.parse(getCookie('userdata'));
+    const { id, nickname, profile_image } = JSON.parse(getCookie('userdata'));
     
     userName.innerText = nickname;
     profileImg.src = profile_image;
-    uglyPercent.innerText = ugly_percent;
+    // uglyPercent.innerText = ugly_percent;
 
     if(ugly_percent > 66){
         uglyTomato.src = '/images/ugly-tomato-big.svg'

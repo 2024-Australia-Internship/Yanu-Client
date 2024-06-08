@@ -13,7 +13,7 @@ window.onload = () => {
     axios.get(`${BASE_URL}/farms`, config)
     .then(response => {
         console.log(response);
-        const { farmName, businessName, ugly_percent, farmId } = response.data;
+        const { farmName, businessName, farmId } = response.data;
         
         farm_id = farmId;
         name.innerText = farmName;
