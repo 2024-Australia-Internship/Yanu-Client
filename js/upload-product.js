@@ -127,8 +127,7 @@ function uploadProduct(){
     axios.post(`${BASE_URL}/products`, req, config)
     .then(response => {
         console.log(response);
-        // console.log(response.data.product_code);
-        sendProductImgs(response.data);
+        sendProductImgs(response.data.product_id);
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
