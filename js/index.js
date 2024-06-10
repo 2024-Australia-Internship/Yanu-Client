@@ -57,5 +57,6 @@ async function checkInfo(){
     }catch(error){
         console.error('There has been a problem with your axios request:', error);
         alert(error.response.data.message);
+        alert(error);
     }
 }
