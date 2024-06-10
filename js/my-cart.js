@@ -5,6 +5,7 @@ window.onload = async() =>{
 async function getProducts() {
     try{
         const response = await axios.get(`${BASE_URL}/carts`, config)
+        console.log(response);
         showProducts(response.data);
     }catch(error){
         console.error(error);
@@ -24,15 +25,15 @@ function showProducts(products){
 
         let productName = document.createElement('div');
         productName.className = 'product-name';
-        productName.innerText = 'Fresh carrot!';
+        productName.innerText = product.title;
 
         let productFarmName = document.createElement('div');
         productFarmName.className = 'product-farm-name';
-        productFarmName.innerText = 'Annie\'s farm';
+        productFarmName.innerText = product.businessName;
 
         let productDescription = document.createElement('div');
         productDescription.className = 'product-description';
-        productDescription.innerText = 'These carrots are ones I grew with great care. The taste and aroma are so good';
+        productDescription.innerText = product.description;
 
         let productDetail = document.createElement('div');
         productDetail.className = 'product-detail';
@@ -42,11 +43,11 @@ function showProducts(products){
 
         let productPrice = document.createElement('div');
         productPrice.className = 'product-price';
-        productPrice.innerText = '$ 57';
+        productPrice.innerText = `$ ${product.price}`;
 
         let productUnit = document.createElement('div');
         productUnit.className = 'product-unit';
-        productUnit.innerText = '/ kg';
+        productUnit.innerText = `/ ${product.unit}`;
 
         productUnitDiv.appendChild(productPrice)
         productUnitDiv.appendChild(productUnit)
@@ -60,7 +61,7 @@ function showProducts(products){
 
         let productMyquantity = document.createElement('div');
         productMyquantity.className = 'product-my-quantity';
-        productMyquantity.innerText = '3';
+        productMyquantity.innerText = product.quantity;
 
         let productQuantityBtnPlus = document.createElement('iconify-icon');
         productQuantityBtnPlus.className = 'product-quantity-btn';
@@ -95,7 +96,54 @@ function showProducts(products){
         productDeleteBtn.onclick = () => {
             deleteProdcut(product.productId);
         }
+
+        productQuantityBtnMinus.onclick = () => {
+            onClickMinusBtn(productMyquantity, product.productId)
+        }
+
+        productQuantityBtnPlus.onclick = () => {
+            onClickPlusBtn(productMyquantity, product.productId)
+        }
+
+        productImg.onclick = () => moveProductPage(product.productId, product.userId, product.farmId);
+        productName.onclick = () => moveProductPage(product.productId, product.userId, product.farmId);
     })
+}
+
+async function onClickMinusBtn(quantityDiv, productId){
+    if(quantityDiv.innerText >= 2) {
+        quantityDiv.innerText -= 1;
+    }else{
+        return alert('This is the minimum quantity.')
+    }
+
+    const req = {
+        productId: {id: productId},
+        quantity: parseInt(quantityDiv.innerText)
+    }
+    
+    try{
+        const response = await axios.put(`${BASE_URL}/carts/quantity`, req, config)
+        console.log(response);
+    }catch(err){
+        console.error(err); 
+    }
+}
+
+async function onClickPlusBtn(quantityDiv, productId) {
+    quantityDiv.innerText = parseInt(quantityDiv.innerText) + 1;
+
+    const req = {
+        productId: {id: productId},
+        quantity: parseInt(quantityDiv.innerText)
+    }
+    
+    try{
+        const response = await axios.put(`${BASE_URL}/carts/quantity`, req, config)
+        console.log(response);
+    }catch(err){
+        console.error(err); 
+    }
 }
 
 async function deleteProdcut(productId) {
