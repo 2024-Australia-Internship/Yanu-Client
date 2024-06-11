@@ -4,37 +4,11 @@ window.onload = () => {
 
 async function getHistory(){
     try{
-        // const response = await axios.get(`${BASE_URL}/orders`, config)
-        // console.log(response)
-        const response = [
-            {
-                "userId": 2,
-                "productId": 8,
-                "quantity": 2,
-                "orderDate": "2024-06-02"
-            },
-            {
-                "userId": 2,
-                "productId": 17,
-                "quantity": 1,
-                "orderDate": "2024-06-02"
-            },
-            {
-                "userId": 2,
-                "productId": 8,
-                "quantity": 2,
-                "orderDate": "2024-06-03"
-            },
-            {
-                "userId": 2,
-                "productId": 17,
-                "quantity": 1,
-                "orderDate": "2024-06-03"
-            }
-        ]
+        const response = await axios.get(`${BASE_URL}/orders`, config)
+        console.log(response.data)
 
         let orderHistory = {};
-        response.forEach(history => {
+        response.data.forEach(history => {
             if(orderHistory[history.orderDate]) {
                 orderHistory[history.orderDate].push(history);
             }else{
@@ -70,6 +44,7 @@ function showProducts(orderHistory){
         myOrderHistory.appendChild(myOrderContainer)
 
         value.forEach(product => {
+            console.log(product);
             let myOrder = document.createElement('div');
             myOrder.classList.add('my-order');
             myOrder.classList.add('my-order-shipped');
@@ -90,22 +65,22 @@ function showProducts(orderHistory){
 
             let productName = document.createElement('div');
             productName.className = 'product-name';
-            productName.innerText = 'Ugly carrots'
+            productName.innerText = product.title
 
             let farmName = document.createElement('div');
             farmName.className = 'farm-name';
-            farmName.innerText = 'owen\'s Farm'
+            farmName.innerText = product.businessName
 
             let productPriceDiv = document.createElement('div');
             productPriceDiv.className = 'product-price-div';
 
             let productPrice = document.createElement('div');
             productPrice.className = 'product-price';
-            productPrice.innerText = '$ 15';
+            productPrice.innerText = `$ ${product.price}`;
 
             let productUnit = document.createElement('div');
             productUnit.className = 'product-unit';
-            productUnit.innerText = '/ kg';
+            productUnit.innerText = `/ ${product.unit}`;
 
             productPriceDiv.appendChild(productPrice);
             productPriceDiv.appendChild(productUnit);
@@ -134,13 +109,18 @@ function showProducts(orderHistory){
             let div = document.createElement('div');
             div.innerText = 'Write a Review';
 
-            shippedBtn.appendChild(reviewBtn)
+            shippedBtn.appendChild(reviewBtn);
             shippedBtn.appendChild(div)
 
             myOrder.appendChild(myOrderProduct)
-            myOrder.appendChild(shippedBtn)
+
+            if(!product.review){
+                myOrder.appendChild(shippedBtn)
+            }
 
             myOrderList.appendChild(myOrder)
+
+            productDetailDiv.onclick = () => moveProductPage(product.productId, product.userId, product.farmId);
 
             shippedBtn.onclick = () => {
                 moveReviewPage(product.productId);
