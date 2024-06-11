@@ -130,6 +130,5 @@ function showProducts(orderHistory){
 }
 
 function moveReviewPage(productId){
-    console.log(productId);
     window.location.href = `./write-review-page.html?product_id=${productId}`
 }
