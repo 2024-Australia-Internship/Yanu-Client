@@ -148,7 +148,8 @@ function showSearchAnswer(products){
         productPriceDiv.appendChild(productUnit);
     
         let productLike = document.createElement('iconify-icon');
-        productLike.icon = "ph:heart";
+        productLike.icon = value.heart ? "ph:heart-fill" : "ph:heart";
+
         productLike.classList.add("heart-btn")
         productLike.classList.add("product-btn")
 
@@ -160,8 +161,8 @@ function showSearchAnswer(products){
         productDetailDiv.appendChild(productDetail);
     
         let productImg = document.createElement('img');
-        // productImg.src = products[i].product_image;
         productImg.className = 'product-img';
+        
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);
         
