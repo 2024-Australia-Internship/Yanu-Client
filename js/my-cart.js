@@ -176,3 +176,12 @@ async function deleteProdcut(productId) {
         console.error(error);
     }
 }
+
+function movePurchasePage(){
+    const productListDiv = document.getElementsByClassName('product-list-div')[0];
+    if(productListDiv.childNodes.length === 0){
+        return alert('There are no products to purchase.');
+    }else{
+        window.location.href = '/html/purchase-page.html'
+    }
+}
