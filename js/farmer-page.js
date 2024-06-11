@@ -2,7 +2,7 @@ const urlParams = new URL(location.href).searchParams;
 const user_code = urlParams.get('user_code');
 const farm_code = urlParams.get('farm_code');
 
-window.onload = () => {
+window.onload = async() => {
     let farmName = document.getElementsByClassName('farm-name')[0];
     let backImg = document.getElementsByClassName('farmer-title-div')[0];
     let profileImg = document.getElementsByClassName('farmer-profile-img')[0];
@@ -10,28 +10,24 @@ window.onload = () => {
     let productsCnt = document.getElementsByClassName('farmer-products-cnt')[0];
     let heartBtn = document.getElementsByClassName('favorite-icon')[0];
 
-    axios.get(`${BASE_URL}/farms/${user_code}`, config)
-    .then(response => {
-        console.log(response);
-        heartBtn.icon = response.data.heart ? "ph:heart-fill" : "ph:heart";
-        const { businessName, ugly_percent } = response.data;
+    try{
+        let resFarm = await axios.get(`${BASE_URL}/farms/${user_code}`, config);
+        console.log(resFarm);
+        heartBtn.icon = resFarm.data.heart ? "ph:heart-fill" : "ph:heart";
+        const { businessName, ugly_percent } = resFarm.data;
         farmName.innerText = businessName;
         uglyPercent.innerText = `${ugly_percent}%`
-    })
-    .catch(error => {
-        console.error('There has been a problem with your axios request:', error);
-    });
 
-    axios.get(`${BASE_URL}/products/farm/${farm_code}`, config)
-    .then(response => {
-        console.log(response);
-        // productsCnt.innerText = `${response.data.length} products`;
-        showFarmerProducts(response.data);
-        showBestSellers(response.data)
-    })
-    .catch(error => {
-        console.error('There has been a problem with your axios request:', error);
-    });
+        let resProduct = await axios.get(`${BASE_URL}/products/farm/${farm_code}`, config);
+        console.log(resProduct);
+        productsCnt.innerText = `${resProduct.data.length} products`;
+        showFarmerProducts(resProduct.data);
+        showBestSellers(resProduct.data)
+
+        
+    }catch(err){
+        console.error(err);
+    }
 }
 
 function clickFavoriteIcon(event){
