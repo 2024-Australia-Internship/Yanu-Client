@@ -1,3 +1,6 @@
+const totalNum = document.getElementsByClassName('total-num')[0];
+let totalPrice = 0;
+
 window.onload = async() =>{
     getProducts();
 }
@@ -15,6 +18,7 @@ async function getProducts() {
 function showProducts(products){
     let productListDiv = document.getElementsByClassName('product-list-div')[0];
     productListDiv.innerText = '';
+    
     
     products.forEach(product => {
         let productDiv = document.createElement('div');
@@ -98,19 +102,27 @@ function showProducts(products){
         }
 
         productQuantityBtnMinus.onclick = () => {
-            onClickMinusBtn(productMyquantity, product.productId)
+            onClickMinusBtn(productMyquantity, product.productId, product.price)
         }
 
         productQuantityBtnPlus.onclick = () => {
-            onClickPlusBtn(productMyquantity, product.productId)
+            onClickPlusBtn(productMyquantity, product.productId, product.price)
         }
 
         productImg.onclick = () => moveProductPage(product.productId, product.userId, product.farmId);
         productName.onclick = () => moveProductPage(product.productId, product.userId, product.farmId);
+        
+        totalPrice += product.price * product.quantity;
     })
+    totalNum.innerText = `$ ${totalPrice}`
 }
 
-async function onClickMinusBtn(quantityDiv, productId){
+async function setTotalPrice(price) {
+    totalPrice += price;
+    totalNum.innerText = `$ ${totalPrice}`
+}
+
+async function onClickMinusBtn(quantityDiv, productId, price){
     if(quantityDiv.innerText >= 2) {
         quantityDiv.innerText -= 1;
     }else{
@@ -125,12 +137,13 @@ async function onClickMinusBtn(quantityDiv, productId){
     try{
         const response = await axios.put(`${BASE_URL}/carts/quantity`, req, config)
         console.log(response);
+        setTotalPrice(-price)
     }catch(err){
         console.error(err); 
     }
 }
 
-async function onClickPlusBtn(quantityDiv, productId) {
+async function onClickPlusBtn(quantityDiv, productId, price) {
     quantityDiv.innerText = parseInt(quantityDiv.innerText) + 1;
 
     const req = {
@@ -141,6 +154,7 @@ async function onClickPlusBtn(quantityDiv, productId) {
     try{
         const response = await axios.put(`${BASE_URL}/carts/quantity`, req, config)
         console.log(response);
+        setTotalPrice(price);
     }catch(err){
         console.error(err); 
     }
