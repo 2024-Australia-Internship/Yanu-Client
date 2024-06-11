@@ -249,6 +249,8 @@ async function findFarm(input){
 
 	if(listMap.classList.contains('hide-list')){ // list가 아래로 내려가있을때
 		listMap.classList.remove('hide-list')
+		let inputList = document.getElementsByClassName('input-list')[0];
+		inputList.value = farm;
 	}
 
 	try{
@@ -344,6 +346,13 @@ function showFarmList(farms) {
 		farmBox.appendChild(farmInfo)
 
 		farmList.appendChild(farmBox);
+
+		heart.onclick = () => clickFavorites(farm.farmId, 'farmId', 'farms', heart)
+		farmImg.onclick = () => moveFarmPage(farm.farmId, farm.userId);
 	})
+}
+
+function moveFarmPage(farm_code, user_code){
+	window.location.href = `/html/farmer-page.html?user_code=${user_code}&farm_code=${farm_code}`;
 }
 
