@@ -1,6 +1,7 @@
 const urlParams = new URL(location.href).searchParams;
 const product_info = urlParams.get('product_info');
 const json_product_info = JSON.parse(product_info);
+let req;
 
 let productList = document.getElementsByClassName('checkout-product-list')[0];
 let showAllBtn = document.getElementsByClassName('show-all-btn')[0];
@@ -16,17 +17,46 @@ let userName = document.getElementsByClassName('user-name')[0];
 let phoneNumber = document.getElementsByClassName('user-phone-num')[0];
 
 window.onload = () => {
-    getProducts();
+    if(product_info){ // 상품을 바로 주문한 경우
+        getProducts();
+    }else{ // 장바구니에서 주문한 경우
+        getAllProducts();
+    }
     getUserInfo();
+}
+
+async function getAllProducts() {
+    try{
+        const response = await axios.get(`${BASE_URL}/carts`, config)
+        showProducts(response.data, 'businessName')
+        makeReq(response.data)
+    }catch(err){
+        console.error(err);
+    }
 }
 
 async function getProducts() {
     try{
         const response = await axios.get(`${BASE_URL}/products/product/${json_product_info.productId}`, config)
-        showProducts([response.data])
+        showProducts([response.data], 'business_name')
+        makeReq([response.data])
     }catch(error){  
         console.error(error);
     }
+}
+
+function makeReq(products){
+    console.log(products);
+    req = {
+        orders: []
+    }
+
+    products.forEach(product => {
+        req.orders.push({
+            productId: product.productId,
+            quantity: product.quantity
+        })
+    })
 }
 
 async function getUserInfo() {
@@ -41,10 +71,11 @@ async function getUserInfo() {
     }
 }
 
-function showProducts(products) {
+function showProducts(products, business_name) {
     let totalPriceCnt = 0;
 
     products.forEach(product => {
+        console.log(product)
         let productDiv = document.createElement('div');
         productDiv.className = 'product-div';
     
@@ -63,14 +94,14 @@ function showProducts(products) {
     
         let farmName = document.createElement('div');
         farmName.className = 'farm-name';
-        farmName.innerText = product.business_name;
+        farmName.innerText = product[business_name];
     
         div.appendChild(productName)
         div.appendChild(farmName)
     
         let productPrice = document.createElement('div');
         productPrice.className = 'product-price';
-        productPrice.innerText = `$ ${product.price}`
+        productPrice.innerText = `$ ${product.price * product.quantity}`
     
         productInfoDiv.appendChild(div)
         productInfoDiv.appendChild(productPrice)
@@ -80,7 +111,7 @@ function showProducts(products) {
     
         productList.appendChild(productDiv);
 
-        totalPriceCnt += product.price
+        totalPriceCnt += product.price * product.quantity
     })
     
     totalPrice.innerText = `$ ${totalPriceCnt}`
@@ -129,15 +160,10 @@ function showMyCard(){
 }
 
 async function pay() {
-    const req = {
-        orders: [
-            json_product_info
-        ]
-    }
-
     try{
         const response = await axios.post(`${BASE_URL}/orders`, req, config);
-        window.location.href = `./success-order.html?order_info=${product_info}`
+        console.log(response.data);
+        // window.location.href = `./success-order.html?order_info=${product_info}`
     }catch(error){
         console.error(error);
     }

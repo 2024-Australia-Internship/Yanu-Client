@@ -90,7 +90,7 @@ async function postReview(){
 
     try{
         const response = await axios.post(`${BASE_URL}/reviews`, req, config)
-        window.location.href='./order-history-page.html'
+        window.location.href='./my-review-page.html'
     }catch(error){
         console.error(error)
         if(error.response.status === 400) {

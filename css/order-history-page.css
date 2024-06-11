@@ -32,7 +32,6 @@ body{
 
 .my-order{
     width: calc(100% - 10px - 13px);
-    height: calc(127px - 10px - 8px);
     padding: 10px 10px 8px 13px;
     background-color: white;
     border-radius: 12px;

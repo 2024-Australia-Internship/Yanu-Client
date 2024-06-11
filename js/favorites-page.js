@@ -12,6 +12,8 @@ window.onload = async() => {
         }
 
         const productRes = await axios.get(`${BASE_URL}/favorites/products`, config)
+        showProducts(productRes.data);
+        console.log(productRes.data);
     }catch(err){
         console.error(err);
     }
@@ -39,80 +41,83 @@ function getRecentProduct(){
 async function getRecentProductInfo(){
     const recentItems = getRecentProduct();
     console.log(recentItems);
-    for (const recent of recentItems) {
+    for (const i in recentItems) {
         try {
-            let product = await axios.get(`${BASE_URL}/products/product/${recent}`, config);
+            let product = await axios.get(`${BASE_URL}/products/product/${recentItems[i]}`, config);
             showRecentProduct(product.data)
         } catch (error) {
-            console.error(error);
+            if(error.response.status == '404'){
+                let recent = JSON.parse(localStorage.getItem('recent'));
+                recent.splice(i, 1);
+                localStorage.setItem('recent', JSON.stringify(recent));
+            }
         }
     }
 }
 
-function showProducts(productList, images) {
+function showProducts(productList) {
     let favoritesProductsDiv = document.getElementsByClassName('favorites-products-div')[0];
-    console.log(productList.length)
-    for (let i = 0; i < productList.length; i++) {
-        console.log(productList[i].product_image.split(",")[0])
-        for (let j of images) {
-            let image = j.split("/");
-            console.log ( productList[i].product_image.split(",")[0]+ "   " + j)
-            if (image[image.length - 1] == productList[i].product_image.split(",")[0]) {
-                console.log (i + "   " + j)
-                console.log(productList[i].product_image.split(",")[0])
-                let product = document.createElement('div');
-                product.className = `favorites-product ${productList[i].user_code}`;
-                product.id = productList[i].product_code;
 
-                let productDetailDiv = document.createElement('div');
-                productDetailDiv.className = 'favorites-product-detail-div';
+    productList.forEach(product => {
+        let productBox = document.createElement('div');
+        productBox.className = `favorites-product`;
 
-                let productName = document.createElement('div');
-                productName.className = 'favorites-product-name';
-                productName.innerText = productList[i].product_title;
+        let productDetailDiv = document.createElement('div');
+        productDetailDiv.className = 'favorites-product-detail-div';
 
-                let productFarmName = document.createElement('div');
-                productFarmName.className = 'favorites-product-farm-name';
-                productFarmName.innerText = "Annie's Farm";
+        let productName = document.createElement('div');
+        productName.className = 'favorites-product-name';
+        productName.innerText = product.title;
 
-                let productDetail = document.createElement('div');
-                productDetail.className = "favorites-product-detail";
+        let productFarmName = document.createElement('div');
+        productFarmName.className = 'favorites-product-farm-name';
+        productFarmName.innerText = product.businessName;
 
-                let productPriceDiv = document.createElement('div');
-                productPriceDiv.className = "favorites-product-price-div";
+        let productDetail = document.createElement('div');
+        productDetail.className = "favorites-product-detail";
 
-                let productPrice = document.createElement('div');
-                productPrice.className = "favorites-product-price";
-                productPrice.innerText = `$ ${productList[i].product_price}`;
+        let productPriceDiv = document.createElement('div');
+        productPriceDiv.className = "favorites-product-price-div";
 
-                let productUnit = document.createElement('div');
-                productUnit.className = "favorites-product-unit";
-                productUnit.innerText = ` / ${productList[i].product_unit}`;
+        let productPrice = document.createElement('div');
+        productPrice.className = "favorites-product-price";
+        productPrice.innerText = `$ ${product.price}`;
 
-                productPriceDiv.appendChild(productPrice);
-                productPriceDiv.appendChild(productUnit);
+        let productUnit = document.createElement('div');
+        productUnit.className = "favorites-product-unit";
+        productUnit.innerText = ` / ${product.unit}`;
 
-                let favoritesHeartBtn = document.createElement('iconify-icon');
-                favoritesHeartBtn.className = 'favorites-heart-btn';
-                favoritesHeartBtn.icon = 'ph:heart-fill';
+        productPriceDiv.appendChild(productPrice);
+        productPriceDiv.appendChild(productUnit);
 
-                productDetail.appendChild(productPriceDiv);
-                productDetail.appendChild(favoritesHeartBtn);
+        let favoritesHeartBtn = document.createElement('iconify-icon');
+        favoritesHeartBtn.className = 'favorites-heart-btn';
+        favoritesHeartBtn.icon = 'ph:heart-fill';
 
-                productDetailDiv.appendChild(productName);
-                productDetailDiv.appendChild(productFarmName);
-                productDetailDiv.appendChild(productDetail);
+        productDetail.appendChild(productPriceDiv);
+        productDetail.appendChild(favoritesHeartBtn);
 
-                product.innerHTML = `<img src=${images[i]} class="favorites-product-img">`;
-                product.appendChild(productDetailDiv);
+        productDetailDiv.appendChild(productName);
+        productDetailDiv.appendChild(productFarmName);
+        productDetailDiv.appendChild(productDetail);
 
-                favoritesProductsDiv.appendChild(product);
+        let favoriteProductImg = document.createElement('img');
+        favoriteProductImg.className = 'favorites-product-img';
+        favoriteProductImg.src = '/images/product-img.png';
 
-                // favoritesHeartBtn.onclick = () => clickFavorites()
-            }
+        productBox.appendChild(favoriteProductImg);
+        productBox.appendChild(productDetailDiv);
+
+        favoritesProductsDiv.appendChild(productBox);
+
+        favoriteProductImg.onclick = () => moveProductPage(product.product_id, product.user_id, product.farm_id);
+        productName.onclick = () => moveProductPage(product.product_id, product.user_id, product.farm_id);
+        
+
+        favoritesHeartBtn.onclick = () => {
+            clickFavorites(product.product_id, 'productId', 'products', favoritesHeartBtn)
         }
-    }
-
+    })
 }
 
 function showRecentProduct(productData) {

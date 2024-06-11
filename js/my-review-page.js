@@ -13,42 +13,11 @@ window.onload = () => {
 
 async function getReview() {
     try{
-        // const response = await axios.get(`${BASE_URL}/reviews`, config);
-        // console.log(response);
-
-        const response = [
-            {
-                "userId": 2,
-                "productId": 8,
-                "starrating": 5,
-                "content": "좋은데... 뭔가 아쉬워요 씁하",
-                "createdAt": "2024-06-02"
-            },
-            {
-                "userId": 2,
-                "productId": 8,
-                "starrating": 1,
-                "content": "좋은데... 뭔가 아쉬워요 씁하",
-                "createdAt": "2024-06-02"
-            },
-            {
-                "userId": 2,
-                "productId": 8,
-                "starrating": 2,
-                "content": "좋은데... 뭔가 아쉬워요 씁하",
-                "createdAt": "2024-06-03"
-            },
-            {
-                "userId": 2,
-                "productId": 8,
-                "starrating": 3,
-                "content": "좋은데... 뭔가 아쉬워요 씁하",
-                "createdAt": "2024-06-03"
-            }
-        ]
+        const response = await axios.get(`${BASE_URL}/reviews`, config);
+        console.log(response.data);
 
         let reviewHistory = {};
-        response.forEach(history => {
+        response.data.forEach(history => {
             if(reviewHistory[history.createdAt]) {
                 reviewHistory[history.createdAt].push(history);
             }else{
@@ -87,6 +56,7 @@ function showReviews(reviewHistory) {
         myReviewHistory.appendChild(currentDateReview)
 
         value.forEach(product => {
+            console.log(product)
             let reviewCard = document.createElement('div');
             reviewCard.className = 'review-card';
 
