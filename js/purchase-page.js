@@ -46,17 +46,24 @@ async function getProducts() {
 }
 
 function makeReq(products){
-    console.log(products);
     req = {
         orders: []
     }
 
-    products.forEach(product => {
-        req.orders.push({
-            productId: product.productId,
-            quantity: product.quantity
+    if(json_product_info){ // 바로 주문한 경우
+        req = {
+            orders: [
+                json_product_info
+            ]
+        }
+    }else{ // 장바구니에서 주문한 경우
+        products.forEach(product => {
+            req.orders.push({
+                productId: product.productId,
+                quantity: product.quantity
+            })
         })
-    })
+    }
 }
 
 async function getUserInfo() {
@@ -101,7 +108,11 @@ function showProducts(products, business_name) {
     
         let productPrice = document.createElement('div');
         productPrice.className = 'product-price';
-        productPrice.innerText = `$ ${product.price * product.quantity}`
+        if(product.quantity){
+            productPrice.innerText = `$ ${product.price * product.quantity}`
+        }else{
+            productPrice.innerText = `$ ${product.price}`
+        }
     
         productInfoDiv.appendChild(div)
         productInfoDiv.appendChild(productPrice)
@@ -111,7 +122,11 @@ function showProducts(products, business_name) {
     
         productList.appendChild(productDiv);
 
-        totalPriceCnt += product.price * product.quantity
+        if(product.quantity){
+            totalPriceCnt += product.price * product.quantity
+        }else{
+            totalPriceCnt += product.price
+        }
     })
     
     totalPrice.innerText = `$ ${totalPriceCnt}`
@@ -162,8 +177,7 @@ function showMyCard(){
 async function pay() {
     try{
         const response = await axios.post(`${BASE_URL}/orders`, req, config);
-        console.log(response.data);
-        // window.location.href = `./success-order.html?order_info=${product_info}`
+        window.location.href = `./success-order.html`
     }catch(error){
         console.error(error);
     }
