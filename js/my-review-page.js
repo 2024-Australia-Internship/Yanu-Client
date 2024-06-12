@@ -78,7 +78,7 @@ function showReviews(reviewHistory) {
             productName.className = 'product-name';
 
             let div = document.createElement('div');
-            div.innerText = '[Annie] SWEET SWEET strawberries 🍓 sdhfk sdfhjshfhdf hsdfkhsjkdfhshdf sdhfkjh'
+            div.innerText = product.title
 
             let productBtn = document.createElement('iconify-icon');
             productBtn.className = 'product-btn';
@@ -96,7 +96,7 @@ function showReviews(reviewHistory) {
 
             let review = document.createElement('div');
             review.className ='review'
-            review.innerText = 'These strawberries are really GOOOOOOOD!! I have two sons and my sons love these strawberries...'
+            review.innerText = product.content
         
             myReview.appendChild(reviewImg)
             myReview.appendChild(review)
@@ -112,15 +112,12 @@ function showReviews(reviewHistory) {
             }
 
             productName.onclick = () => {
-                showProduct();
+                moveProductPage(product.productId, product.userId, product.farmId);
             }
         })
     })
 }
 
-function showProduct(){
-    window.location.href = '../html/product-page.html';
-}
 
 function showEditDiv(e, i){
     let editDiv = document.getElementsByClassName('edit-post-div')[0];
