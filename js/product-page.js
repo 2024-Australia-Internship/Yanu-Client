@@ -7,12 +7,123 @@ const heartBtn = document.getElementsByClassName('heart-btn')[0];
 window.onload = async() => {
   try{
     const response = await axios.get(`${BASE_URL}/products/product/${product_code}`, config);
+    console.log(response.data)
     addRecentlyView();
     showInfo(response.data)
     // makeImages(response.data);
+
+    const reviewRes = await axios.get(`${BASE_URL}/reviews/product/${product_code}`, config);
+    console.log(reviewRes.data)
+    showBestReview(reviewRes.data);
+    showReviews(reviewRes.data);
   }catch(error){
     console.log(error)
   }
+}
+
+function showBestReview(reviews){
+  let bestReviewsDiv = document.getElementsByClassName('best-reviews')[0];
+  
+  const limit = reviews.length < 5 ? reviews.length : 5;
+  
+  for (let i = 0; i < limit; i++) {
+    console.log(reviews[i]);
+    let bestReview = document.createElement('div');
+    bestReview.className = "best-review";
+  
+    let reviewerInfoDiv = document.createElement('div');
+    reviewerInfoDiv.className = 'reviewer-info-div';
+  
+    let bestReviewerProfileImg = document.createElement('div');
+    bestReviewerProfileImg.className = "best-reviewer-profile-img";
+    bestReviewerProfileImg.innerHTML = `<img src="/images/product-img.png" class="reviewer-img">`
+  
+    let reviewer = document.createElement('div');
+    reviewer.className = 'reviewer';
+  
+    let reviewerName = document.createElement('div');
+    reviewerName.className = 'reviewer-name';
+    reviewerName.innerText = reviews[i].writerName;
+  
+    let reviewerStarDiv = document.createElement('div');
+    reviewerStarDiv.className = 'reviewer-star-div';
+  
+    reviewerStarDiv.innerHTML += `<iconify-icon icon="ph:star-fill" class="review-star"></iconify-icon>`.repeat(reviews[i].starrating)
+  
+    reviewer.appendChild(reviewerName);
+    reviewer.appendChild(reviewerStarDiv);
+  
+    reviewerInfoDiv.appendChild(bestReviewerProfileImg);
+    reviewerInfoDiv.appendChild(reviewer);
+  
+    let reviewDetail = document.createElement('div');
+    reviewDetail.className = 'review-detail';
+    reviewDetail.innerText = reviews[i].content
+  
+    bestReview.appendChild(reviewerInfoDiv);
+    bestReview.appendChild(reviewDetail);
+  
+    bestReviewsDiv.appendChild(bestReview);
+  }
+}
+
+function showReviews(reviews){
+  let allReviews = document.getElementsByClassName('all-reviews')[0];
+  let starAvgBox = document.getElementsByClassName('avg-num')[0];
+  let starAvg = 0;
+  
+  reviews.forEach(review => {
+    console.log(review);
+    let allReview = document.createElement('div');
+    allReview.className = 'all-review'
+  
+    let reviewerTitleDiv = document.createElement('div');
+    reviewerTitleDiv.className = 'reviewer-title-div';
+  
+    let reviewerInfoDiv = document.createElement('div');
+    reviewerInfoDiv.className = 'reviewer-info-div';
+  
+    let allReviewerProfileImg = document.createElement('div');
+    allReviewerProfileImg.className = 'all-reviewer-profile-img';
+    allReviewerProfileImg.innerHTML = `<img src="/images/home-hover.svg" class="all-reviewer-img reviewer-img">`;
+  
+    let reviewerInfo = document.createElement('div');
+    reviewerInfo.className = 'reviewer-info';
+  
+    let allReviewerName = document.createElement('div');
+    allReviewerName.className = 'all-reviewer-name';
+    allReviewerName.innerText = review.writerName
+  
+    let reviewDate = document.createElement('div');
+    reviewDate.className = 'review-date';
+    reviewDate.innerText = review.createdAt.replaceAll('-', '.');
+  
+    reviewerInfo.appendChild(allReviewerName);
+    reviewerInfo.appendChild(reviewDate);
+  
+    reviewerInfoDiv.appendChild(allReviewerProfileImg);
+    reviewerInfoDiv.appendChild(reviewerInfo);
+  
+    let allReviewStars = document.createElement('div');
+    allReviewStars.className = 'all-review-starts'
+    allReviewStars.innerHTML += `<iconify-icon icon="ph:star-fill" class="review-star all-review-star"></iconify-icon>`.repeat(review.starrating);
+  
+    reviewerTitleDiv.appendChild(reviewerInfoDiv);
+    reviewerTitleDiv.appendChild(allReviewStars);
+  
+    let allReviewDetail = document.createElement('div');
+    allReviewDetail.className = 'all-review-detail';
+    allReviewDetail.innerText = review.content;
+  
+    allReview.appendChild(reviewerTitleDiv);
+    allReview.appendChild(allReviewDetail);
+  
+    allReviews.appendChild(allReview);
+
+    starAvg += review.starrating;
+  })
+
+  starAvgBox.innerText = (starAvg / reviews.length).toFixed(1);
 }
 
 function addRecentlyView() {
@@ -61,7 +172,7 @@ function orderProduct() {
 }
 
 function showInfo(data){
-  const { business_name, farmId, title, farm_name, hashtag, price, description } = data;
+  const { productId, business_name, title, farm_name, hashtag, price, description, heart } = data;
 
   let product_title = document.getElementsByClassName('product-name')[0];
   let product_price = document.getElementsByClassName('product-price')[0]
@@ -70,10 +181,15 @@ function showInfo(data){
   let farmName = document.getElementsByClassName('farm-name')[0];
   let product_description = document.getElementsByClassName('product-description')[0];
   let product_hashtag = document.getElementsByClassName('product-hashtag')[0];
+  let heartBtn = document.getElementsByClassName('heart-btn')[0];
+
+  heartBtn.icon = heart ? "ph:heart-fill" : "ph:heart";
+  heartBtn.onclick = () => clickFavorites(productId, 'productId', 'products', heartBtn)
 
   product_title.innerText = title;
   product_price.innerText = `$ ${price}`
   farmer_name.innerText = farm_name;
+  farmName.innerText = business_name;
   product_description.innerText = description;
   
   JSON.parse(hashtag).forEach(value => {
@@ -174,6 +290,7 @@ function prevSilde() {
   var currectPage = document.getElementsByClassName(`radio${currentIdx}`)[0];
   currectPage.checked = true;
 }
+
 function chooseProductDetail(detail) {
   let info = document.getElementsByClassName('product-info-div')[0];
   let review = document.getElementsByClassName('product-review-div')[0];
@@ -193,99 +310,6 @@ function chooseProductDetail(detail) {
     infoBtn.classList.remove('choose-detail');
     reivewBtn.classList.add('choose-detail');
   }
-}
-
-let bestReviewsDiv = document.getElementsByClassName('best-reviews')[0];
-for (let i = 0; i < 20; i++) {
-  let bestReview = document.createElement('div');
-  bestReview.className = "best-review";
-
-  let reviewerInfoDiv = document.createElement('div');
-  reviewerInfoDiv.className = 'reviewer-info-div';
-
-  let bestReviewerProfileImg = document.createElement('div');
-  bestReviewerProfileImg.className = "best-reviewer-profile-img";
-  bestReviewerProfileImg.innerHTML = `<img src="/images/product-img.png" class="reviewer-img">`
-
-  let reviewer = document.createElement('div');
-  reviewer.className = 'reviewer';
-
-  let reviewerName = document.createElement('div');
-  reviewerName.className = 'reviewer-name';
-  reviewerName.innerText = 'Bella';
-
-  let reviewerStarDiv = document.createElement('div');
-  reviewerStarDiv.className = 'reviewer-star-div';
-
-  for (let j = 0; j < 5; j++) {
-    reviewerStarDiv.innerHTML += `<iconify-icon icon="ph:star-fill" class="review-star"></iconify-icon>`
-  }
-
-  reviewer.appendChild(reviewerName);
-  reviewer.appendChild(reviewerStarDiv);
-
-  reviewerInfoDiv.appendChild(bestReviewerProfileImg);
-  reviewerInfoDiv.appendChild(reviewer);
-
-  let reviewDetail = document.createElement('div');
-  reviewDetail.className = 'review-detail';
-  reviewDetail.innerText = `shdfshdfkjsdfhfjfjkshdkfhskhfkjhsdjfshdfsjkdfhuefhkjwhefksjhdfjkshfkjsdfjkdhfjksdhfkjsdfhjsfkjhfjkswhfkjsfwhkjwefkjwehfjkshkjfhskjfwhekfhwuefhkwhk`
-
-  bestReview.appendChild(reviewerInfoDiv);
-  bestReview.appendChild(reviewDetail);
-
-  bestReviewsDiv.appendChild(bestReview);
-}
-
-let allReviews = document.getElementsByClassName('all-reviews')[0];
-for (let i = 0; i < 20; i++) {
-  let allReview = document.createElement('div');
-  allReview.className = 'all-review'
-
-  let reviewerTitleDiv = document.createElement('div');
-  reviewerTitleDiv.className = 'reviewer-title-div';
-
-  let reviewerInfoDiv = document.createElement('div');
-  reviewerInfoDiv.className = 'reviewer-info-div';
-
-  let allReviewerProfileImg = document.createElement('div');
-  allReviewerProfileImg.className = 'all-reviewer-profile-img';
-  allReviewerProfileImg.innerHTML = `<img src="/images/home-hover.svg" class="all-reviewer-img reviewer-img">`;
-
-  let reviewerInfo = document.createElement('div');
-  reviewerInfo.className = 'reviewer-info';
-
-  let allReviewerName = document.createElement('div');
-  allReviewerName.className = 'all-reviewer-name';
-  allReviewerName.innerText = 'Amanda Scott'
-
-  let reviewDate = document.createElement('div');
-  reviewDate.className = 'review-date';
-  reviewDate.innerText = '2024.01.12'
-
-  reviewerInfo.appendChild(allReviewerName);
-  reviewerInfo.appendChild(reviewDate);
-
-  reviewerInfoDiv.appendChild(allReviewerProfileImg);
-  reviewerInfoDiv.appendChild(reviewerInfo);
-
-  let allReviewStars = document.createElement('div');
-  allReviewStars.className = 'all-review-starts'
-  for (let j = 0; j < 5; j++) {
-    allReviewStars.innerHTML += `<iconify-icon icon="ph:star-fill" class="review-star all-review-star"></iconify-icon>`;
-  }
-
-  reviewerTitleDiv.appendChild(reviewerInfoDiv);
-  reviewerTitleDiv.appendChild(allReviewStars);
-
-  let allReviewDetail = document.createElement('div');
-  allReviewDetail.className = 'all-review-detail';
-  allReviewDetail.innerText = 'jsdfhlsdfhkdhfkhsdfdhsdhsdfhfkhsidwyhivbwifuwbklihfuwabyihfviawhribevhvfiuaebhlioanvihertaeurtnhaeilmvawiohaemloiwdjfvkd,uheuklfsndfjbklawvnhwuifbhlwaunvwi';
-
-  allReview.appendChild(reviewerTitleDiv);
-  allReview.appendChild(allReviewDetail);
-
-  allReviews.appendChild(allReview);
 }
 
 function moveFarmerPage() {

@@ -85,6 +85,14 @@ function register(businessName, familyName, name, phoneNumber, email, address1, 
     axios.post(`${BASE_URL}/farms`, req, config)
     .then(response => {
         console.log(response)
+        let userInfo = JSON.parse(getCookie('userdata'))
+        userInfo.is_farmer = true
+
+        let expireDate = new Date();
+        expireDate.setMonth(expireDate.getMonth() + 1);
+
+        document.cookie = `userdata=${JSON.stringify(userInfo)}; path=/; expires=${expireDate}; secure`; 
+        
         window.location.href = '/html/main-page.html';
     })
     .catch(error => {

@@ -81,7 +81,7 @@ function showList(saleHistory) {
     
             let consumerName = document.createElement('div');
             consumerName.className = 'consumer-name';
-            consumerName.innerText = 'Hannah';
+            consumerName.innerText = product.buyerName;
     
             productTitleBox.appendChild(productTitle)
             productTitleBox.appendChild(consumerName)
