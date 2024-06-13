@@ -1,0 +1,17 @@
+.upload-img-li{
+    position: relative;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.image{
+    height: 100%;
+    position: absolute;
+}
+
+.delete-img{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+}
