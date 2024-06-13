@@ -108,7 +108,7 @@ function showReviews(reviewHistory) {
             currentDateReviewList.appendChild(reviewCard)
 
             editBtn.onclick = () => {
-                showEditDiv(editBtn, product.productId);
+                showEditDiv(editBtn, product.productId, product.reviewId);
             }
 
             productName.onclick = () => {
@@ -119,16 +119,16 @@ function showReviews(reviewHistory) {
 }
 
 
-function showEditDiv(e, i){
+function showEditDiv(e, productId, reviewId){
     let editDiv = document.getElementsByClassName('edit-post-div')[0];
-    if(index != i){
+    if(index != productId){
         let buttonRect = e.getBoundingClientRect();
         let buttonX = buttonRect.left + window.pageXOffset;
         let buttonY = buttonRect.top + window.pageYOffset;
         editDiv.style.visibility = "visible";
         editDiv.style.top = `${buttonY + 24}px`;
         editDiv.style.left =`${buttonX - 70}px`;
-        index = i;
+        index = productId;
     }else{
         editDiv.style.visibility = "hidden";
         index = -1;
@@ -136,12 +136,12 @@ function showEditDiv(e, i){
 
     let editButton = document.getElementsByClassName('edit-post')[0];
     let deleteButton = document.getElementsByClassName('delete-post')[0];
-    editButton.onclick = () => editMyPost(i);
-    deleteButton.onclick = () => deleteMyPost(i);
+    editButton.onclick = () => editMyPost(productId, reviewId);
+    deleteButton.onclick = () => deleteMyPost(productId);
 }
 
-function editMyPost(i){
-    window.location.href = `../html/edit-my-review.html?product_id=${i}`;
+function editMyPost(productId, reviewId){
+    window.location.href = `../html/edit-my-review.html?product_id=${productId}&review_id=${reviewId}`;
     
 }
 async function deleteMyPost(i){
