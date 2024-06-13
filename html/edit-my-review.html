@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/basic.css">
     <link rel="stylesheet" href="/css/write-review-page.css">
+    <link rel="stylesheet" href="/css/edit-my-review.css">
     <title>Document</title>
 </head>
 <body>
@@ -33,9 +34,12 @@
 
     <textarea class="evaluation-box"></textarea>
 
-    <div class="fill-basic-btn" onclick="window.location.href='./order-history-page.html'">Done</div>
+    <div class="fill-basic-btn" onclick="setReview()">Done</div>
     
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="../config.js"></script>
+    <script src="/js/basic.js"></script>
     <script src="/js/edit-my-review.js"></script>
 </body>
 </html>
