@@ -9,6 +9,7 @@ window.onload = async() => {
     let uglyPercent = document.getElementsByClassName('farmer-kind-percent')[0];
     let productsCnt = document.getElementsByClassName('farmer-products-cnt')[0];
     let heartBtn = document.getElementsByClassName('favorite-icon')[0];
+    let reviewsCnt = document.getElementsByClassName('farmer-review-cnt')[0];
 
     try{
         let resFarm = await axios.get(`${BASE_URL}/farms/${user_code}`, config);
@@ -19,12 +20,14 @@ window.onload = async() => {
         uglyPercent.innerText = `${ugly_percent}%`
 
         let resProduct = await axios.get(`${BASE_URL}/products/farm/${farm_code}`, config);
-        console.log(resProduct);
+        // console.log(resProduct);
         productsCnt.innerText = `${resProduct.data.length} products`;
         showFarmerProducts(resProduct.data);
         showBestSellers(resProduct.data)
 
-        
+        let resReview = await axios.get(`${BASE_URL}/farms/${farm_code}/reviews`, config);
+        reviewsCnt.innerText = `${resReview.data.length} reviews`
+        showReviews(resReview.data)
     }catch(err){
         console.error(err);
     }
@@ -100,8 +103,9 @@ function showFarmerProducts(products){
 
 function showBestSellers(products){
     let bestSellerDiv = document.getElementsByClassName('best-sellers')[0];
+    const limit = products.length < 5 ? products.length : 5
     
-    for(let i = 0; i<5; i++){
+    for(let i = 0; i<limit; i++){
         let bestSeller = document.createElement('div');
         bestSeller.className = 'best-seller';
     
@@ -143,78 +147,92 @@ function showBestSellers(products){
     
 }
 
-let allReviewsDiv = document.getElementsByClassName('all-reviews')[0];
-for(let i = 0; i<20; i++){
-    let allReview = document.createElement('div');
-    allReview.className = 'all-review';
+function showReviews(reviews){
+    let allReviewsDiv = document.getElementsByClassName('all-reviews')[0];
+    let starAvgBox = document.getElementsByClassName('star-avg')[0];
+    let reviewAvg = 0;
 
-    let allReviewTitleDiv = document.createElement('div');
-    allReviewTitleDiv.className = 'all-review-title-div';
+    reviews.forEach(review => {
+        console.log(review);
+        let allReview = document.createElement('div');
+        allReview.className = 'all-review';
+    
+        let allReviewTitleDiv = document.createElement('div');
+        allReviewTitleDiv.className = 'all-review-title-div';
+    
+        let allReviewUserInfo = document.createElement('div');
+        allReviewUserInfo.className = 'all-review-user-info';
+    
+        let userName = document.createElement('div');
+        userName.className = 'user-name';
+        userName.innerText = review.name;
+    
+        let reviewDate = document.createElement('div');
+        reviewDate.className = 'review-date';
+        reviewDate.innerText = review.createAt.replaceAll('-', '.');
+    
+        allReviewUserInfo.appendChild(userName);
+        allReviewUserInfo.appendChild(reviewDate);
+    
+        let allReviewStars = document.createElement('div');
+        allReviewStars.className = 'all-review-stars';
+    
+        allReviewStars.innerHTML += `<iconify-icon icon="ph:star-fill" class="review-star-icon"></iconify-icon>`.repeat(review.starrating);
+        
+    
+        allReviewTitleDiv.appendChild(allReviewUserInfo);
+        allReviewTitleDiv.appendChild(allReviewStars);
+    
+        let reviewDetailDiv = document.createElement('div');
+        reviewDetailDiv.className = 'review-detail-div';
+    
+        let userProfileImgDiv = document.createElement('div');
+        userProfileImgDiv.className = 'user-profile-img-div';
+    
+        let allReviewProfileImg = document.createElement('img');
+        allReviewProfileImg.className = 'all-review-profile-img';
+        allReviewProfileImg.src = '/images/product-img.png';
+    
+        userProfileImgDiv.appendChild(allReviewProfileImg);
+    
+        let reviewDetail = document.createElement('div');
+        reviewDetail.className = 'review-detail';
+        reviewDetail.innerText = review.content;
+    
+        reviewDetailDiv.appendChild(userProfileImgDiv);
+        reviewDetailDiv.appendChild(reviewDetail);
+    
+        let allReviewProductBtn = document.createElement('div');
+        allReviewProductBtn.className = 'all-review-product-btn';
+    
+        let allReviewProductTitle = document.createElement('div');
+        allReviewProductTitle.className = 'all-review-product-title';
+        allReviewProductTitle.innerText = review.title;
+    
+        let moveProductBtn = document.createElement('iconify-icon');
+        moveProductBtn.className = 'move-product-btn';
+        moveProductBtn.icon = 'iconamoon:arrow-up-2-thin';
 
-    let allReviewUserInfo = document.createElement('div');
-    allReviewUserInfo.className = 'all-review-user-info';
+        allReviewProductBtn.appendChild(allReviewProductTitle);
+        allReviewProductBtn.appendChild(moveProductBtn);
+    
+        allReview.appendChild(allReviewTitleDiv);
+        allReview.appendChild(reviewDetailDiv);
+        allReview.appendChild(allReviewProductBtn);
+    
+        allReviewsDiv.appendChild(allReview);
 
-    let userName = document.createElement('div');
-    userName.className = 'user-name';
-    userName.innerText = 'Amanda Scott';
+        allReviewProductBtn.onclick = () =>  moveProductPage(review.productId, user_code, farm_code);
+        
+        reviewAvg += review.starrating
+    })
 
-    let reviewDate = document.createElement('div');
-    reviewDate.className = 'review-date';
-    reviewDate.innerText = '2024.01.12';
-
-    allReviewUserInfo.appendChild(userName);
-    allReviewUserInfo.appendChild(reviewDate);
-
-    let allReviewStars = document.createElement('div');
-    allReviewStars.className = 'all-review-stars';
-
-    for(let j = 0; j<5; j++){
-        allReviewStars.innerHTML += `<iconify-icon icon="ph:star-fill" class="review-star-icon"></iconify-icon>`;
+    if(reviews.length === 0){ // 리뷰가 없는 경우
+        starAvgBox.innerText = reviewAvg
+    }else{
+        starAvgBox.innerText = (reviewAvg / reviews.length).toFixed(1);
     }
-
-    allReviewTitleDiv.appendChild(allReviewUserInfo);
-    allReviewTitleDiv.appendChild(allReviewStars);
-
-    let reviewDetailDiv = document.createElement('div');
-    reviewDetailDiv.className = 'review-detail-div';
-
-    let userProfileImgDiv = document.createElement('div');
-    userProfileImgDiv.className = 'user-profile-img-div';
-
-    let allReviewProfileImg = document.createElement('img');
-    allReviewProfileImg.className = 'all-review-profile-img';
-    allReviewProfileImg.src = '/images/product-img.png';
-
-    userProfileImgDiv.appendChild(allReviewProfileImg);
-
-    let reviewDetail = document.createElement('div');
-    reviewDetail.className = 'review-detail';
-    reviewDetail.innerText = `These strawberries are really GOOOOOOOD!! I have two sons and my sons love these strawberry`;
-
-    reviewDetailDiv.appendChild(userProfileImgDiv);
-    reviewDetailDiv.appendChild(reviewDetail);
-
-    let allReviewProductBtn = document.createElement('div');
-    allReviewProductBtn.className = 'all-review-product-btn';
-
-    let allReviewProductTitle = document.createElement('div');
-    allReviewProductTitle.className = 'all-review-product-title';
-    allReviewProductTitle.innerText = '[Annie] SWEET SWEET strawberries 🍓';
-
-    allReviewProductBtn.appendChild(allReviewProductTitle);
-    allReviewProductBtn.innerHTML += `<iconify-icon icon="iconamoon:arrow-up-2-thin" class="move-product-btn"></iconify-icon>`
-
-    allReview.appendChild(allReviewTitleDiv);
-    allReview.appendChild(reviewDetailDiv);
-    allReview.appendChild(allReviewProductBtn);
-
-    allReviewsDiv.appendChild(allReview);
 }
-
-let heartBtns = [...document.getElementsByClassName("heart-btn")];
-heartBtns.forEach((e) => {
-    e.onclick = (e) => heartToggle(e);
-});
 
 function chooseDetail(flag){
     let productBtn = document.getElementsByClassName('product-btn')[0];
