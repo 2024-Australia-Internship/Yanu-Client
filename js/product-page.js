@@ -123,7 +123,11 @@ function showReviews(reviews){
     starAvg += review.starrating;
   })
 
-  starAvgBox.innerText = (starAvg / reviews.length).toFixed(1);
+  if(reviews.length === 0) { // 리뷰가 없을 때
+    starAvgBox.innerText = starAvg
+  }else{ // 리뷰가 있을 때
+    starAvgBox.innerText = (starAvg / reviews.length).toFixed(1);
+  }
 }
 
 function addRecentlyView() {
@@ -150,8 +154,9 @@ async function addCart(){
 
   try{
     const response = await axios.post(`${BASE_URL}/carts`, req, config);
-    alert('A product has been added to your shopping cart.');
-    window.location.href = './my-cart.html';
+    if(confirm('The product has been added to your shopping cart. Would you like to go to cart?')){
+      window.location.href = './my-cart.html';
+    }
   }catch(error){
     console.error(error);
     if(error.response.status === 400){
