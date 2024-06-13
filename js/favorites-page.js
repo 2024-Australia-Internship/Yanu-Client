@@ -14,19 +14,80 @@ window.onload = async() => {
         const productRes = await axios.get(`${BASE_URL}/favorites/products`, config)
         showProducts(productRes.data);
         console.log(productRes.data);
+
+        const farmRes = await axios.get(`${BASE_URL}/favorites/farms`, config);
+        console.log(farmRes);
+        showFarms(farmRes.data)
+
     }catch(err){
         console.error(err);
     }
-    // axios.get(`${BASE_URL}/hearts/${user_code}/product`)
-    // .then(response => {
-    //     console.log(response)
-    //     console.log(response.data.productList[0].product);
-    //     showProducts(response.data.productList[0].product, response.data.firstProductImageURL);
-    // })
-    // .catch(error => {
-    //     console.error('There has been a problem with your axios request:', error);
-    // });
     getRecentProductInfo();
+}
+
+function showFarms(farms){
+    farms.forEach(farm => {
+        console.log(farm);
+        let favoritesFarm = document.createElement('div');
+        favoritesFarm.classList.add('farm');
+        favoritesFarm.classList.add('favorites-farm');
+    
+        let farmDetailDiv = document.createElement('div');
+        farmDetailDiv.className = "farm-detail-div";
+    
+        let farmName = document.createElement('div');
+        farmName.className = 'farm-username';
+        farmName.innerText = farm.businessName;
+    
+        let farmUsername = document.createElement('div');
+        farmUsername.className = 'farm-username';
+        farmUsername.innerText = farm.farmName;
+    
+        let farmReviewDiv = document.createElement('div');
+        farmReviewDiv.className = 'farm-review-div';
+    
+        let farmReviewDetail = document.createElement('div');
+        farmReviewDetail.className = 'farm-review-detail';
+    
+        let farmProducts = document.createElement('div');
+        farmProducts.className = 'farm-products';
+        farmProducts.innerText = `${farm.products.length} products`
+    
+        let farmReviews = document.createElement('div');
+        farmReviews.className = 'farm-reviews';
+        farmReviews.innerText = `${farm.reviews.length} review`
+    
+        let farmReviewHearts = document.createElement('div');
+        farmReviewHearts.className = 'farm-review-hearts';
+    
+        farmReviewDetail.appendChild(farmProducts);
+        farmReviewDetail.appendChild(farmReviews);
+        farmReviewDetail.appendChild(farmReviewHearts);
+    
+        let heartIcon = document.createElement('iconify-icon');
+        heartIcon.className = 'farm-heart-icon';
+        heartIcon.icon = 'ph:heart-fill'
+
+        farmReviewDiv.appendChild(farmReviewDetail);
+        farmReviewDiv.appendChild(heartIcon);
+    
+        farmDetailDiv.appendChild(farmName);
+        farmDetailDiv.appendChild(farmUsername);
+        farmDetailDiv.appendChild(farmReviewDiv);
+    
+        let farmImg = document.createElement('img');
+        farmImg.className = 'farm-img';
+        farmImg.src = '/images/product-img.png';
+        favoritesFarm.appendChild(farmImg);
+        favoritesFarm.appendChild(farmDetailDiv);
+    
+        favoritesFarmsDiv.appendChild(favoritesFarm);
+
+        farmImg.onclick = () => window.location.href = `/html/farmer-page.html?user_code=${farm.user_id}&farm_code=${farm.farm_id}`;
+        farmName.onclick = () => window.location.href = `/html/farmer-page.html?user_code=${farm.user_id}&farm_code=${farm.farm_id}`;
+    
+        heartIcon.onclick = () => clickFavorites(farm.farm_id, 'farmId', 'farms', heartIcon)
+    })
 }
 
 function getRecentProduct(){
@@ -172,63 +233,7 @@ function showRecentProduct(productData) {
 }
 
 
-for (let i = 0; i < 20; i++) {
 
-    let favoritesFarm = document.createElement('div');
-    favoritesFarm.classList.add('farm');
-    favoritesFarm.classList.add('favorites-farm');
-
-    let farmDetailDiv = document.createElement('div');
-    farmDetailDiv.className = "farm-detail-div";
-
-    let farmName = document.createElement('div');
-    farmName.className = 'farm-username';
-    farmName.innerText = "Annie's Farm";
-
-    let farmUsername = document.createElement('div');
-    farmUsername.className = 'farm-username';
-    farmUsername.innerText = "Annie Johnson";
-
-    let farmReviewDiv = document.createElement('div');
-    farmReviewDiv.className = 'farm-review-div';
-
-    let farmReviewDetail = document.createElement('div');
-    farmReviewDetail.className = 'farm-review-detail';
-
-    let farmProducts = document.createElement('div');
-    farmProducts.className = 'farm-products';
-    farmProducts.innerText = '120 products'
-
-    let farmReviews = document.createElement('div');
-    farmReviews.className = 'farm-reviews';
-    farmReviews.innerText = '23 review'
-
-    let farmReviewHearts = document.createElement('div');
-    farmReviewHearts.className = 'farm-review-hearts';
-
-    let farmReviewHeartCnt = document.createElement('div');
-    farmReviewHeartCnt.className = 'farm-review-heart-cnt';
-    farmReviewHeartCnt.innerText = '1,232'
-
-    farmReviewHearts.innerHTML = `<iconify-icon icon="ph:heart-fill" class="farm-review-heart-icon"></iconify-icon>`;
-    farmReviewHearts.appendChild(farmReviewHeartCnt);
-
-    farmReviewDetail.appendChild(farmProducts);
-    farmReviewDetail.appendChild(farmReviews);
-    farmReviewDetail.appendChild(farmReviewHearts);
-
-    farmReviewDiv.appendChild(farmReviewDetail);
-    farmReviewDiv.innerHTML += `<iconify-icon icon="ph:heart-fill" class="farm-heart-icon"></iconify-icon>`;
-
-    farmDetailDiv.appendChild(farmName);
-    farmDetailDiv.appendChild(farmUsername);
-    farmDetailDiv.appendChild(farmReviewDiv);
-
-    favoritesFarm.innerHTML = `<img src="/images/product-img.png" class="farm-img">`
-    favoritesFarm.appendChild(farmDetailDiv);
-
-    favoritesFarmsDiv.appendChild(favoritesFarm);
-}
 
 let heartBtns = [...document.getElementsByClassName('heart-btn')];
 heartBtns.forEach((e) => {
