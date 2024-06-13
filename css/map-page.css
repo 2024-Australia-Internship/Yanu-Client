@@ -43,7 +43,6 @@
 .overlay-farm-name{
     font-family: 'gilroy-semiBold';
     font-size: 13px;
-    text-align: center;
 }
 
 .overlay-farm-info{
@@ -85,7 +84,6 @@
     display: flex;
     align-items: end;
     justify-content: space-between;
-    column-gap: 25px;
     margin-bottom: 10px;
 }
 
@@ -98,6 +96,7 @@
 .arrow-icon{
     transform: rotate(90deg);
     font-size: 24px;
+    flex-shrink: 0;
 }
 
 .overlay-farm-img-box{
