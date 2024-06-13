@@ -275,7 +275,6 @@ input[type='radio']:checked {
 .all-review-detail{
     position: absolute;
     width: calc(100% - 24px);
-    height: 26px;
     margin-top: 16px;
     font-family: 'gilroy-regular';
     font-size: 11px;
