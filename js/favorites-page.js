@@ -3,20 +3,10 @@ const favoritesFarmsDiv = document.getElementsByClassName('favorites-farms-div')
 
 window.onload = async() => {
     try{
-        const productReq = {
-            type: "product"
-        }
-
-        const farmReq = {
-            type: "farm"
-        }
-
         const productRes = await axios.get(`${BASE_URL}/favorites/products`, config)
-        showProducts(productRes.data);
         console.log(productRes.data);
 
         const farmRes = await axios.get(`${BASE_URL}/favorites/farms`, config);
-        console.log(farmRes);
         showFarms(farmRes.data)
 
     }catch(err){
