@@ -31,14 +31,14 @@ function getImageFiles(e) {
     let images = [...document.getElementsByClassName('upload-img-li')].length;
     const files = e.currentTarget.files;
   
-    if ([...files].length >= 6 && [...files].length + images >= 6) {
-      alert('이미지는 최대 5개까지 업로드가 가능합니다.');
+    if ([...files].length >= 6 || [...files].length + images >= 6) {
+      alert('Up to 5 images can be uploaded.');
       return;
     }
 
     [...files].forEach(file => {
         if (!file.type.match("image/.*")) {
-          alert('이미지 파일만 업로드가 가능합니다.');
+          alert('Only image files can be uploaded.');
           return;
         }
         if ([...files].length < 6 && [...files].length + images < 6) {
@@ -90,7 +90,7 @@ async function postReview(){
 
     try{
         const response = await axios.post(`${BASE_URL}/reviews`, req, config)
-        window.location.href='./my-review-page.html'
+        uploadReviewImg(response.data)
     }catch(error){
         console.error(error)
         if(error.response.status === 400) {
@@ -100,3 +100,24 @@ async function postReview(){
     }
     
 }
+
+async function uploadReviewImg(reviewId) {
+    try{
+        const formData = new FormData();
+        let files = document.getElementsByClassName('upload-file')[0].files;
+        console.log([...files]);
+
+        for(let file of files){
+            formData.append('image', file);
+        }
+
+        formData.append('review_id', reviewId);
+
+        let response = await axios.post(`${BASE_URL}/reviews/images`, formData, config);
+        console.log(response);
+
+        window.location.href='./my-review-page.html'
+    }catch(err){
+        console.error(err);
+    }
+} 
