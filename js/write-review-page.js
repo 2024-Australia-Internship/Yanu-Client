@@ -72,23 +72,29 @@ function deleteImg(e){
 }
 
 async function postReview(){
+    let files = document.getElementsByClassName('upload-file')[0].files;
     let starrating = document.getElementsByClassName('fill-star').length;
     let content = document.getElementsByClassName('evaluation-box')[0].value;
-    if(starrating === 0) {
-        return alert('Please enter a rating')
-    }
 
-    if(content === ''){
-        return alert('Please enter a content')
-    }
+    try{   
+        if(files.length === 0) {
+            return alert('Please upload an image.')
+        }
 
-    const req = {
-        productId: {id: product_id},
-        starrating: starrating,
-        content: content
-    }
+        if(starrating === 0) {
+            return alert('Please enter a rating.')
+        }
 
-    try{
+        if(content === ''){
+            return alert('Please enter a content.')
+        }
+
+        const req = {
+            productId: {id: product_id},
+            starrating: starrating,
+            content: content
+        }
+
         const response = await axios.post(`${BASE_URL}/reviews`, req, config)
         uploadReviewImg(response.data)
     }catch(error){

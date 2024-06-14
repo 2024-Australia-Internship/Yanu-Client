@@ -11,7 +11,7 @@ function getImageFiles(e) {
     let images = [...document.getElementsByClassName('upload-img-li')].length;
     const files = e.currentTarget.files;
   
-    if ([...files].length >= 6 && [...files].length + images >= 6) {
+    if ([...files].length >= 6 || [...files].length + images >= 6) {
       alert('이미지는 최대 5개까지 업로드가 가능합니다.');
       return;
     }
@@ -29,7 +29,6 @@ function getImageFiles(e) {
             reader.readAsDataURL(file);
         }
     })
-
 }
 
 function createElement(e, file){
@@ -92,6 +91,7 @@ label.addEventListener('click', function(){
 });
 
 function uploadProduct(){
+    let files = document.getElementsByClassName('upload-file')[0].files;
     let title = document.getElementsByClassName('product-title-input')[0].value;
     let category = document.getElementsByClassName('choose-category')[0];
     let price = document.getElementsByClassName('price-input')[0].value;
@@ -99,10 +99,14 @@ function uploadProduct(){
     let description = document.getElementsByClassName('description-input')[0].value;
     let hashtag = JSON.stringify(tagify.value.map(hashtag => hashtag.value));
 
-    if(title === '') return alert('title');
-    if(hashtag == '[]') return alert('hashtag');
-    if(price == '' || isNaN(price)) return alert('price');
-    if(description == '') return alert('description');
+    if(title === '') return alert('Please enter the title');
+    if(hashtag == '[]') return alert('Please enter a hashtag');
+    if(price == '' || isNaN(price)) return alert('Please enter price');
+    if(description == '') return alert('Please enter the description');
+
+    if(files.length === 0) {
+        return alert('Please upload an image.')
+    }
 
     let categoryBoolean = 0;
     if(category == undefined){
@@ -126,7 +130,8 @@ function uploadProduct(){
 
     axios.post(`${BASE_URL}/products`, req, config)
     .then(response => {
-        console.log(response);
+        console.log(response.data.product_id);
+        console.log(response.data);
         sendProductImgs(response.data.product_id);
     })
     .catch(error => {
@@ -149,7 +154,7 @@ function sendProductImgs(product_code){
     axios.post(`${BASE_URL}/products/image`, formData, config)
     .then(response => {
         console.log(response);
-        window.location.href = '/html/main-page.html';
+        // window.location.href = '/html/main-page.html';
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
