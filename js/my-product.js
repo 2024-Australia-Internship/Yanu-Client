@@ -23,6 +23,7 @@ function showProducts(products){
     prductsDiv.innerHTML = '';
 
     products.forEach(value => {
+        console.log(value.images[0]);
         let product = document.createElement('div');
         product.classList.add('product');
 
@@ -67,7 +68,7 @@ function showProducts(products){
         productDetailDiv.appendChild(productDetail);
 
         let productImg = document.createElement('img');
-        // productImg.src = images[i];
+        productImg.src = `${IMAGE_URL}${value.images[0]}`;
         productImg.className = 'product-img';
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);

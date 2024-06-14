@@ -45,8 +45,6 @@ function getProducts(){
 let prductsDiv = document.getElementsByClassName('products-div')[0];
 
 function showProducts(products){
-    console.log(products);
-
     products.forEach(value => {
         let product = document.createElement('div');
         product.classList.add('product');
@@ -93,7 +91,7 @@ function showProducts(products){
         productDetailDiv.appendChild(productDetail);
 
         let productImg = document.createElement('img');
-        // productImg.src = images[i];
+        productImg.src = `${IMAGE_URL}${value.imageUrls[0]}`;
         productImg.className = 'product-img';
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);
