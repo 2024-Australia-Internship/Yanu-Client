@@ -110,6 +110,7 @@ function showProducts(productList) {
     let favoritesProductsDiv = document.getElementsByClassName('favorites-products-div')[0];
 
     productList.forEach(product => {
+        console.log(product);
         let productBox = document.createElement('div');
         productBox.className = `favorites-product`;
 
@@ -172,7 +173,6 @@ function showProducts(productList) {
 }
 
 function showRecentProduct(productData) {
-    console.log(productData);
     const { userId, farmId, productId, title, price, unit, heart } = productData;
 
     let product = document.createElement('div');
@@ -204,7 +204,7 @@ function showRecentProduct(productData) {
 
     let productImg = document.createElement('img');
     productImg.className = 'product-img';
-    productImg.src = "/images/product-img.png";
+    productImg.src = `${IMAGE_URL}${productData.images[0]}`;
 
     let heartBtn = document.createElement('iconify-icon');
     heartBtn.className = 'heart-btn';
@@ -268,8 +268,6 @@ function chooseFavoritesCategory(category) {
     let productsBtn = document.getElementsByClassName('products-btn')[0];
     let farmsBtn = document.getElementsByClassName('farms-btn')[0];
 
-    console.log(productsBtn);
-    console.log(farmsBtn);
     if (category) { //products
         products.style.display = 'grid';
         farms.style.display = 'none';
