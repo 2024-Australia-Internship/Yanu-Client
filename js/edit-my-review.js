@@ -14,16 +14,14 @@ window.onload = () => {
 
 async function getMyReview(){
     try{
-        const response = await axios.get(`${BASE_URL}/reviews/8`, config);
-        
-        console.log()
+        const response = await axios.get(`${BASE_URL}/reviews/${review_id}`, config);
         editInfo(response.data)
     }catch(err){
         console.error(err);
     }
 }
 
-function setReview(){
+async function setReview(){
     try{
         let starrating = document.getElementsByClassName('fill-star').length;
         let content = document.getElementsByClassName('evaluation-box')[0].value;
@@ -43,8 +41,8 @@ function setReview(){
 
         // 지운 사진 조회
         images.forEach(image => {
-            if(removeImage.includes(image)){
-                removeImage.splice(removeImage.indexOf(image), 1);
+            if(removeImage.includes(image.url)){
+                removeImage.splice(removeImage.indexOf(image.url), 1);
             } 
         })
         formData.append('removeImage', removeImage.join(', '))
@@ -54,8 +52,17 @@ function setReview(){
             formData.append('image', file);
         }
 
+        // 새 이미지를 업로드하지 않은 경우
+        if(files.length === 0){
+            formData.append('image', null);
+        }
+
         formData.append('starrating', starrating)
         formData.append('content', content)
+
+        const response = await axios.put(`${BASE_URL}/reviews/${product_id}`, formData, config);
+        console.log(response);
+        window.location.href = '/html/my-review-page.html'
     }catch(err){
         console.error(err);
     }
@@ -68,10 +75,9 @@ function editInfo(review){
 
     starArr[review.starrating - 1].click();
 
-    let images = review.images.map(img => `${IMAGE_URL}${img}`);
-    recentImages = [...images];
-    images.forEach(image => {
-        createElement(image);
+    recentImages = [...review.images];
+    review.images.forEach(image => {
+        createElement(image, true);
     })
 }
 
@@ -97,7 +103,7 @@ function getImageFiles(e) {
     const files = e.currentTarget.files;
   
     if ([...files].length >= 6 || [...files].length + images >= 6) {
-      alert('Up to 5 images can be uploaded.');
+      alert('You can upload up to 5 items.');
       return;
     }
 
@@ -109,7 +115,7 @@ function getImageFiles(e) {
         if ([...files].length < 6 && [...files].length + images < 6) {
             const reader = new FileReader();
             reader.onload = (e) => {
-              createElement(e.target.result);
+              createElement(e.target.result, false);
             };
             reader.readAsDataURL(file);
         }
@@ -117,7 +123,7 @@ function getImageFiles(e) {
 
 }
 
-function createElement(image){
+function createElement(image, isPrev){
     let uploadImgDiv = document.getElementsByClassName('upload-img-div')[0];
     
     let uploadImgLi = document.createElement('div');
@@ -127,7 +133,12 @@ function createElement(image){
     
     let newimage = document.createElement('img');
     newimage.className = 'image';
-    newimage.src = image;
+    if(isPrev){
+        newimage.src = `${IMAGE_URL}${image}`;
+    }else{
+        newimage.src = image
+    }
+    newimage.url = image;
 
     uploadImgLi.appendChild(newimage);
 
