@@ -8,17 +8,15 @@ window.onload = () => {
     let uglyPercent = document.getElementsByClassName('ugly-cnt')[0];
     let uglyTomato = document.getElementsByClassName('ugly-tomato')[0];
 
-    let profileImgSrc = JSON.parse(getCookie('userdata')).profile_image;
-
     axios.get(`${BASE_URL}/farms`, config)
     .then(response => {
         console.log(response);
-        const { farmName, businessName, farmId } = response.data;
+        const { farmName, businessName, farmId, profile } = response.data;
         
         farm_id = farmId;
         name.innerText = farmName;
         farm_name.innerText = businessName;
-        profile_img.src = profileImgSrc;
+        profile_img.src = `${IMAGE_URL}${profile}`;
 
         if(ugly_percent > 66){
             uglyTomato.src = '/images/ugly-tomato-big.svg'

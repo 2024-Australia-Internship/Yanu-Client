@@ -5,17 +5,27 @@ const farm_code = urlParams.get('farm_code');
 const heartBtn = document.getElementsByClassName('heart-btn')[0];
 
 window.onload = async() => {
+  let addCartBtn = document.getElementsByClassName('add-cart-btn')[0];
+  let buyBtn = document.getElementsByClassName('buy-btn')[0];
   try{
     const response = await axios.get(`${BASE_URL}/products/product/${product_code}`, config);
-    console.log(response.data)
-    addRecentlyView();
-    showInfo(response.data)
-    // makeImages(response.data);
+    addRecentlyView(); // 최근 본 상품에 추가
+    showInfo(response.data) // 상품 정보
 
     const reviewRes = await axios.get(`${BASE_URL}/reviews/product/${product_code}`, config);
-    console.log(reviewRes.data)
-    showBestReview(reviewRes.data);
-    showReviews(reviewRes.data);
+    showBestReview(reviewRes.data); // 베스트 리뷰
+    showReviews(reviewRes.data); // 모든 리뷰
+
+    // 내가 올린 상품인지 비교
+    let id = JSON.parse(getCookie('userdata')).id; 
+
+    if(id == user_code){
+      addCartBtn.style.display = 'none'
+      buyBtn.classList.add('prevent-buy')
+    }else{
+      buyBtn.onclick = () => orderProduct()
+    }
+
   }catch(error){
     console.log(error)
   }

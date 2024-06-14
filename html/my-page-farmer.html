@@ -23,18 +23,23 @@
         </div>
         <div class="user-farm-name">Annie’s farm</div>
         <div class="user-info-box">
-            <div class="user-history-div">
-                <div class="user-order-history-div history-div" onclick="clickMyProduct()">
-                    <div class="history-title">My Product</div>
-                    <iconify-icon icon="iconamoon:arrow-up-2-thin" class="history-btn"></iconify-icon>
+            <div class="buy-product-box">
+                <div class="order-history-box border-bottom" onclick="window.location.href='./order-history-page.html'">
+                    <div class="name">Order History</div>
+                    <iconify-icon icon="iconamoon:arrow-up-2-thin" class="move-btn"></iconify-icon>
                 </div>
-                <div class="user-info-history-div">
-                    <div class="user-address-div history-div" onclick="window.location.href='./sales-history-page.html'">
-                        <div class="history-title sales-history-title">Sales History</div>
-                        <iconify-icon icon="iconamoon:arrow-up-2-thin" class="history-btn"></iconify-icon>
+                <div class="address-review-box">
+                    <div class="my-address-box" onclick="window.location.href='./my-address-page.html'">
+                        <div class="name">My Address</div>
+                        <iconify-icon icon="iconamoon:arrow-up-2-thin" class="move-btn"></iconify-icon>
+                    </div>
+                    <div class="my-review-box" onclick="window.location.href='./my-review-page.html'">
+                        <div class="name">My Review</div>
+                        <iconify-icon icon="iconamoon:arrow-up-2-thin" class="move-btn"></iconify-icon>
                     </div>
                 </div>
             </div>
+
             <div class="user-ugly-percent-div">
                 <div class="ugly-percent-title">My Ugly Percent</div>
                 <div class="user-ugly-percent">
@@ -45,15 +50,16 @@
                     <img src="/images/ugly-tomato-small.svg" class="ugly-tomato">
                 </div>
             </div>
-            <div class="etc-div">
-                <div class="payment-div etc">
-                    <iconify-icon icon="ion:card-outline" class="etc-btn"></iconify-icon>
-                    <div class="etc-title">Payment Methods</div>
-                </div>
-                <div class="logout-div etc">
-                    <iconify-icon icon="mynaui:logout" class="etc-btn logout"></iconify-icon>
-                    <div class="etc-title logout" onclick="window.location.href='/index.html'">Log out</div>
-                </div>
+
+            <div class="about-product-box">
+                <div class="payment-method name border-bottom" onclick="window.location.href='./payment-method-page.html'">Payment Methods</div>
+                <div class="my-product name border-bottom" onclick="clickMyProduct()">My Product</div>
+                <div class="sales-history name" onclick="window.location.href='./sales-history-page.html'">Sales History</div>
+            </div>
+
+            <div class="logout-box" onclick="window.location.href='/index.html'">
+                <iconify-icon icon="mynaui:logout" class="logout-icon"></iconify-icon>
+                <div class="name">Log out</div>
             </div>
         </div>
     </div>
