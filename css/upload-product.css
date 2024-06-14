@@ -1,13 +1,13 @@
 header{
     position: fixed;
     top: 0;
-    width: calc(100% - 24px * 2);
-    padding-left: 24px;
+    width: calc(100vw - 32px * 2);
     display: flex;
-    padding-top: 12px;
+    padding: 12px 24px;
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    z-index: 1000;
 }
 .back-btn{
     transform: rotate(-90deg);
