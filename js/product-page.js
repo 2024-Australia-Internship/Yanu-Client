@@ -187,7 +187,7 @@ function orderProduct() {
 }
 
 function showInfo(data){
-  const { productId, business_name, title, farm_name, hashtag, price, description, heart } = data;
+  const { productId, business_name, title, farm_name, hashtag, price, description, heart, images } = data;
 
   let product_title = document.getElementsByClassName('product-name')[0];
   let product_price = document.getElementsByClassName('product-price')[0]
@@ -213,6 +213,8 @@ function showInfo(data){
     myHashtag.innerText = `# ${value}`;
     product_hashtag.appendChild(myHashtag);
   })
+
+  makeImages(images)
 }
 
 heartBtn.onclick = () => clickFavorites(product_code, 'product', heartBtn);
@@ -224,7 +226,7 @@ function makeImages(images) {
   console.log(productImgSlider);
   for (let image of images) {
     let imgDiv = document.createElement('img');
-    imgDiv.src = image;
+    imgDiv.src = `${IMAGE_URL}${image}`;
     imgDiv.className = "product-title-img"
 
     productImgSlider.appendChild(imgDiv);
@@ -247,7 +249,7 @@ function scrollToPage(direction) {
     // 스크롤 이벤트 처리 후 500ms 동안 스크롤 중 상태 유지
     setTimeout(() => {
       isScrolling = false;
-    }, 2000);
+    }, 1900);
   }
 }
 
