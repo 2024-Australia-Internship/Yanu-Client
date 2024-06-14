@@ -6,12 +6,16 @@ window.onload = async() =>{
 }
 
 async function getProducts() {
+    let emptyProduct = document.getElementsByClassName('empty-product-div')[0];
+    let orderBox = document.getElementsByClassName('order-div')[0];
     try{
         const response = await axios.get(`${BASE_URL}/carts`, config)
-        console.log(response);
         showProducts(response.data);
     }catch(error){
-        console.error(error);
+        if(error.response.status === 404){
+            emptyProduct.style.display = 'flex';
+            orderBox.style.display  = 'none';
+        }
     }
 }
 

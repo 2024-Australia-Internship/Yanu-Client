@@ -143,3 +143,29 @@ body{
     height: 44px;
     font-size: 14px;
 }
+
+.empty-product-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+}
+
+.empty-img{
+    margin: 137px 0 24px 0;
+}
+
+.empty-title{
+    font-family: 'gilroy-semiBold';
+    font-size: 18px;
+    color: var(--brown);
+}
+
+.empty-move{
+    position: absolute;
+    bottom: 95px;
+    font-family: 'gilroy-medium';
+    font-size: 11px;
+    color: var(--orange);
+    text-decoration: underline;
+}

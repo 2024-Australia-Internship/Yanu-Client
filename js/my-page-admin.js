@@ -7,7 +7,7 @@ window.onload = () => {
     const { id, nickname, profile_image } = JSON.parse(getCookie('userdata'));
     
     userName.innerText = nickname;
-    profileImg.src = profile_image;
+    profileImg.src = `${IMAGE_URL}${profile_image}`;
     // uglyPercent.innerText = ugly_percent;
 
     if(ugly_percent > 66){
