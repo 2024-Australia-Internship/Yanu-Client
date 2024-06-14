@@ -2,6 +2,9 @@ const urlParams = new URL(location.href).searchParams;
 const productId = urlParams.get('id');
 const farmId = urlParams.get('farmId');
 
+const currentImgLength = document.getElementsByClassName('current-img')[0];
+const imgUploadBtn = document.getElementsByClassName('upload-img-btn')[0];
+const realImgUploadBtn = document.getElementsByClassName('upload-file')[0];
 const titleInput = document.getElementsByClassName('product-title-input')[0];
 const fruitCategory = document.getElementsByClassName('fruit-category')[0];
 const vegetableCategory = document.getElementsByClassName('vegetable-category')[0];
@@ -16,6 +19,11 @@ const countryNum = document.getElementsByClassName('select-unit-num')[0];
 const options = document.querySelectorAll('.optionItem');
 const descriptionInput = document.getElementsByClassName('description-input')[0];
 
+realImgUploadBtn.addEventListener('change', getImageFiles);
+imgUploadBtn.addEventListener('click', () => realImgUploadBtn.click());
+
+let prevImage = [];
+
 window.onload = () => {
     getProductInfo();
 }
@@ -28,6 +36,61 @@ function getProductInfo() {
     .catch(error => {
         console.error(error);
     })
+}
+
+// 이미지 업로드
+function getImageFiles(e) {
+    let images = [...document.getElementsByClassName('upload-img-li')].length;
+    const files = e.currentTarget.files;
+  
+    if ([...files].length >= 6 || [...files].length + images >= 6) {
+      alert('이미지는 최대 5개까지 업로드가 가능합니다.');
+      return;
+    }
+
+    [...files].forEach(file => {
+        if (!file.type.match("image/.*")) {
+          alert('이미지 파일만 업로드가 가능합니다.');
+          return;
+        }
+        if ([...files].length < 6 && [...files].length + images < 6) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                console.log(e);
+                createElement(e.target.result, false);
+            };
+            reader.readAsDataURL(file);
+        }
+    })
+}
+
+function deleteImg(e){
+    e.parentNode.remove();
+    currentImgLength.innerHTML = parseInt(currentImgLength.innerHTML)-1;
+}
+
+function createElement(image, isPrev){
+    let uploadImgDiv = document.getElementsByClassName('upload-img-div')[0];
+    
+    let uploadImgLi = document.createElement('div');
+    uploadImgLi.classList.add('upload-img');
+    uploadImgLi.classList.add('upload-img-li');
+    uploadImgLi.innerHTML += `<iconify-icon icon="mynaui:x" class="delete-img" onclick="deleteImg(this)"></iconify-icon>`
+    
+    let newimage = document.createElement('img');
+    newimage.className = 'image';
+    if(isPrev){
+        newimage.src = `${IMAGE_URL}${image}`;
+    }else{
+        newimage.src = image
+    }
+    newimage.url = image;
+
+    uploadImgLi.appendChild(newimage);
+
+    uploadImgDiv.appendChild(uploadImgLi);
+    let images = [...document.getElementsByClassName('upload-img-li')].length;
+    currentImgLength.innerText = images;
 }
 
 // 드롭다운
@@ -92,7 +155,7 @@ function chooseCategory(flag){
 
 function showProductInfo(data){
     console.log(data);
-    const { title, category, hashtag, price, unit, description } = data;
+    const { title, category, hashtag, price, unit, description, images } = data;
     let option = document.getElementsByClassName(`option-${unit}`)[0];
     
     titleInput.value = title; // 타이틀 값 넣기
@@ -101,20 +164,27 @@ function showProductInfo(data){
     priceInput.value = price; // 가격 넣기
     handleSelect(option); // 단위 선택하기
     descriptionInput.value = description; // 상품 설명 값 넣기
+
+    prevImage = [...images];
+    images.forEach(image =>{
+        createElement(image, true)
+    })
 }
 
 function editProduct() {
+    let files = document.getElementsByClassName('upload-file')[0].files;
     let title = titleInput.value;
     let category = document.getElementsByClassName('choose-category')[0];
     let price = priceInput.value;
     let unit = countryNum.innerText;
     let description = descriptionInput.value;
     let hashtag = JSON.stringify(tagify.value.map(hashtag => hashtag.value));
+    let removeImage = [...recentImages];
 
-    if(title === '') return alert('title');
-    if(hashtag == '[]') return alert('hashtag');
-    if(price == '' || isNaN(price)) return alert('price');
-    if(description == '') return alert('description');
+    if(title === '') return alert('Please enter the title');
+    if(hashtag == '[]') return alert('Please enter a hashtag');
+    if(price == '' || isNaN(price)) return alert('Please enter price');
+    if(description == '') return alert('Please enter the description');
 
     let categoryBoolean = 0;
     if(category == undefined){
@@ -125,16 +195,42 @@ function editProduct() {
         categoryBoolean = 'vegetable';
     }
 
-    const req = {
-        productId: productId,
-        title: title,
-        category: categoryBoolean,
-        hashtag: hashtag,
-        price: price,
-        unit: unit,
-        description: description
+    if(files.length === 0){
+
     }
 
+    let formData = new FormData();
+
+    // 지운 사진 조회
+    images.forEach(image => {
+        if(removeImage.includes(image.url)){
+            removeImage.splice(removeImage.indexOf(image.url), 1);
+        } 
+    })
+    formData.append('removeImage', removeImage.join(', '))
+
+    // 새로 업로드한 파일 추가
+    for(let file of files){
+        formData.append('image', file);
+    }
+
+    // 새 이미지를 업로드하지 않은 경우
+    if(files.length === 0){
+        formData.append('image', null);
+    }
+    
+    formData.append('title', title);
+    formData.append('category', categoryBoolean);
+    formData.append('hashtag', hashtag);
+    formData.append('price', price);
+    formData.append('unit', unit);
+    formData.append('description', description);
+
+    try{
+        
+    }catch(err){
+        console.error(err);
+    }
     axios.put(`${BASE_URL}/products`, req, config)
     .then(response => {
         console.log(response);
