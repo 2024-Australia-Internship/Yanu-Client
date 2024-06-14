@@ -42,7 +42,7 @@ let fileUpload = document.getElementsByClassName('upload-file')[0];
 
 fileUpload.addEventListener('change', getImageFiles);
 
-function getImageFiles(e){
+async function getImageFiles(e){
     const file = e.currentTarget.files[0];
     console.log(file);
     let img = document.getElementsByClassName('farm-back-img')[0];
@@ -53,23 +53,13 @@ function getImageFiles(e){
     }
 
     const formData = new FormData();
+    formData.append('profile', file);
 
-    formData.append('farm_image', file);
-
-    const config = {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    };
-
-    // axios.post(`${BASE_URL}/farms/register/image/${user_code}`, formData, config)
-    // .then(response => {
-    //     console.log(response);
-    //     img.src = URL.createObjectURL(file); 
-    //     alert('이미지 업로드 성공');
-    // })
-    // .catch(error => {
-    //     console.error('There has been a problem with your axios request:', error);
-    //     alert('이미지 업로드 실패');
-    // });
+    try{
+        const response = await axios.post(`${BASE_URL}/farms/image`, formData, config);
+        img.src = URL.createObjectURL(file); 
+        console.log(response);
+    }catch(err){
+        console.error(err);
+    }
 }
