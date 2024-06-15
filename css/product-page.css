@@ -185,6 +185,7 @@ input[type='radio']:checked {
     border-radius: 50%;
 }
 .reviewer-img{
+    height: 100%;
     object-fit: contain;
 }
 .reviewer-name{
