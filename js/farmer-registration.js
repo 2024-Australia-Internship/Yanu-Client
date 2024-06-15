@@ -22,6 +22,8 @@ async function submit(){
     if(address1 === '') return alert('Please input your address');
     if(address2 === '') return alert('Please input your address');
 
+    phoneNumber = phoneNumber.replace(/-/g, '');
+
     if(!(((/^04\d{8}$/).test(phoneNumber)) || ((/^010\d{8}$/).test(phoneNumber)))){
         return alert('Please re-enter your phone number')
     }
