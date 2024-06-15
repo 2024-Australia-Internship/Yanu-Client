@@ -9,10 +9,12 @@ window.onload = async() => {
   let buyBtn = document.getElementsByClassName('buy-btn')[0];
   try{
     const response = await axios.get(`${BASE_URL}/products/product/${product_code}`, config);
+    console.log(response.data)
     addRecentlyView(); // 최근 본 상품에 추가
     showInfo(response.data) // 상품 정보
 
     const reviewRes = await axios.get(`${BASE_URL}/reviews/product/${product_code}`, config);
+    console.log(reviewRes.data)
     showBestReview(reviewRes.data); // 베스트 리뷰
     showReviews(reviewRes.data); // 모든 리뷰
 
@@ -46,8 +48,11 @@ function showBestReview(reviews){
   
     let bestReviewerProfileImg = document.createElement('div');
     bestReviewerProfileImg.className = "best-reviewer-profile-img";
-    bestReviewerProfileImg.innerHTML = `<img src="/images/product-img.png" class="reviewer-img">`
   
+    let reviewerImg = document.createElement('img');
+    reviewerImg.className = 'reviewer-img';
+    reviewerImg.src = `${IMAGE_URL}${reviews[i].profile}`
+
     let reviewer = document.createElement('div');
     reviewer.className = 'reviewer';
   
@@ -69,7 +74,9 @@ function showBestReview(reviews){
     let reviewDetail = document.createElement('div');
     reviewDetail.className = 'review-detail';
     reviewDetail.innerText = reviews[i].content
-  
+
+    bestReviewerProfileImg.appendChild(reviewerImg);
+
     bestReview.appendChild(reviewerInfoDiv);
     bestReview.appendChild(reviewDetail);
   
@@ -95,8 +102,12 @@ function showReviews(reviews){
   
     let allReviewerProfileImg = document.createElement('div');
     allReviewerProfileImg.className = 'all-reviewer-profile-img';
-    allReviewerProfileImg.innerHTML = `<img src="/images/home-hover.svg" class="all-reviewer-img reviewer-img">`;
   
+    let reviewerImg = document.createElement('img');
+    reviewerImg.classList.add('all-reviewer-img');
+    reviewerImg.classList.add('reviewer-img');
+    reviewerImg.src = `${IMAGE_URL}${review.profile}`
+
     let reviewerInfo = document.createElement('div');
     reviewerInfo.className = 'reviewer-info';
   
@@ -110,6 +121,8 @@ function showReviews(reviews){
   
     reviewerInfo.appendChild(allReviewerName);
     reviewerInfo.appendChild(reviewDate);
+
+    allReviewerProfileImg.appendChild(reviewerImg);
   
     reviewerInfoDiv.appendChild(allReviewerProfileImg);
     reviewerInfoDiv.appendChild(reviewerInfo);
@@ -187,7 +200,7 @@ function orderProduct() {
 }
 
 function showInfo(data){
-  const { productId, business_name, title, farm_name, hashtag, price, description, heart, images } = data;
+  const { productId, business_name, title, farm_name, hashtag, price, description, heart, images, farmProfileImage } = data;
 
   let product_title = document.getElementsByClassName('product-name')[0];
   let product_price = document.getElementsByClassName('product-price')[0]
@@ -197,6 +210,7 @@ function showInfo(data){
   let product_description = document.getElementsByClassName('product-description')[0];
   let product_hashtag = document.getElementsByClassName('product-hashtag')[0];
   let heartBtn = document.getElementsByClassName('heart-btn')[0];
+  let profileImg = document.getElementsByClassName('profile-img')[0];
 
   heartBtn.icon = heart ? "ph:heart-fill" : "ph:heart";
   heartBtn.onclick = () => clickFavorites(productId, 'productId', 'products', heartBtn)
@@ -206,6 +220,7 @@ function showInfo(data){
   farmer_name.innerText = farm_name;
   farmName.innerText = business_name;
   product_description.innerText = description;
+  profileImg.src = `${IMAGE_URL}${farmProfileImage}`
   
   JSON.parse(hashtag).forEach(value => {
     let myHashtag = document.createElement('div');
@@ -315,7 +330,7 @@ function chooseProductDetail(detail) {
   let infoBtn = document.getElementsByClassName('product-info-btn')[0];
   let reivewBtn = document.getElementsByClassName('product-review-btn')[0];
   if (detail) { // product info
-    info.style.display = 'inherit'
+    info.style.display = 'flex'
     review.style.display = 'none';
 
     infoBtn.classList.add('choose-detail');
