@@ -74,6 +74,7 @@
     border-radius: 12px;
     background-color: white;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.08);
+    z-index: 1000;
 }
 
 .hide-overlay{
