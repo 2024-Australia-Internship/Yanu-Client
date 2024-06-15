@@ -86,42 +86,7 @@
 }
 .user-address-div{
     border-right: 1px solid #D4D4D4;
-}
-.user-ugly-percent-div{
-    width: 262px;
-    height: 112px;
-    background-color: #FFD7B3;
-    border-radius: 12px;
-}
-.ugly-percent-title{
-    margin: 16px 0 0 20px;
-    font-family: 'gilroy-semiBold';
-    font-size: 17px;
-}
-.user-ugly-percent{
-    float: right;
-    position: relative;
-    display: flex;
-    align-items: center;
-    column-gap: 12px;
-    right: 16px;
-    top: 16px;
-}
-.ugly-percent{
-    display: flex;
-    column-gap: 2px;
-}
-.ugly-cnt{
-    font-family: 'gilroy-semiBold';
-    font-size: 24px;
-}
-.ugly-unit{
-    font-weight: 700;
-    font-size: 24px;
-}
-.ugly-tomato{
-    height: 40px;   
-}
+} 
 .etc-div{
     width: 262px;
     height: 168px;
