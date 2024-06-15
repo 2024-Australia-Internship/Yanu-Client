@@ -156,6 +156,8 @@ function signup(){
         return alert('Please check your password');
     }
 
+    user_phonenumber = user_phonenumber.replace(/-/g, '');
+    
     // phone number 확인
     console.log(user_country_num);
     if(!((user_country_num == '+ 61' && (/^04\d{8}$/).test(user_phonenumber)) ||
@@ -170,13 +172,13 @@ function signup(){
         password: user_pw, 
         phonenumber: user_phonenumber
     }
-    axios.post(`${BASE_URL}/users`, req)
-    .then(response => {
-        console.log(response)
-        window.location.href = `/html/setting-profile.html?email=${user_email}`;
-    })
-    .catch(error => {
-        console.error('There has been a problem with your axios request:', error);
-        alert(error.response.data.message);
-    });
+    // axios.post(`${BASE_URL}/users`, req)
+    // .then(response => {
+    //     console.log(response)
+    //     window.location.href = `/html/setting-profile.html?email=${user_email}`;
+    // })
+    // .catch(error => {
+    //     console.error('There has been a problem with your axios request:', error);
+    //     alert(error.response.data.message);
+    // });
 }
