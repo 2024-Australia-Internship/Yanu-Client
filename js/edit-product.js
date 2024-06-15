@@ -120,8 +120,8 @@ tagify.on('remove', showList);
 
 function onTagifyKeyDown(e){
     if(e.detail.event.keyCode == 32) {
-        tagify.addTags(tagify.DOM.tagInput.innerText);
-        tagify.DOM.tagInput.innerText = '';
+        tagify.addTags(tagify.DOM.input.innerText);
+        tagify.DOM.input.innerText = '';
     }
 }
 
@@ -171,7 +171,7 @@ function showProductInfo(data){
     })
 }
 
-function editProduct() {
+async function editProduct() {
     let files = document.getElementsByClassName('upload-file')[0].files;
     let title = titleInput.value;
     let category = document.getElementsByClassName('choose-category')[0];
@@ -179,7 +179,8 @@ function editProduct() {
     let unit = countryNum.innerText;
     let description = descriptionInput.value;
     let hashtag = JSON.stringify(tagify.value.map(hashtag => hashtag.value));
-    let removeImage = [...recentImages];
+    let removeImage = [...prevImage];
+    let images = [...document.getElementsByClassName('image')];
 
     if(title === '') return alert('Please enter the title');
     if(hashtag == '[]') return alert('Please enter a hashtag');
@@ -227,16 +228,10 @@ function editProduct() {
     formData.append('description', description);
 
     try{
-        
+        const response = await axios.put(`${BASE_URL}/products/${productId}`, formData, config);
+        console.log(response);
+        window.location.href= `./my-product.html?id=${farmId}`;
     }catch(err){
         console.error(err);
     }
-    axios.put(`${BASE_URL}/products`, req, config)
-    .then(response => {
-        console.log(response);
-        window.location.href= `./my-product.html?id=${farmId}`;
-    })
-    .catch(error => {
-        console.error(error);
-    });
 }

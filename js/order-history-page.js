@@ -54,7 +54,7 @@ function showProducts(orderHistory){
 
             let productImg = document.createElement('img');
             productImg.className = 'product-img';
-            productImg.src = '/images/product-img.png';
+            productImg.src = `${IMAGE_URL}${product.productImages[0]}`;
 
             let productInfo = document.createElement('div');
             productInfo.className = 'product-info';

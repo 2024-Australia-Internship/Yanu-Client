@@ -34,7 +34,13 @@ function search(){
     let searchValue = document.getElementsByClassName('search-input')[0].value;
     let searchArr = getRecentlySearched();
     
-    searchArr.push(searchValue);
+    if(searchArr.length < 7){
+        searchArr.push(searchValue);
+    }else{
+        searchArr.shift();
+        searchArr.push(searchValue);
+    }
+
     localStorage.setItem('recentSearch', JSON.stringify(searchArr));
     showRecentlySearched();
 
@@ -49,15 +55,21 @@ function search(){
 }
 
 function searchProduct(searchValue){
+    let prductsDiv = document.getElementsByClassName('products-div')[0];
+    let emptyPopup = document.getElementsByClassName('empty-product-popup')[0];
+
     axios.get(`${BASE_URL}/searches/${searchValue}`, config)
     .then(response => {
         showSearchAnswer(response.data);
         console.log(response);
+        emptyPopup.style.display = 'none';
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
         if(error.response.status == 404) {
+            prductsDiv.innerHTML = '';
             recentlySearchDiv.style.display = 'none';
+            emptyPopup.style.display = 'inline';
         }
     });
 }
@@ -87,7 +99,7 @@ function getRecentlySearched() {
 
 function showRecentlySearched(){
     let recentSearchList = document.getElementsByClassName('recently-search-list')[0];
-    let recentSearchValue = getRecentlySearched();
+    let recentSearchValue = getRecentlySearched().reverse();
     console.log(recentSearchValue);
     recentSearchList.innerHTML = '';
 
@@ -161,6 +173,7 @@ function showSearchAnswer(products){
         productDetailDiv.appendChild(productDetail);
     
         let productImg = document.createElement('img');
+        productImg.src = `${IMAGE_URL}${value.productImages[0]}`
         productImg.className = 'product-img';
         
         product.appendChild(productImg);

@@ -107,3 +107,13 @@
     transform: translate(-50%, 0);
     display: none;
 }
+
+.empty-product-popup{
+    position: absolute;
+    top:50vh;
+    left: 50%;
+    transform: translate(-50%);
+    font-family: 'gilroy-medium';
+    color: #D9D9D9;
+    display: none;
+}

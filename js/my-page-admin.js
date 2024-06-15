@@ -5,15 +5,6 @@ const uglyTomato = document.getElementsByClassName('ugly-tomato')[0];
 
 window.onload = () => {
     const { id, nickname, profile_image } = JSON.parse(getCookie('userdata'));
-    
+    profileImg.src = `${IMAGE_URL}${profile_image}`
     userName.innerText = nickname;
-    profileImg.src = `${IMAGE_URL}${profile_image}`;
-    // uglyPercent.innerText = ugly_percent;
-
-    if(ugly_percent > 66){
-        uglyTomato.src = '/images/ugly-tomato-big.svg'
-    }else if(ugly_percent > 33){
-        uglyTomato.src = '/images/ugly-tomato-middle.svg'
-    }
-    uglyPercent.innerText = ugly_percent;
 }  

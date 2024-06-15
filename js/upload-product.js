@@ -154,7 +154,7 @@ function sendProductImgs(product_code){
     axios.post(`${BASE_URL}/products/image`, formData, config)
     .then(response => {
         console.log(response);
-        // window.location.href = '/html/main-page.html';
+        window.location.href = '/html/main-page.html';
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
