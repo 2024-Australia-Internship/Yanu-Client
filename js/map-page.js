@@ -2,7 +2,7 @@ const listMap = document.getElementsByClassName('list-map')[0];
 const mapConfig = {
 	headers: {
 		'Content-type': 'application/json;charset=UTF-8',
-		'Authorization': `KakaoAK ${window.env.KAKAO_MAP_REST_API}`
+		'Authorization': `KakaoAK a30996029d69ea4129413adcbd4e0ff5`
 	}
 }
 
@@ -190,8 +190,8 @@ async function showOverlay(x1, y1, map, farms){
 
 			let farmImg = document.createElement('img');
 			farmImg.className = 'overlay-farm-img';
-			farmImg.src = '../images/farmer-registration-back-img.svg';
-
+			farmImg.src = position.profile === null ? '../images/farmer-registration-back-img.svg' : `${IMAGE_URL}${position.profile}`
+			console.log( `${IMAGE_URL}${position.profile}`)
 			farmImgBox.appendChild(farmImg);
 
 			subContent.appendChild(farmTitle)
@@ -287,7 +287,7 @@ function showFarmList(farms) {
 
 		let farmImg = document.createElement('img');
 		farmImg.className = 'farm-img';
-		farmImg.src = '../images/farmer-registration-back-img.svg';
+		farmImg.src = farm.farmImage ? `${IMAGE_URL}${farm.farmImage}`: '../images/farmer-registration-back-img.svg';
 
 		let heart = document.createElement('iconify-icon');
 		heart.className = 'heart';

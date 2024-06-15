@@ -92,7 +92,7 @@ function showReviews(reviewHistory) {
 
             let reviewImg = document.createElement('img');
             reviewImg.className = 'review-img';
-            reviewImg.src = '/images/product-img.png'
+            reviewImg.src = `${IMAGE_URL}${product.images[0]}`;
 
             let review = document.createElement('div');
             review.className ='review'

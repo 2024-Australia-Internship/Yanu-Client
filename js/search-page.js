@@ -161,6 +161,7 @@ function showSearchAnswer(products){
         productDetailDiv.appendChild(productDetail);
     
         let productImg = document.createElement('img');
+        productImg.src = `${IMAGE_URL}${value.productImages[0]}`
         productImg.className = 'product-img';
         
         product.appendChild(productImg);

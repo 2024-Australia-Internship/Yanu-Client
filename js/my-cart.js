@@ -10,6 +10,7 @@ async function getProducts() {
     let orderBox = document.getElementsByClassName('order-div')[0];
     try{
         const response = await axios.get(`${BASE_URL}/carts`, config)
+        console.log(response.data);
         showProducts(response.data);
     }catch(error){
         if(error.response.status === 404){
@@ -89,7 +90,7 @@ function showProducts(products){
 
         let productImg = document.createElement('img');
         productImg.className = 'product-img';
-        productImg.src = '/images/product-img.png';
+        productImg.src = `${IMAGE_URL}${product.images[0]}`;
 
         let productDeleteBtn = document.createElement('iconify-icon');
         productDeleteBtn.className = 'product-delete-btn';

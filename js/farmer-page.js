@@ -13,14 +13,13 @@ window.onload = async() => {
 
     try{
         let resFarm = await axios.get(`${BASE_URL}/farms/${user_code}`, config);
-        console.log(resFarm);
+        profileImg.src = `${IMAGE_URL}${resFarm.data.profile}`
+        backImg.style.backgroundImage = resFarm.data.farmProfile ? `url(${IMAGE_URL}${resFarm.data.farmProfile})` : '/images/farmer-registration-back-img.svg'
         heartBtn.icon = resFarm.data.heart ? "ph:heart-fill" : "ph:heart";
-        const { businessName, ugly_percent } = resFarm.data;
+        const { businessName } = resFarm.data;
         farmName.innerText = businessName;
-        uglyPercent.innerText = `${ugly_percent}%`
 
         let resProduct = await axios.get(`${BASE_URL}/products/farm/${farm_code}`, config);
-        // console.log(resProduct);
         productsCnt.innerText = `${resProduct.data.length} products`;
         showFarmerProducts(resProduct.data);
         showBestSellers(resProduct.data)
@@ -28,6 +27,9 @@ window.onload = async() => {
         let resReview = await axios.get(`${BASE_URL}/farms/${farm_code}/reviews`, config);
         reviewsCnt.innerText = `${resReview.data.length} reviews`
         showReviews(resReview.data)
+
+        let resUgly = await axios.get(`${BASE_URL}/farms/${user_code}/uglypercent`, config)
+        uglyPercent.innerText = `${resUgly.data.uglypercent}%`
     }catch(err){
         console.error(err);
     }
@@ -86,7 +88,7 @@ function showFarmerProducts(products){
         productDetailDiv.appendChild(productDetail);
     
         let productImg = document.createElement('img');
-        // productImg.src = images[i];
+        productImg.src = `${IMAGE_URL}${value.images[0]}`;
         productImg.className = 'product-img';
         product.appendChild(productImg);
         product.appendChild(productDetailDiv);
@@ -111,8 +113,11 @@ function showBestSellers(products){
     
         let bestSellerImgDiv = document.createElement('div');
         bestSellerImgDiv.className = "best-seller-img-div";
-        bestSellerImgDiv.innerHTML += `<img src="/images/product-img.png" class="best-seller-img">`;
     
+        let bestSellerImg = document.createElement('img');
+        bestSellerImg.className = 'best-seller-img';
+        bestSellerImg.src = `${IMAGE_URL}${products[i].images[0]}`
+
         let productInfoDiv = document.createElement('div');
         productInfoDiv.className = 'product-info-div';
     
@@ -139,6 +144,8 @@ function showBestSellers(products){
     
         bestSeller.appendChild(bestSellerImgDiv);
         bestSeller.appendChild(productInfoDiv);
+
+        bestSellerImgDiv.appendChild(bestSellerImg)
     
         bestSellerDiv.appendChild(bestSeller);
 
@@ -191,7 +198,7 @@ function showReviews(reviews){
     
         let allReviewProfileImg = document.createElement('img');
         allReviewProfileImg.className = 'all-review-profile-img';
-        allReviewProfileImg.src = '/images/product-img.png';
+        allReviewProfileImg.src = `${IMAGE_URL}${review.reviewImages[0]}`;
     
         userProfileImgDiv.appendChild(allReviewProfileImg);
     

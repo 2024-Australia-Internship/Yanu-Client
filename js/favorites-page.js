@@ -67,7 +67,7 @@ function showFarms(farms){
     
         let farmImg = document.createElement('img');
         farmImg.className = 'farm-img';
-        farmImg.src = '/images/product-img.png';
+        farmImg.src = farm.farmProfile ? `${IMAGE_URL}${farm.farmProfile}` : '/images/farmer-registration-back-img.svg';
         favoritesFarm.appendChild(farmImg);
         favoritesFarm.appendChild(farmDetailDiv);
     
@@ -155,7 +155,7 @@ function showProducts(productList) {
 
         let favoriteProductImg = document.createElement('img');
         favoriteProductImg.className = 'favorites-product-img';
-        favoriteProductImg.src = '/images/product-img.png';
+        favoriteProductImg.src = `${IMAGE_URL}${product.images[0]}`;
 
         productBox.appendChild(favoriteProductImg);
         productBox.appendChild(productDetailDiv);
