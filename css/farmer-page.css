@@ -265,7 +265,7 @@
 .user-profile-img-div{
     width: 28px;
     height: 28px;
-    border-radius: 50%;
+    border-radius: 4px;
     overflow: hidden;
     flex-shrink: 0;
 }
