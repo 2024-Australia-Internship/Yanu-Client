@@ -172,13 +172,13 @@ function signup(){
         password: user_pw, 
         phonenumber: user_phonenumber
     }
-    // axios.post(`${BASE_URL}/users`, req)
-    // .then(response => {
-    //     console.log(response)
-    //     window.location.href = `/html/setting-profile.html?email=${user_email}`;
-    // })
-    // .catch(error => {
-    //     console.error('There has been a problem with your axios request:', error);
-    //     alert(error.response.data.message);
-    // });
+    axios.post(`${BASE_URL}/users`, req)
+    .then(response => {
+        console.log(response)
+        window.location.href = `/html/setting-profile.html?email=${user_email}`;
+    })
+    .catch(error => {
+        console.error('There has been a problem with your axios request:', error);
+        alert(error.response.data.message);
+    });
 }
