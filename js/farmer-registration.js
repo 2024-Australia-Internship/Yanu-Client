@@ -24,7 +24,7 @@ async function submit(){
 
     phoneNumber = phoneNumber.replace(/-/g, '');
 
-    if(!(((/^04\d{8}$/).test(phoneNumber)) || ((/^010\d{8}$/).test(phoneNumber)))){
+    if(!(((/^4\d{8}$/).test(phoneNumber)) || ((/^010\d{8}$/).test(phoneNumber)))){
         return alert('Please re-enter your phone number')
     }
 
