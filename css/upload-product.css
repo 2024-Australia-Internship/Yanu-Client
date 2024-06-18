@@ -188,7 +188,7 @@ header{
 .price-info{
     display: flex;
     column-gap: 8px;
-    align-items: baseline;
+    align-items: center;
 }
 .price-input{
     width: 72px;
