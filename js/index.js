@@ -56,7 +56,15 @@ async function checkInfo(){
         window.location.href = '/html/main-page.html';
     }catch(error){
         console.error('There has been a problem with your axios request:', error);
-        alert(error.response.data.message);
-        alert(error);
+        console.log(error.response.status)
+        if(error.response.status == '404'){
+            if(error.response.data.message === '비밀번호가 일치하지 않습니다'){
+                return alert('Passwords do not match')
+            }
+    
+            if(error.response.data.message === "등록된 이메일이 아닙니다"){
+                return alert('This is not a registered email')
+            }
+        }
     }
 }

@@ -94,11 +94,11 @@ function changePw(){
     let user_confirm_pw = document.getElementsByClassName('check-new-pw-input')[0].value;
 
     // pw 확인 - myPw와 confirmPw가 같은지
-    if(user_pw !== user_confirm_pw) return alert('비번 틀림');
+    if(user_pw !== user_confirm_pw) return alert('Passwords do not match');
 
     // pw 확인 - 조건에 충족하는지
     if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^*+=-]).{8,16}$/).test(user_confirm_pw)){
-        return alert('비번 조건에 안 맞음');
+        return alert('Please re-enter your password');
     }
 
     console.log(user_email)

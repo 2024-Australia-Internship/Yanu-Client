@@ -114,7 +114,7 @@ function showProducts(orderHistory){
 
             myOrder.appendChild(myOrderProduct)
 
-            if(!product.review){
+            if(product.review){
                 myOrder.appendChild(shippedBtn)
             }
 
@@ -123,12 +123,12 @@ function showProducts(orderHistory){
             productDetailDiv.onclick = () => moveProductPage(product.productId, product.userId, product.farmId);
 
             shippedBtn.onclick = () => {
-                moveReviewPage(product.productId);
+                moveReviewPage(product.productId, product.orderId);
             }
         })
     })
 }
 
-function moveReviewPage(productId){
-    window.location.href = `./write-review-page.html?product_id=${productId}`
+function moveReviewPage(productId, orderId){
+    window.location.href = `./write-review-page.html?product_id=${productId}&order_id=${orderId}`
 }
