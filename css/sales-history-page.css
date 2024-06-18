@@ -1,3 +1,5 @@
+@import url('https://rsms.me/inter/inter.css');
+
 .history-list-div{
     margin: 37px 20px 40px 20px;
     width: calc(100vw - 20px * 2);
@@ -51,7 +53,7 @@
 }
 
 .product-name{
-    font-family: 'Inter';
+    font-family: "Inter", sans-serif;
     font-weight: 500;
     font-size: 13px;
 }

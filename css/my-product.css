@@ -15,6 +15,7 @@
 .edit-btn{
     transform: rotate(90deg);
     color: #9E9E9E;
+    font-size: 24px;
 }
 
 .edit-popup{
