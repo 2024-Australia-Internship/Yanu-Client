@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/map-page.css">
     <title>Document</title>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b4e3c4d53d46c5f563fa1cbcc3868a4e&autoload=false"></script>
 </head>
 <body>
     <div id="map"></div>
@@ -15,7 +16,7 @@
         <input class="input-map input">
     </div>
 
-    <div class="list-map hide-list" ondragstart="showList()">
+    <div class="list-map hide-list" onclick="showList()">
         <div class="up-btn"></div>
         <div class="input-box list-input">
             <iconify-icon icon="basil:search-outline" class="find-icon" onclick="findFarm('input-list')"></iconify-icon>
@@ -58,7 +59,6 @@
     </nav>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b4e3c4d53d46c5f563fa1cbcc3868a4e&autoload=false"></script>
     <script src="/config.js"></script>
     <script src="/js/nav.js"></script>
     <script src="/js/basic.js"></script>
