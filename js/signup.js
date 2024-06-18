@@ -157,12 +157,11 @@ function signup(){
     }
 
     user_phonenumber = user_phonenumber.replace(/-/g, '');
-    
-    alert(user_phonenumber);
+
     // phone number 확인
     console.log(user_country_num);
-    if(!((user_country_num == '+ 61' && (/^4\d{8}$/).test(user_phonenumber)) ||
-       (user_country_num == '+ 82' && (/^010\d{8}$/).test(user_phonenumber)))){
+    if(!((user_country_num.trim() == '+ 61' && (/^4\d{8}$/).test(user_phonenumber)) ||
+       (user_country_num.trim() == '+ 82' && (/^010\d{8}$/).test(user_phonenumber)))){
         return alert('Please check your phone number');
     }
 
