@@ -26,7 +26,7 @@ async function checkInfo(){
     try{
         // 로그인
         const login = await axios.post(`${BASE_URL}/users/login`, req)
-        document.cookie = `token=Bearer ${login.data.token}; path=/; expires=${expireDate}; secure`; 
+        document.cookie = `token=Bearer ${login.data.token}; path=/; expires=${expireDate};`; 
 
         // 헤더 가져오기
         let value = document.cookie.match('(^|;) ?' + 'token' + '=([^;]*)(;|$)');
@@ -56,7 +56,7 @@ async function checkInfo(){
 
         const jsonData = JSON.stringify(data);
 
-        document.cookie = `userdata=${jsonData}; path=/; expires=${expireDate}; secure`; 
+        document.cookie = `userdata=${jsonData}; path=/; expires=${expireDate};`; 
         localStorage.setItem('firstLogin', 1);
         window.location.href = '/html/main-page.html';
     }catch(error){
