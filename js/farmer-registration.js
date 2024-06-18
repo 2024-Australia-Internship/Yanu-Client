@@ -50,7 +50,7 @@ async function submit(){
     const addressRes =  await axios.get(`https://dapi.kakao.com/v2/local/search/address?query=${address1}`, config)
 
     if(addressRes.data.documents.length === 0){
-        return alert('Please enter your address again')
+        return alert('The address cannot be found.')
     }
 
     x = addressRes.data.documents[0].x;

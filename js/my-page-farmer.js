@@ -52,7 +52,7 @@ async function getImageFiles(e){
     let img = document.getElementsByClassName('farm-back-img')[0];
 
     if (!file.type.match("image/.*")) {
-        alert('이미지 파일만 업로드가 가능합니다.');
+        alert('Only image files can be uploaded.');
         return;
     }
 

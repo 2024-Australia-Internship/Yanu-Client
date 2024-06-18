@@ -1,5 +1,6 @@
 const urlParams = new URL(location.href).searchParams;
 const product_id = urlParams.get('product_id');
+const order_id = urlParams.get('order_id');
 
 const starArr = [...document.getElementsByClassName('star')];
 
@@ -92,7 +93,8 @@ async function postReview(){
         const req = {
             productId: {id: product_id},
             starrating: starrating,
-            content: content
+            content: content,
+            orderId: {id: order_id}
         }
 
         const response = await axios.post(`${BASE_URL}/reviews`, req, config)

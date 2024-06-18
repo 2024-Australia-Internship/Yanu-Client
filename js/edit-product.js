@@ -44,13 +44,13 @@ function getImageFiles(e) {
     const files = e.currentTarget.files;
   
     if ([...files].length >= 6 || [...files].length + images >= 6) {
-      alert('이미지는 최대 5개까지 업로드가 가능합니다.');
+      alert('Up to 5 images can be uploaded.');
       return;
     }
 
     [...files].forEach(file => {
         if (!file.type.match("image/.*")) {
-          alert('이미지 파일만 업로드가 가능합니다.');
+          alert('Only image files can be uploaded.');
           return;
         }
         if ([...files].length < 6 && [...files].length + images < 6) {
