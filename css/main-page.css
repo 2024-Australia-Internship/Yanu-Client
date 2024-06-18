@@ -15,6 +15,9 @@ body{
 .cart-icon{
     font-size: 24px;
 }
+.product-name{
+    height: 20px;
+}
 .welcome-ment{
     display: flex;
     margin-top: 43px;
