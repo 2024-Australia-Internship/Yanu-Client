@@ -32,11 +32,16 @@ async function checkInfo(){
         let value = document.cookie.match('(^|;) ?' + 'token' + '=([^;]*)(;|$)');
         const token = value? value[2] : null;
 
+        console.log(login);
+        console.log(token);
+
         const config =  {
             headers: {
-                'Authorization': token
+                'Authorization': `Bearer ${login.data.token}`
             },
         };
+
+        console.log(config)
 
         // 유저 정보 저장
         const getInfo = await axios.get(`${BASE_URL}/users`, config)
