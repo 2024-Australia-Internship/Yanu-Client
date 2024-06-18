@@ -158,6 +158,7 @@ function signup(){
 
     user_phonenumber = user_phonenumber.replace(/-/g, '');
     
+    alert(user_phonenumber);
     // phone number 확인
     console.log(user_country_num);
     if(!((user_country_num == '+ 61' && (/^4\d{8}$/).test(user_phonenumber)) ||
