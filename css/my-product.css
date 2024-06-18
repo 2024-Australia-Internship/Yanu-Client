@@ -24,7 +24,7 @@
     border-radius: 8px;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
     background-color: white;
-    display:none;
+    visibility:hidden;
 }
 
 .edit-popup > div{

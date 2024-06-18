@@ -1,10 +1,18 @@
 const urlParams = new URL(location.href).searchParams;
 const farmId = urlParams.get('id');
-let productId;
+let index = -1;
 
 window.onload = () => {
     getProducts();
 }
+
+document.addEventListener('click', (e) => {
+    let editDiv = document.getElementsByClassName('edit-popup')[0];
+    console.log(e.target.className);
+    if(e.target.className != "edit-btn"){
+        editDiv.style.visibility = "hidden";
+    }
+});
 
 function getProducts() {
     axios.get(`${BASE_URL}/products/farm/${farmId}`, config)
@@ -77,34 +85,40 @@ function showProducts(products){
         productImg.onclick = () => moveProductPage(value.productId, value.userId, value.farmId);
         
         prductsDiv.appendChild(product);
+
+        editBtn.onclick = () => clickEditBtn(editBtn, value.farmId, value.productId);
     })
 
 }
 
-window.onclick = e => clickEditBtn(e);
+function clickEditBtn(e, farmId, productId){
+    let editDiv = document.getElementsByClassName('edit-popup')[0];
 
-
-function clickEditBtn(e){
-    let editPopup = document.getElementsByClassName('edit-popup')[0];
-
-    if(e.target.className === 'edit-btn'){
-        productId = e.target.id;
-        let position = e.target.getBoundingClientRect();
-
-        editPopup.style.display = 'block';
-        editPopup.style.top = `${position.top + scrollY + 17}px`;
-        editPopup.style.left = `${position.left - 75}px`;
+    if(index != productId){
+        let buttonRect = e.getBoundingClientRect();
+        let buttonX = buttonRect.left + window.pageXOffset;
+        let buttonY = buttonRect.top + window.pageYOffset;
+        editDiv.style.visibility = "visible";
+        editDiv.style.top = `${buttonY + 24}px`;
+        editDiv.style.left =`${buttonX - 70}px`;
+        index = productId;
     }else{
-        editPopup.style.display = 'none';
+        editDiv.style.visibility = "hidden";
+        index = -1;
     }
+
+    let editBtn = document.getElementsByClassName('edit')[0];
+    let deleteBtn = document.getElementsByClassName('delete')[0];
+
+    editBtn.onclick = () => editProduct(productId, farmId)
+    deleteBtn.onclick = () => deleteProduct(productId)
 }
 
-function editProduct(){
+function editProduct(productId, farmId){
     window.location.href = `./edit-product.html?id=${productId}&farmId=${farmId}`
 }
 
-function deleteProduct() {
-    console.log(productId)
+function deleteProduct(productId) {
     if(confirm('Are you sure you want to delete it?')){
         axios.delete(`${BASE_URL}/products`, {
             ...config,
