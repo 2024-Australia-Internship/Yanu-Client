@@ -8,7 +8,6 @@ window.onload = () => {
 
 document.addEventListener('click', (e) => {
     let editDiv = document.getElementsByClassName('edit-popup')[0];
-    console.log(e.target.className);
     if(e.target.className != "edit-btn"){
         editDiv.style.visibility = "hidden";
     }
@@ -93,7 +92,6 @@ function showProducts(products){
 
 function clickEditBtn(e, farmId, productId){
     let editDiv = document.getElementsByClassName('edit-popup')[0];
-
     if(index != productId){
         let buttonRect = e.getBoundingClientRect();
         let buttonX = buttonRect.left + window.pageXOffset;
