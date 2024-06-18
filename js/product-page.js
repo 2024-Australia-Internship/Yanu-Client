@@ -249,35 +249,17 @@ function makeImages(images) {
   imgRadio();
 }
 
-// 스크롤 중 여부를 확인하기 위한 변수
-let isScrolling = false;
 
 // 페이지 이동 함수
 function scrollToPage(direction) {
-  if (!isScrolling) {
-    isScrolling = true;
+    console.log(direction);
     if (direction === 'right') {
       prevSilde();
     } else if (direction === 'left') {
       nextSlide();
     }
-    // 스크롤 이벤트 처리 후 500ms 동안 스크롤 중 상태 유지
-    setTimeout(() => {
-      isScrolling = false;
-    }, 1900);
-  }
 }
 
-// 스크롤 이벤트 핸들러
-function handleScroll(event) {
-  if (event.deltaX > 0) {
-    // 오른쪽으로 스크롤
-    scrollToPage('right');
-  } else if (event.deltaX < 0) {
-    // 왼쪽으로 스크롤
-    scrollToPage('left');
-  }
-}
 let currentIdx = 0; // 슬라이드 현재 번호
 let translate = 0; // 슬라이드 위치 값
 let slider = document.getElementsByClassName('product-img-div')[0];
@@ -295,8 +277,25 @@ function imgRadio() {
     }
   }
 }
-// 스크롤 이벤트 리스너 등록
-slider.addEventListener('wheel', handleScroll);
+
+slider.addEventListener('touchstart', touchStartHandler);
+slider.addEventListener('touchend', touchEndHandler);
+
+let start;
+let end;
+
+function touchStartHandler(e){
+  start = e.changedTouches[0].clientX;
+}
+
+function touchEndHandler(e){
+  end = e.changedTouches[0].clientX;
+  if(Math.sign(start-end) === 1){ // 오른쪽으로 이동
+    scrollToPage('right')
+  }else if(Math.sign(start-end) === -1){ //왼쪽으로 이동
+    scrollToPage('left')
+  }
+}
 
 function nextSlide() {
   let totalsliderWidth = document.getElementsByClassName('product-img-slider')[0];
