@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
     <link rel="stylesheet" href="/css/basic.css">
     <link rel="stylesheet" href="/css/nav.css">
     <link rel="stylesheet" href="/css/map-page.css">
@@ -16,8 +16,10 @@
         <input class="input-map input">
     </div>
 
-    <div class="list-map hide-list" onclick="showList()">
-        <div class="up-btn"></div>
+    <div class="list-map hide-list">
+        <div class="up-box" onclick="showList()">
+            <div class="up-btn"></div>
+        </div>
         <div class="input-box list-input">
             <iconify-icon icon="basil:search-outline" class="find-icon" onclick="findFarm('input-list')"></iconify-icon>
             <input class="input input-list" placeholder="Nearest farm">

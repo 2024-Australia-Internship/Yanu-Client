@@ -57,10 +57,10 @@ async function getFarms(markerX, markerY, map){
 	const farms = await axios.get(`${BASE_URL}/farms/lists`, config);
 	
 	showOverlay(x1, y1, map, farms.data);
-	fetchListFormat(x1, y1, farms.data);
+	fetchListFormat(x1, y1, farms.data, 'profile');
 }
 
-async function fetchListFormat(x1, y1, farms) {
+async function fetchListFormat(x1, y1, farms, image) {
 	const farmList = [];
 	console.log(x1, y1);
 	console.log(farms)
@@ -83,7 +83,7 @@ async function fetchListFormat(x1, y1, farms) {
 
     // 거리순으로 정렬
 	farmList.sort((a, b) => a.distance - b.distance)
-	showFarmList(farmList);
+	showFarmList(farmList, image);
 }
 
 async function showOverlay(x1, y1, map, farms){
@@ -252,11 +252,11 @@ async function findFarm(input){
 	try{
 		if(!farm){ // 빈 문자일 때 
 			const response = await axios.get(`${BASE_URL}/farms/lists`, config);
-			fetchListFormat(x1, y1, response.data)
+			fetchListFormat(x1, y1, response.data, 'profile')
 		}else{
 			const response = await axios.get(`${BASE_URL}/searches/farms/${farm}`, config);
 			console.log(response.data);
-			fetchListFormat(x1, y1, response.data)
+			fetchListFormat(x1, y1, response.data, 'farmImage')
 		}
 	}catch(err){
 		console.error(err);
@@ -273,7 +273,7 @@ function getDistance(x1, y1, x2, y2) {
 	return Math.round(Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2));
 }
 
-function showFarmList(farms) {
+function showFarmList(farms, image) {
 	const farmList = document.getElementsByClassName('farm-list')[0];
 	farmList.innerHTML = ''
 
@@ -287,7 +287,7 @@ function showFarmList(farms) {
 
 		let farmImg = document.createElement('img');
 		farmImg.className = 'farm-img';
-		farmImg.src = farm.farmImage ? `${IMAGE_URL}${farm.farmImage}`: '../images/farmer-registration-back-img.svg';
+		farmImg.src = farm[image] ? `${IMAGE_URL}${farm[image]}`: '../images/farmer-registration-back-img.svg';
 
 		let heart = document.createElement('iconify-icon');
 		heart.className = 'heart';

@@ -134,6 +134,14 @@
     overflow-y: hidden;
 }
 
+.up-box{
+    width: 100vw;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
 .up-btn{
     width: 70px;
     height: 4px;
