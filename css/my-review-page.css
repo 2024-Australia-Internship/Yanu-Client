@@ -83,6 +83,7 @@
     height: 28px;
     border-radius: 4px;
     flex-shrink: 0;
+    object-fit: cover;
 }
 
 .my-review{
