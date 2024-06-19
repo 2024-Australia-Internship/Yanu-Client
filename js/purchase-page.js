@@ -68,9 +68,19 @@ function makeReq(products){
 
 async function getUserInfo() {
     try{
+        let username = document.getElementsByClassName('user-name')[0];
         const response = await axios.get(`${BASE_URL}/users`, config)
-        let phone_num = response.data.phonenumber.substring(5);
-        phone_num = `${phone_num.substr(0, 3)}-${phone_num.substr(3, 4)}-${phone_num.substr(7)}`
+        
+        username.innerText = response.data.nickname;
+
+        let phone_num = response.data.phonenumber.substring(5).trim();
+        let countryNum = response.data.phonenumber.substr(0, 4);
+        
+        if(countryNum.trim() === '+ 61'){
+            phone_num = `${phone_num.substr(0, 3)}-${phone_num.substr(3, 3)}-${phone_num.substr(6)}`
+        }else{
+            phone_num = `${phone_num.substr(0, 3)}-${phone_num.substr(3, 4)}-${phone_num.substr(7)}`
+        }
         
         phoneNumber.innerText = phone_num;
     }catch(error){  
