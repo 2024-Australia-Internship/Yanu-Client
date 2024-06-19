@@ -62,6 +62,5 @@ async function settingProfile(){
     })
     .catch(error => {
         console.error('There has been a problem with your axios request:', error);
-        alert('Nickname registration failed');
     });
 }
